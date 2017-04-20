@@ -2,7 +2,35 @@
 
 ## enki Minecraft Importer
 
-A permissively licensed C and C++ Minecraft Importer library.
+A permissively licensed lightweight C and C++ Minecraft Importer library.
+
+## Building
+
+A cmake file is included for the example code, but to use in your project simply add the 2 .c the files in [/src](https://github.com/dougbinks/enkiMI/tree/master/src) into your project and add the director to your include paths.
+
+## Using
+
+enkiMI currently includes NBT file reading (compressed or uncompressed), and region/anvil file chunk extraction.
+
+```
+FILE *fpOutput = fopen( "output.txt", "w" );
+enkiRegionFile regionFile = enkiRegionFileLoad( fp );
+for( int i = 0; i < ENKI_MI_REGION_CHUNKS_NUMBER; i++ )
+{
+    enkiNBTDataStream stream;
+    enkiInitNBTDataStreamForChunk( regionFile,  i, &stream );
+    if( stream.dataLength )
+    {
+        enkiChunkBlockData aChunk = enkiNBTReadChunk( &stream );
+        enkiMICoordinate chunkOriginPos = enkiGetChunkOrigin( &aChunk ); // y always 0
+        printf( "Chunk at xyz{ %d, %d, %d }  Number of sections: %d \n",
+            chunkOriginPos.x, chunkOriginPos.y, chunkOriginPos.z, aChunk.countOfSections );
+    }
+    enkiNBTFreeAllocations( &stream );
+}
+enkiRegionFileFreeAllocations( &regionFile );
+fclose( fp );
+```
 
 ## Credits
 

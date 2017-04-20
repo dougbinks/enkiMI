@@ -13,7 +13,7 @@ A cmake file is included for the example code, but to use in your project simply
 enkiMI currently includes NBT file reading (compressed or uncompressed), and region/anvil file chunk extraction.
 
 ```
-FILE *fpOutput = fopen( "output.txt", "w" );
+FILE *fp = fopen( "../example/r.1.0.mca", "rb" );
 enkiRegionFile regionFile = enkiRegionFileLoad( fp );
 for( int i = 0; i < ENKI_MI_REGION_CHUNKS_NUMBER; i++ )
 {

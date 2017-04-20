@@ -40,6 +40,8 @@ fclose( fp );
 
 * Thanks to Voxtric for their [C# Minecraft Level Ripper](https://github.com/Voxtric/Minecraft-Level-Ripper) which got us started.
 
+* [ephtracy for the Minecraft palette colours](http://ephtracy.github.io/)
+
 * Thanks to [WesterosCraft](http://www.westeroscraft.com/guide) and [MrBatou](https://www.planetminecraft.com/project/cuirass-dsd-401-by-mrbatou-download-cinematic/) for letting us use their Minecraft constructions to test the importer with our game [Avoyd](https://www.avoyd.com):
 
 ![Two Minecraft constructions imported into Avoyd: WesterosCraft King's Landing and MrBatou Cuirassé DSD-401](https://storage.googleapis.com/enkisoftware-images/Avoyd_2017-04-15_Westeroscraft_Kings_Landing_MrBatou_Spaceship.jpg)

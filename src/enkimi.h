@@ -138,6 +138,10 @@ void enkiRegionFileInit( enkiRegionFile* pRegionFile_ );
 
 enkiRegionFile enkiRegionFileLoad( FILE* fp_ );
 
+
+// 1 for a chunk exists, 0 for does not.
+uint8_t enkiHasChunk( enkiRegionFile regionFile_, int32_t chunkNr_ );
+
 void enkiInitNBTDataStreamForChunk( enkiRegionFile regionFile_, int32_t chunkNr_, enkiNBTDataStream* pStream_ );
 
 int32_t enkiGetTimestampForChunk( enkiRegionFile regionFile_, int32_t chunkNr_ );

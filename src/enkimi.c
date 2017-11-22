@@ -398,6 +398,18 @@ enkiRegionFile enkiRegionFileLoad( FILE * fp_ )
 }
 
 
+uint8_t enkiHasChunk( enkiRegionFile regionFile_, int32_t chunkNr_ )
+{
+	uint8_t hasChunk = 0;
+	RegionHeader* header = (RegionHeader*)regionFile_.pRegionData;
+	uint32_t locationOffset = GetChunkLocation( header->sectionChunksInfos[ chunkNr_ ] );
+	if( locationOffset > sizeof( RegionHeader ) )
+	{
+		hasChunk = 1;
+	}
+	return hasChunk;
+}
+
 void enkiInitNBTDataStreamForChunk( enkiRegionFile regionFile_, int32_t chunkNr_, enkiNBTDataStream* pStream_ )
 {
 	RegionHeader* header = (RegionHeader*)regionFile_.pRegionData;

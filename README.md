@@ -1,3 +1,7 @@
+Support development of enkiMI through our [Patreon](https://www.patreon.com/enkisoftware)
+
+[<img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="Become a Patron" width="150"/>](https://www.patreon.com/enkisoftware)
+
 # enkiMI
 
 ## enki Minecraft Importer

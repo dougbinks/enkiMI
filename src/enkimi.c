@@ -448,6 +448,8 @@ void enkiInitNBTDataStreamForChunk( enkiRegionFile regionFile_, int32_t chunkNr_
 	{
 		uint32_t length = Get32BitInt(  *( BigEndian4BytesTo32BitInt* )&regionFile_.pRegionData[ locationOffset ] );
 		uint8_t compression_type = regionFile_.pRegionData[ locationOffset + 4 ]; // we ignore this as unused for now
+		assert(compression_type == 2 );
+		(void)compression_type;
 		--length; // length includes compression_type
 		// get the data and decompress it
 		uint8_t* dataCompressed = &regionFile_.pRegionData[ locationOffset + 5 ];

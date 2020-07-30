@@ -314,6 +314,11 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 	if( ( enkiNBTTAG_Compound == pStream_->currentTag.tagId ) || ( enkiNBTTAG_List == pStream_->currentTag.tagId ) )
 	{
 		pStream_->level++;
+		if( pStream_->level == 512 )
+		{
+			assert(0); // in debug break.
+			return 0; // invalid nested tags
+		}
 		pStream_->parentTags[ pStream_->level ] = pStream_->currentTag;
 	}
 	if( ( pStream_->level >= 0 ) && ( enkiNBTTAG_List == pStream_->parentTags[ pStream_->level ].tagId ) )
@@ -326,12 +331,18 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 		{
 			pStream_->currentTag.tagId = pStream_->parentTags[ pStream_->level ].listItemTagId;
 			pStream_->currentTag.pName = NULL;
+			if( enkiNBTTAG_List == pStream_->currentTag.tagId )
+			{
+				pStream_->currentTag.listItemTagId = *(pStream_->pCurrPos++);
+				pStream_->currentTag.listNumItems = enkiNBTReadInt32( pStream_ );
+				pStream_->currentTag.listCurrItem = 0;
+			}
 			SkipDataToNextTag( pStream_ );
+			pStream_->pCurrPos = pStream_->pNextTag;
 			pStream_->parentTags[ pStream_->level ].listCurrItem++;
 			return 1;
 		}
 	}
-
 	if( pStream_->pNextTag >= pStream_->pDataEnd )
 	{
 		return 0;
@@ -340,9 +351,13 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 
 	// Get Tag Header
 	pStream_->currentTag.pName = NULL;
+	assert( *(pStream_->pCurrPos) < enkiNBTTAG_SIZE );
+
 	pStream_->currentTag.tagId = *(pStream_->pCurrPos++);
 	if( enkiNBTTAG_End != pStream_->currentTag.tagId )
 	{
+		// We null terminate tag names by replacing 2 byte size with 1 byte 0xFF, moving and adding 0 at end
+		// This assumes no tag name is ever > in16_t max as name sizes are actually uint16_t
 		if( 0xff == *(pStream_->pCurrPos) )
 		{
 			pStream_->pCurrPos++;
@@ -354,6 +369,7 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 			int32_t lengthOfName = enkiNBTReadInt16( pStream_ );
 			if( lengthOfName )
 			{
+				// move and null terminate, flag as 
 				*( pStream_->pCurrPos - 2 ) = 0xff; // this value will not be seen as a length since it will be negative
 				pStream_->currentTag.pName = ( char* )( pStream_->pCurrPos - 1 );
 				memmove( pStream_->currentTag.pName, pStream_->pCurrPos, lengthOfName );

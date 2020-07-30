@@ -297,6 +297,12 @@ static void SkipDataToNextTag( enkiNBTDataStream* pStream_ )
 		pStream_->pNextTag = pStream_->pCurrPos + length * 4; // array of ints (4 bytes)
 		break;
 	}
+	case enkiNBTTAG_Long_Array:
+	{
+		int32_t length = enkiNBTReadInt32( pStream_ );
+		pStream_->pNextTag = pStream_->pCurrPos + length * 8; // array of longs (4 bytes)
+		break;
+	}
 	default:
 		assert( 0 );
 		break;

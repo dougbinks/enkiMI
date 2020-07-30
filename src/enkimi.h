@@ -43,6 +43,8 @@ typedef enum
 	enkiNBTTAG_List = 9,
 	enkiNBTTAG_Compound = 10,
 	enkiNBTTAG_Int_Array = 11,
+	enkiNBTTAG_Long_Array = 12,
+	enkiNBTTAG_SIZE,
 } enkiNBTTAG_ID;
 
 

@@ -121,7 +121,7 @@ double  enkiNBTReadDouble( enkiNBTDataStream* pStream_ );
 
 typedef struct enkiNBTString_s
 {
-	int16_t     size;
+	uint16_t    size;
 	const char* pStrNotNullTerminated;
 } enkiNBTString;
 

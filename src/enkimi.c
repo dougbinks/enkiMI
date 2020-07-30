@@ -232,10 +232,18 @@ double  enkiNBTReadDouble( enkiNBTDataStream* pStream_ )
 	return retVal;
 }
 
+// Internal only uint16_t type
+uint16_t enkiNBTReadUint16( enkiNBTDataStream* pStream_ )
+{
+	uint16_t retVal = ( pStream_->pCurrPos[ 0 ] << 8 ) + pStream_->pCurrPos[ 1 ];
+	pStream_->pCurrPos += 2;
+	return retVal;
+}
+
 enkiNBTString enkiNBTReadString( enkiNBTDataStream* pStream_ )
 {
 	enkiNBTString nbtString;
-	nbtString.size = enkiNBTReadInt16( pStream_ );
+	nbtString.size = enkiNBTReadUint16( pStream_ );
 	nbtString.pStrNotNullTerminated = (const char*)pStream_->pCurrPos;
 	return nbtString;
 }
@@ -273,7 +281,7 @@ static void SkipDataToNextTag( enkiNBTDataStream* pStream_ )
 	}
 	case enkiNBTTAG_String:
 	{
-		int32_t length = enkiNBTReadInt16( pStream_ );
+		int32_t length = enkiNBTReadUint16( pStream_ );
 		pStream_->pNextTag = pStream_->pCurrPos + length;
 		break;
 	}

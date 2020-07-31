@@ -38,6 +38,7 @@ static const char* tagIdString[] =
 	"TAG_List",
 	"TAG_Compound",
 	"TAG_Int_Array",
+	"TAG_Long_Array",
 };
 
 static uint32_t minecraftPalette[] = 

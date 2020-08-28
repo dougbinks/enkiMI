@@ -449,7 +449,7 @@ uint8_t enkiHasChunk( enkiRegionFile regionFile_, int32_t chunkNr_ )
 	uint8_t hasChunk = 0;
 	RegionHeader* header = (RegionHeader*)regionFile_.pRegionData;
 	uint32_t locationOffset = GetChunkLocation( header->sectionChunksInfos[ chunkNr_ ] );
-	if( locationOffset > sizeof( RegionHeader ) )
+	if( locationOffset >= sizeof( RegionHeader ) )
 	{
 		hasChunk = 1;
 	}
@@ -460,7 +460,7 @@ void enkiInitNBTDataStreamForChunk( enkiRegionFile regionFile_, int32_t chunkNr_
 {
 	RegionHeader* header = (RegionHeader*)regionFile_.pRegionData;
 	uint32_t locationOffset = GetChunkLocation( header->sectionChunksInfos[ chunkNr_ ] );
-	if( locationOffset > sizeof( RegionHeader ) )
+	if( locationOffset >= sizeof( RegionHeader ) )
 	{
 		uint32_t length = Get32BitInt(  *( BigEndian4BytesTo32BitInt* )&regionFile_.pRegionData[ locationOffset ] );
 		uint8_t compression_type = regionFile_.pRegionData[ locationOffset + 4 ]; // we ignore this as unused for now

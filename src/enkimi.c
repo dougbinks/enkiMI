@@ -510,14 +510,21 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 {
 	enkiChunkBlockData chunk;
 	enkiChunkInit( &chunk );
+	int foundSectionData = 0;
 	while( enkiNBTReadNextTag( pStream_ ) )
 	{
+		if( enkiAreStringsEqual( "DataVersion", pStream_->currentTag.pName ) )
+		{
+			chunk.dataVersion = enkiNBTReadInt(pStream_ );
+		}
+
 		if( enkiAreStringsEqual( "Level", pStream_->currentTag.pName ) )
 		{
 			int foundXPos = 0;
 			int foundZPos = 0;
 			int foundSection = 0;
-			while( enkiNBTReadNextTag( pStream_ ) )
+			int level = pStream_->level;
+			while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > level )
 			{
 				if( enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
 				{
@@ -564,13 +571,24 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 
 				if( foundXPos && foundZPos && foundSection )
 				{
-					return chunk;
+					foundSectionData = 1;
+					break;
 				}
 			}
 		}
+
+		if( foundSectionData && chunk.dataVersion )
+		{
+			// chunk complete
+			return chunk;
+		}
 	}
-	// reset to empty
-	enkiChunkInit( &chunk );
+
+	if( 0 == foundSectionData )
+	{
+		// reset to empty as did not find required information
+		enkiChunkInit( &chunk );
+	}
 	return chunk;
 }
 

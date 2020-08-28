@@ -182,6 +182,7 @@ typedef struct enkiChunkBlockData_s
 	int32_t xPos; // section coordinates
 	int32_t zPos; // section coordinates
 	int32_t countOfSections;
+	int32_t dataVersion;
 } enkiChunkBlockData;
 
 // enkiChunkInit simply zeros data

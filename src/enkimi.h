@@ -65,6 +65,12 @@ typedef struct enkiNBTTagHeader_s
 const char* enkiGetNBTTagIDAsString( uint8_t tagID_ );
 const char* enkiGetNBTTagHeaderIDAsString( enkiNBTTagHeader tagID_ );
 
+typedef struct enkiNBTAllocation_s
+{
+	void*                       pAllocation;
+	struct enkiNBTAllocation_s* pNext;
+} enkiNBTAllocation;
+
 typedef struct enkiNBTDataStream_s
 {
 	enkiNBTTagHeader parentTags[ 512 ];
@@ -73,9 +79,9 @@ typedef struct enkiNBTDataStream_s
 	uint8_t* pDataEnd;
 	uint8_t* pData;
 	uint8_t* pNextTag;
-	uint8_t* pAllocation;
+	enkiNBTAllocation* pAllocations;
 	uint32_t dataLength;
-	int32_t level;
+	int32_t  level;
 } enkiNBTDataStream;
 
 
@@ -106,6 +112,10 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ );
 
 // Rewind stream so it can be read again from beginning
 void enkiNBTRewind( enkiNBTDataStream* pStream_ );
+
+// Add allocation pAllocation_ to stream, which will be freed using enkiNBTFreeAllocations
+// primarily for internal use, but can be used externally
+void enkiNBTAddAllocation( enkiNBTDataStream* pStream_, void* pAllocation_ );
 
 // Frees any internally allocated memory.
 void enkiNBTFreeAllocations( enkiNBTDataStream* pStream_ );

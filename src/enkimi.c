@@ -123,7 +123,7 @@ void enkiNBTInitFromMemoryUncompressed( enkiNBTDataStream* pStream_, uint8_t * p
 	pStream_->pDataEnd = pStream_->pData + pStream_->dataLength;
 	pStream_->pNextTag = pStream_->pCurrPos;
 	pStream_->level = -1;
-	pStream_->pAllocation = NULL;
+	pStream_->pAllocations = NULL;
 }
 
 int enkiNBTInitFromMemoryCompressed( enkiNBTDataStream* pStream_, uint8_t * pCompressedData_,
@@ -157,13 +157,28 @@ int enkiNBTInitFromMemoryCompressed( enkiNBTDataStream* pStream_, uint8_t * pCom
 
 	dataUnCompressed = (uint8_t*)realloc( dataUnCompressed, destLength ); // reallocate to actual size
 	enkiNBTInitFromMemoryUncompressed( pStream_, dataUnCompressed, ( uint32_t )destLength );
-	pStream_->pAllocation = dataUnCompressed;
+	enkiNBTAddAllocation( pStream_, dataUnCompressed );
 	return 1;
+}
+
+void enkiNBTAddAllocation( enkiNBTDataStream* pStream_, void* pAllocation_ )
+{
+	enkiNBTAllocation* pAlloc = (enkiNBTAllocation*)malloc(sizeof(enkiNBTAllocation));
+	pAlloc->pAllocation = pAllocation_;
+	pAlloc->pNext = pStream_->pAllocations;
+	pStream_->pAllocations = pAlloc;
 }
 
 void enkiNBTFreeAllocations( enkiNBTDataStream* pStream_ )
 {
-	free( pStream_->pAllocation );
+	enkiNBTAllocation* pNext = pStream_->pAllocations;
+	while( pNext )
+	{
+		enkiNBTAllocation* pCurr = pNext;
+		free( pCurr->pAllocation );
+		pNext = pCurr->pNext;
+		free( pCurr );
+	}
 	memset( pStream_, 0, sizeof(enkiNBTDataStream) );
 }
 

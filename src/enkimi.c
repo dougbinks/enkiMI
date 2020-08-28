@@ -129,6 +129,64 @@ void enkiNBTInitFromMemoryUncompressed( enkiNBTDataStream* pStream_, uint8_t * p
 int enkiNBTInitFromMemoryCompressed( enkiNBTDataStream* pStream_, uint8_t * pCompressedData_,
 										uint32_t compressedDataSize_, uint32_t uncompressedSizeHint_)
 {
+	// check if gzip style first:  https://tools.ietf.org/html/rfc1952#section-2.2
+	static const uint32_t GZIP_HEADER_SIZE = 10;
+	if(    compressedDataSize_ > GZIP_HEADER_SIZE
+		&& pCompressedData_[0] == 0x1f
+		&& pCompressedData_[1] == 0x8b )
+	{
+		// gzip style
+		if( pCompressedData_[3] != 0)
+		{
+			// flags add extra information, normally not added by minecraft and we don't handle them
+			enkiNBTInitFromMemoryUncompressed( pStream_, NULL, 0 );
+			return 0;
+		}
+
+		int32_t ISIZE = *(int32_t*)(pCompressedData_ + compressedDataSize_ - 4);
+		assert(ISIZE > 0);
+		uint8_t* gzUncompressedData = (uint8_t*)malloc( (size_t)ISIZE );
+
+		// uncompress gzip
+		mz_stream stream;
+		int status;
+		memset(&stream, 0, sizeof(stream));
+		uint32_t gzCompressedDataSize = compressedDataSize_ - GZIP_HEADER_SIZE;
+		uint8_t* gzCompressedData     = pCompressedData_    + GZIP_HEADER_SIZE;
+
+		stream.next_in   = gzCompressedData;
+		stream.avail_in  = (mz_uint32)gzCompressedDataSize;
+		stream.next_out  = gzUncompressedData;
+		stream.avail_out = (mz_uint32)ISIZE;
+
+		status = mz_inflateInit2(&stream, -MZ_DEFAULT_WINDOW_BITS);
+		if (status == MZ_OK)
+		{
+			status = mz_inflate(&stream, MZ_FINISH);
+			if (status != MZ_STREAM_END)
+			{
+				mz_inflateEnd(&stream);
+				status = ((status == MZ_BUF_ERROR) && (!stream.avail_in)) ? MZ_DATA_ERROR : status;
+			}
+			else
+			{
+				status = mz_inflateEnd(&stream);
+			}
+
+			if( status == MZ_OK )
+			{
+				enkiNBTInitFromMemoryUncompressed( pStream_, gzUncompressedData, ( uint32_t )stream.total_out );
+				enkiNBTAddAllocation( pStream_, gzUncompressedData );
+				return 1;
+			}
+			else
+			{
+				free( gzUncompressedData );
+			}
+		}
+	}
+
+
 	mz_ulong destLength = uncompressedSizeHint_;
 	if( destLength <= compressedDataSize_ )
 	{

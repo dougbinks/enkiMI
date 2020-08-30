@@ -327,6 +327,7 @@ enkiNBTString enkiNBTReadString( enkiNBTDataStream* pStream_ )
 
 static void SkipDataToNextTag( enkiNBTDataStream* pStream_ )
 {
+	uint8_t* pCurrPos = pStream_->pCurrPos;
 	switch( pStream_->currentTag.tagId )
 	{
 	case enkiNBTTAG_End:
@@ -384,6 +385,7 @@ static void SkipDataToNextTag( enkiNBTDataStream* pStream_ )
 		assert( 0 );
 		break;
 	}
+	pStream_->pCurrPos = pCurrPos; // restore current position
 }
 
 int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )

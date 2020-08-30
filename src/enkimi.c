@@ -617,6 +617,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						}
 						if( enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
 						{
+							enkiNBTReadInt32( pStream_ ); // read number of items
 							pBlocks = pStream_->pCurrPos;
 						}
 						if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )

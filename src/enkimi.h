@@ -113,10 +113,6 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ );
 // Rewind stream so it can be read again from beginning
 void enkiNBTRewind( enkiNBTDataStream* pStream_ );
 
-// Add allocation pAllocation_ to stream, which will be freed using enkiNBTFreeAllocations
-// primarily for internal use, but can be used externally
-void enkiNBTAddAllocation( enkiNBTDataStream* pStream_, void* pAllocation_ );
-
 // Frees any internally allocated memory.
 void enkiNBTFreeAllocations( enkiNBTDataStream* pStream_ );
 

@@ -22,6 +22,9 @@
 #include "enkimi.h"
 
 
+// Add allocation pAllocation_ to stream, which will be freed using enkiNBTFreeAllocations
+void enkiNBTAddAllocation( enkiNBTDataStream* pStream_, void* pAllocation_ );
+
 static const uint32_t SECTOR_SIZE = 4096;
 
 static const char* tagIdString[] =

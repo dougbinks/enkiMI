@@ -21,7 +21,6 @@
 
 #include "enkimi.h"
 
-
 // Add allocation pAllocation_ to stream, which will be freed using enkiNBTFreeAllocations
 void enkiNBTAddAllocation( enkiNBTDataStream* pStream_, void* pAllocation_ );
 
@@ -73,6 +72,273 @@ static uint32_t minecraftPalette[] =
 	0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 
 	0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xff242132 };
 
+static enkiMIBlockID defaultBlockIDs[] = 
+{
+	{ "minecraft:air", 0 }, 
+	{ "minecraft:stone", 1 }, 
+	{ "minecraft:andesite", 1 }, 
+	{ "minecraft:seagrass", 2 }, 
+	{ "minecraft:grass", 2 }, 
+	{ "minecraft:grass_block", 2 }, 
+	{ "minecraft:dirt", 3 }, 
+	{ "minecraft:cobblestone", 4 }, 
+	{ "minecraft:planks", 5 }, 
+	{ "minecraft:sapling", 6 }, 
+	{ "minecraft:bedrock", 7 }, 
+	{ "minecraft:flowing_water", 8 }, 
+	{ "minecraft:water", 9 }, 
+	{ "minecraft:flowing_lava", 10 }, 
+	{ "minecraft:lava", 11 }, 
+	{ "minecraft:sand", 12 }, 
+	{ "minecraft:gravel", 13 }, 
+	{ "minecraft:gold_ore", 14 }, 
+	{ "minecraft:iron_ore", 15 }, 
+	{ "minecraft:coal_ore", 16 }, 
+	{ "minecraft:log", 17 }, 
+	{ "minecraft:leaves", 18 }, 
+	{ "minecraft:spruce_leaves", 18 }, 
+	{ "minecraft:oak_leaves", 18 }, 
+	{ "minecraft:jungle_leaves", 18 }, 
+	{ "minecraft:birch_leaves", 18 }, 
+	{ "minecraft:sponge", 19 }, 
+	{ "minecraft:glass", 20 }, 
+	{ "minecraft:lapis_ore", 21 }, 
+	{ "minecraft:lapis_block", 22 }, 
+	{ "minecraft:dispenser", 23 }, 
+	{ "minecraft:sandstone", 24 }, 
+	{ "minecraft:noteblock", 25 }, 
+	{ "minecraft:bed", 26 }, 
+	{ "minecraft:golden_rail", 27 }, 
+	{ "minecraft:detector_rail", 28 }, 
+	{ "minecraft:sticky_piston", 29 }, 
+	{ "minecraft:web", 30 }, 
+	{ "minecraft:tallgrass", 31 }, 
+	{ "minecraft:tall_grass", 31 }, 
+	{ "minecraft:tall_seagrass", 31 }, 
+	{ "minecraft:deadbush", 32 }, 
+	{ "minecraft:piston", 33 }, 
+	{ "minecraft:piston_head", 34 }, 
+	{ "minecraft:wool", 35 }, 
+	{ "minecraft:yellow_flower", 37 }, 
+	{ "minecraft:red_flower", 38 }, 
+	{ "minecraft:brown_mushroom", 39 }, 
+	{ "minecraft:red_mushroom", 40 }, 
+	{ "minecraft:gold_block", 41 }, 
+	{ "minecraft:iron_block", 42 }, 
+	{ "minecraft:double_stone_slab", 43 }, 
+	{ "minecraft:stone_slab", 44 }, 
+	{ "minecraft:brick_block", 45 }, 
+	{ "minecraft:bricks", 45 }, 
+	{ "minecraft:tnt", 46 }, 
+	{ "minecraft:bookshelf", 47 }, 
+	{ "minecraft:mossy_cobblestone", 48 }, 
+	{ "minecraft:obsidian", 49 }, 
+	{ "minecraft:torch", 50 }, 
+	{ "minecraft:fire", 51 }, 
+	{ "minecraft:mob_spawner", 52 }, 
+	{ "minecraft:oak_stairs", 53 }, 
+	{ "minecraft:chest", 54 }, 
+	{ "minecraft:redstone_wire", 55 }, 
+	{ "minecraft:diamond_ore", 56 }, 
+	{ "minecraft:diamond_block", 57 }, 
+	{ "minecraft:crafting_table", 58 }, 
+	{ "minecraft:wheat", 59 }, 
+	{ "minecraft:farmland", 60 }, 
+	{ "minecraft:furnace", 61 }, 
+	{ "minecraft:lit_furnace", 62 }, 
+	{ "minecraft:standing_sign", 63 }, 
+	{ "minecraft:wooden_door", 64 }, 
+	{ "minecraft:ladder", 65 }, 
+	{ "minecraft:rail", 66 }, 
+	{ "minecraft:stone_stairs", 67 }, 
+	{ "minecraft:wall_sign", 68 }, 
+	{ "minecraft:lever", 69 }, 
+	{ "minecraft:stone_pressure_plate", 70 }, 
+	{ "minecraft:iron_door", 71 }, 
+	{ "minecraft:wooden_pressure_plate", 72 }, 
+	{ "minecraft:redstone_ore", 73 }, 
+	{ "minecraft:lit_redstone_ore", 74 }, 
+	{ "minecraft:unlit_redstone_torch", 75 }, 
+	{ "minecraft:redstone_torch", 76 }, 
+	{ "minecraft:stone_button", 77 }, 
+	{ "minecraft:snow_layer", 78 }, 
+	{ "minecraft:ice", 79 }, 
+	{ "minecraft:snow", 80 }, 
+	{ "minecraft:cactus", 81 }, 
+	{ "minecraft:clay", 82 }, 
+	{ "minecraft:reeds", 83 }, 
+	{ "minecraft:jukebox", 84 }, 
+	{ "minecraft:fence", 85 }, 
+	{ "minecraft:pumpkin", 86 }, 
+	{ "minecraft:netherrack", 87 }, 
+	{ "minecraft:soul_sand", 88 }, 
+	{ "minecraft:glowstone", 89 }, 
+	{ "minecraft:portal", 90 }, 
+	{ "minecraft:lit_pumpkin", 91 }, 
+	{ "minecraft:cake", 92 }, 
+	{ "minecraft:unpowered_repeater", 93 }, 
+	{ "minecraft:powered_repeater", 94 }, 
+	{ "minecraft:stained_glass", 95 }, 
+	{ "minecraft:trapdoor", 96 }, 
+	{ "minecraft:monster_egg", 97 }, 
+	{ "minecraft:stonebrick", 98 }, 
+	{ "minecraft:brown_mushroom_block", 99 }, 
+	{ "minecraft:red_mushroom_block", 100 }, 
+	{ "minecraft:iron_bars", 101 }, 
+	{ "minecraft:glass_pane", 102 }, 
+	{ "minecraft:melon_block", 103 }, 
+	{ "minecraft:pumpkin_stem", 104 }, 
+	{ "minecraft:melon_stem", 105 }, 
+	{ "minecraft:vine", 106 }, 
+	{ "minecraft:fence_gate", 107 }, 
+	{ "minecraft:brick_stairs", 108 }, 
+	{ "minecraft:stone_brick_stairs", 109 }, 
+	{ "minecraft:mycelium", 110 }, 
+	{ "minecraft:waterlily", 111 }, 
+	{ "minecraft:nether_brick", 112 }, 
+	{ "minecraft:nether_brick_fence", 113 }, 
+	{ "minecraft:nether_brick_stairs", 114 }, 
+	{ "minecraft:nether_wart", 115 }, 
+	{ "minecraft:enchanting_table", 116 }, 
+	{ "minecraft:brewing_stand", 117 }, 
+	{ "minecraft:cauldron", 118 }, 
+	{ "minecraft:end_portal", 119 }, 
+	{ "minecraft:end_portal_frame", 120 }, 
+	{ "minecraft:end_stone", 121 }, 
+	{ "minecraft:dragon_egg", 122 }, 
+	{ "minecraft:redstone_lamp", 123 }, 
+	{ "minecraft:lit_redstone_lamp", 124 }, 
+	{ "minecraft:double_wooden_slab", 125 }, 
+	{ "minecraft:wooden_slab", 126 }, 
+	{ "minecraft:cocoa", 127 }, 
+	{ "minecraft:sandstone_stairs", 128 }, 
+	{ "minecraft:emerald_ore", 129 }, 
+	{ "minecraft:ender_chest", 130 }, 
+	{ "minecraft:tripwire_hook", 131 }, 
+	{ "minecraft:tripwire_hook", 132 }, 
+	{ "minecraft:emerald_block", 133 }, 
+	{ "minecraft:spruce_stairs", 134 }, 
+	{ "minecraft:birch_stairs", 135 }, 
+	{ "minecraft:jungle_stairs", 136 }, 
+	{ "minecraft:command_block", 137 }, 
+	{ "minecraft:beacon", 138 }, 
+	{ "minecraft:cobblestone_wall", 139 }, 
+	{ "minecraft:flower_pot", 140 }, 
+	{ "minecraft:carrots", 141 }, 
+	{ "minecraft:potatoes", 142 }, 
+	{ "minecraft:wooden_button", 143 }, 
+	{ "minecraft:skull", 144 }, 
+	{ "minecraft:anvil", 145 }, 
+	{ "minecraft:trapped_chest", 146 }, 
+	{ "minecraft:light_weighted_pressure_plate", 147 }, 
+	{ "minecraft:heavy_weighted_pressure_plate", 148 }, 
+	{ "minecraft:unpowered_comparator", 149 }, 
+	{ "minecraft:powered_comparator", 150 }, 
+	{ "minecraft:daylight_detector", 151 }, 
+	{ "minecraft:redstone_block", 152 }, 
+	{ "minecraft:quartz_ore", 153 }, 
+	{ "minecraft:hopper", 154 }, 
+	{ "minecraft:quartz_block", 155 }, 
+	{ "minecraft:quartz_stairs", 156 }, 
+	{ "minecraft:activator_rail", 157 }, 
+	{ "minecraft:dropper", 158 }, 
+	{ "minecraft:stained_hardened_clay", 159 }, 
+	{ "minecraft:stained_glass_pane", 160 }, 
+	{ "minecraft:leaves2", 161 }, 
+	{ "minecraft:log2", 162 }, 
+	{ "minecraft:acacia_stairs", 163 }, 
+	{ "minecraft:dark_oak_stairs", 164 }, 
+	{ "minecraft:slime", 165 }, 
+	{ "minecraft:barrier", 166 }, 
+	{ "minecraft:iron_trapdoor", 167 }, 
+	{ "minecraft:prismarine", 168 }, 
+	{ "minecraft:sea_lantern", 169 }, 
+	{ "minecraft:hay_block", 170 }, 
+	{ "minecraft:carpet", 171 }, 
+	{ "minecraft:hardened_clay", 172 }, 
+	{ "minecraft:coal_block", 173 }, 
+	{ "minecraft:packed_ice", 174 }, 
+	{ "minecraft:double_plant", 175 }, 
+	{ "minecraft:standing_banner", 176 }, 
+	{ "minecraft:wall_banner", 177 }, 
+	{ "minecraft:daylight_detector_inverted", 178 }, 
+	{ "minecraft:red_sandstone", 179 }, 
+	{ "minecraft:red_sandstone_stairs", 180 }, 
+	{ "minecraft:double_stone_slab2", 181 }, 
+	{ "minecraft:stone_slab2", 182 }, 
+	{ "minecraft:spruce_fence_gate", 183 }, 
+	{ "minecraft:birch_fence_gate", 184 }, 
+	{ "minecraft:jungle_fence_gate", 185 }, 
+	{ "minecraft:dark_oak_fence_gate", 186 }, 
+	{ "minecraft:acacia_fence_gate", 187 }, 
+	{ "minecraft:spruce_fence", 188 }, 
+	{ "minecraft:birch_fence", 189 }, 
+	{ "minecraft:jungle_fence", 190 }, 
+	{ "minecraft:dark_oak_fence", 191 }, 
+	{ "minecraft:acacia_fence", 192 }, 
+	{ "minecraft:spruce_door", 193 }, 
+	{ "minecraft:birch_door", 194 }, 
+	{ "minecraft:jungle_door", 195 }, 
+	{ "minecraft:acacia_door", 196 }, 
+	{ "minecraft:dark_oak_door", 197 }, 
+	{ "minecraft:end_rod", 198 }, 
+	{ "minecraft:chorus_plant", 199 }, 
+	{ "minecraft:chorus_flower", 200 }, 
+	{ "minecraft:purpur_block", 201 }, 
+	{ "minecraft:purpur_pillar", 202 }, 
+	{ "minecraft:purpur_stairs", 203 }, 
+	{ "minecraft:purpur_double_slab", 204 }, 
+	{ "minecraft:purpur_slab", 205 }, 
+	{ "minecraft:end_bricks", 206 }, 
+	{ "minecraft:beetroots", 207 }, 
+	{ "minecraft:grass_path", 208 }, 
+	{ "minecraft:end_gateway", 209 }, 
+	{ "minecraft:repeating_command_block", 210 }, 
+	{ "minecraft:chain_command_block", 211 }, 
+	{ "minecraft:frosted_ice", 212 }, 
+	{ "minecraft:magma", 213 }, 
+	{ "minecraft:nether_wart_block", 214 }, 
+	{ "minecraft:red_nether_brick", 215 }, 
+	{ "minecraft:bone_block", 216 }, 
+	{ "minecraft:structure_void", 217 }, 
+	{ "minecraft:observer", 218 }, 
+	{ "minecraft:white_shulker_box", 219 }, 
+	{ "minecraft:orange_shulker_box", 220 }, 
+	{ "minecraft:magenta_shulker_box", 221 }, 
+	{ "minecraft:light_blue_shulker_box", 222 }, 
+	{ "minecraft:yellow_shulker_box", 223 }, 
+	{ "minecraft:lime_shulker_box", 224 }, 
+	{ "minecraft:pink_shulker_box", 225 }, 
+	{ "minecraft:gray_shulker_box", 226 }, 
+	{ "minecraft:silver_shulker_box", 227 }, 
+	{ "minecraft:cyan_shulker_box", 228 }, 
+	{ "minecraft:purple_shulker_box", 229 }, 
+	{ "minecraft:blue_shulker_box", 230 }, 
+	{ "minecraft:brown_shulker_box", 231 }, 
+	{ "minecraft:green_shulker_box", 232 }, 
+	{ "minecraft:red_shulker_box", 233 }, 
+	{ "minecraft:black_shulker_box", 234 },
+	{ "minecraft:white_glazed_terracotta", 235 }, 
+	{ "minecraft:orange_glazed_terracotta", 236 }, 
+	{ "minecraft:magenta_glazed_terracotta", 237 }, 
+	{ "minecraft:light_blue_glazed_terracotta", 238 }, 
+	{ "minecraft:yellow_glazed_terracotta", 239 }, 
+	{ "minecraft:lime_glazed_terracotta", 240 }, 
+	{ "minecraft:pink_glazed_terracotta", 241 }, 
+	{ "minecraft:gray_glazed_terracotta", 242 }, 
+	{ "minecraft:light_gray_glazed_terracotta", 243 }, 
+	{ "minecraft:cyan_glazed_terracotta", 244 }, 
+	{ "minecraft:purple_glazed_terracotta", 245 }, 
+	{ "minecraft:blue_glazed_terracotta", 246 }, 
+	{ "minecraft:brown_glazed_terracotta", 247 }, 
+	{ "minecraft:green_glazed_terracotta", 248 }, 
+	{ "minecraft:red_glazed_terracotta", 249 }, 
+	{ "minecraft:black_glazed_terracotta", 250 }, 
+	{ "minecraft:concrete", 251 }, 
+	{ "minecraft:concrete_powder", 252 }, 
+	{ "minecraft:structure_block", 255 }
+};
+
 
 typedef struct SectionChunkInfo_s
 {
@@ -89,16 +355,13 @@ static int32_t GetChunkLocation( SectionChunkInfo section_ )
 
 typedef struct BigEndian4BytesTo32BitInt_s
 {
-	uint8_t pos_0;
-	uint8_t pos_1;
-	uint8_t pos_2;
-	uint8_t pos_3;
+	uint8_t pos[4];
 } BigEndian4BytesTo32BitInt;
 
 
 static int32_t Get32BitInt( BigEndian4BytesTo32BitInt in_ )
 {
-	return ( ( in_.pos_0 << 24 ) + ( in_.pos_1 << 16 ) + ( in_.pos_2 << 8 ) + in_.pos_3 );
+	return ( ( in_.pos[0] << 24 ) + ( in_.pos[1] << 16 ) + ( in_.pos[2] << 8 ) + in_.pos[3] );
 }
 
 typedef struct RegionHeader_s
@@ -603,32 +866,102 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 				{
 					foundSection = 1;
 					int32_t levelParent = pStream_->level;
-					int8_t sectionY = -1;
+					int8_t sectionY = 0;
 					uint8_t* pBlocks = NULL;
+					uint8_t* pBlockStates = NULL;
+					enkiChunkSectionPalette sectionPalette = {0};
 					do
 					{
 						if( 0 == enkiNBTReadNextTag( pStream_ ) )
 						{
 							break;
 						}
-						if( enkiNBTTAG_Compound == pStream_->currentTag.tagId )
-						{
-							chunk.countOfSections++;
-						}
+
 						if( enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
 						{
-							enkiNBTReadInt32( pStream_ ); // read number of items
+							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pBlocks = pStream_->pCurrPos;
 						}
 						if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
 						{
+							// sectionY is not always present, and may indicate a start point.
+							// For example, can find sectionY = -1 as first section, then next
+							// section has data but no sectionY.
 							sectionY = enkiNBTReadInt8( pStream_ );
 						}
-						if( pBlocks && ( 0 <= sectionY ) )
+						if( enkiAreStringsEqual( "BlockStates", pStream_->currentTag.pName ) )
 						{
-							chunk.sections[ sectionY ] = pBlocks;
-							sectionY = -1;
-							pBlocks = NULL;
+							sectionPalette.blockArraySize = enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
+							pBlockStates = pStream_->pCurrPos;
+						}
+						if( enkiAreStringsEqual( "Palette", pStream_->currentTag.pName ) )
+						{
+							sectionPalette.size = (uint32_t)pStream_->currentTag.listNumItems;
+							uint32_t numBits = 4;
+							uint32_t test = (sectionPalette.size-1) >> 4;
+							while( test )
+							{
+								test = test >> 1;
+								++numBits;
+							}
+							sectionPalette.numBitsPerBlock = numBits;
+
+							sectionPalette.pNumericIDs = (uint32_t*)malloc(sizeof(uint32_t)*sectionPalette.size);
+							enkiNBTAddAllocation( pStream_, sectionPalette.pNumericIDs );
+							// read palettes
+							int levelPalette = pStream_->level;
+   						    uint32_t paletteNum = 0;
+							while(     enkiNBTReadNextTag( pStream_ )
+									&& levelPalette < pStream_->level )
+							{
+								if(   pStream_->currentTag.tagId == enkiNBTTAG_String
+									&& enkiAreStringsEqual( "Name", pStream_->currentTag.pName ) )
+								{
+									assert( paletteNum < sectionPalette.size );
+									enkiNBTString paletteEntry = enkiNBTReadString( pStream_ );
+									// find in palette
+									// enkiMIBlockID defaultBlockIDs[]
+									uint32_t numBlockIDs = (uint32_t)sizeof(defaultBlockIDs)/sizeof(enkiMIBlockID);
+									sectionPalette.pNumericIDs[ paletteNum ] = 256; // 1 is normally stone. TODO: Allow default to be set
+									for( uint32_t id=0; id <numBlockIDs; ++id )
+									{
+										size_t len = strlen( defaultBlockIDs[id].pNamespaceID );
+										if(    len == paletteEntry.size
+											&& 0 == memcmp( defaultBlockIDs[id].pNamespaceID, paletteEntry.pStrNotNullTerminated, len ) )
+										{
+											sectionPalette.pNumericIDs[ paletteNum ] = defaultBlockIDs[id].numericID;
+											break;
+										}
+									}
+									if( sectionPalette.pNumericIDs[ paletteNum ] == 256 )
+									{
+										// not found.
+										sectionPalette.pNumericIDs[ paletteNum ] = 1;
+									}
+									++paletteNum;
+								}
+							}
+						}
+						if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelParent + 1 )
+						{
+							if( pBlocks )
+							{
+								chunk.countOfSections++;
+								assert( sectionPalette.size == 0 ); // a given chunk should use the same format
+								chunk.sections[ sectionY ] = pBlocks;
+								pBlocks = NULL;
+								pBlockStates = NULL;
+							}
+							if( pBlockStates  && sectionPalette.size )
+							{
+								chunk.countOfSections++;
+								assert( pBlocks == NULL ); // a given chunk should use the same format
+								chunk.palette[ sectionY ]  = sectionPalette;
+								chunk.sections[ sectionY ] = pBlockStates;
+								pBlockStates = NULL;
+								memset( &sectionPalette, 0, sizeof(sectionPalette) );
+							}
+							++sectionY;
 						}
 					} while(  pStream_->level > levelParent );
 				}
@@ -651,6 +984,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 	if( 0 == foundSectionData )
 	{
 		// reset to empty as did not find required information
+		// memory allocation will be freed when stream freed
 		enkiChunkInit( &chunk );
 	}
 	return chunk;
@@ -676,10 +1010,100 @@ enkiMICoordinate enkiGetChunkSectionOrigin(enkiChunkBlockData * pChunk_, int32_t
 
 uint8_t enkiGetChunkSectionVoxel(enkiChunkBlockData * pChunk_, int32_t section_, enkiMICoordinate sectionOffset_)
 {
-	uint8_t retVal = 0;
-	uint8_t* pSection = pChunk_->sections[ section_ ];
-	uint8_t* pVoxel = pSection + sectionOffset_.y*ENKI_MI_SIZE_SECTIONS*ENKI_MI_SIZE_SECTIONS + sectionOffset_.z*ENKI_MI_SIZE_SECTIONS + sectionOffset_.x;
-	retVal = *pVoxel;
+	uint8_t  retVal = 0;
+	uint8_t* pSection    = pChunk_->sections[ section_ ];
+	uint32_t paletteSize = pChunk_->palette[ section_ ].size;
+	uint32_t posArray    = sectionOffset_.y*ENKI_MI_SIZE_SECTIONS*ENKI_MI_SIZE_SECTIONS + sectionOffset_.z*ENKI_MI_SIZE_SECTIONS + sectionOffset_.x;
+	if( paletteSize )
+	{
+		// size depends on palette
+		uint32_t numBits = pChunk_->palette[ section_ ].numBitsPerBlock;
+
+
+		// Versions prior to 1.16 (DataVersion 2556) have block elements containing values stretching over multiple 64-bit fields.
+		// 1.16 and above do not.
+		uint32_t blockArrayValue = 0;
+		if( pChunk_->dataVersion >= 2556 )
+		{
+			// do not need to handle bits spread across two uint64_t values
+			uint32_t numPer64 = 64 / numBits;
+			uint32_t pos64   = posArray / numPer64;
+			uint32_t posIn64 = posArray - (pos64 * numPer64);
+
+			assert( pChunk_->palette[ section_ ].blockArraySize > pos64 );
+
+			uint8_t* pVal64BigEndian = pSection + (8*(size_t)pos64);
+
+			uint64_t val64 =   ( (uint64_t)pVal64BigEndian[0] << 56 ) + ( (uint64_t)pVal64BigEndian[1] << 48 )
+							 + ( (uint64_t)pVal64BigEndian[2] << 40 ) + ( (uint64_t)pVal64BigEndian[3] << 32 )
+							 + ( (uint64_t)pVal64BigEndian[4] << 24 ) + ( (uint64_t)pVal64BigEndian[5] << 16 )
+							 + ( (uint64_t)pVal64BigEndian[6] <<  8 ) + ( (uint64_t)pVal64BigEndian[7]       );
+
+			uint64_t val = val64 >> posIn64;
+
+			uint64_t mask = (~(uint64_t)0) >> (64-numBits);
+			uint32_t valmasked = (uint32_t)( val & mask );
+		}
+		else
+		{
+
+			uint32_t posBits = numBits * posArray;
+			uint32_t pos64   = posBits / 64;
+			uint32_t posIn64 = posBits - (pos64 * 64);
+
+			assert( pChunk_->palette[ section_ ].blockArraySize > pos64 );
+
+			uint8_t* pVal64BigEndian = pSection + (8*(size_t)pos64);
+
+			uint64_t val64 =   ( (uint64_t)pVal64BigEndian[0] << 56 ) + ( (uint64_t)pVal64BigEndian[1] << 48 )
+							 + ( (uint64_t)pVal64BigEndian[2] << 40 ) + ( (uint64_t)pVal64BigEndian[3] << 32 )
+							 + ( (uint64_t)pVal64BigEndian[4] << 24 ) + ( (uint64_t)pVal64BigEndian[5] << 16 )
+							 + ( (uint64_t)pVal64BigEndian[6] <<  8 ) + ( (uint64_t)pVal64BigEndian[7]       );
+
+			uint64_t val = val64 >> posIn64;
+
+			// handle 'overhang'
+			uint32_t maxBitsPossibleIn64Bits = 64 - posIn64;
+			uint32_t numBitsIn64      = maxBitsPossibleIn64Bits < numBits ? maxBitsPossibleIn64Bits : numBits;
+			uint32_t overhangInNext64 = numBitsIn64 < numBits ? numBits-numBitsIn64 : 0;
+				
+			uint64_t mask = (~(uint64_t)0) >> (64-numBitsIn64);
+			uint32_t valmasked = (uint32_t)( val & mask );
+
+			if( overhangInNext64 )
+			{
+				uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;;
+
+				uint64_t val64_2 =  ( (uint64_t)pVal64BigEndianPlus1[0] << 56 ) + ( (uint64_t)pVal64BigEndianPlus1[1] << 48 )
+								  + ( (uint64_t)pVal64BigEndianPlus1[2] << 40 ) + ( (uint64_t)pVal64BigEndianPlus1[3] << 32 )
+								  + ( (uint64_t)pVal64BigEndianPlus1[4] << 24 ) + ( (uint64_t)pVal64BigEndianPlus1[5] << 16 )
+								  + ( (uint64_t)pVal64BigEndianPlus1[6] <<  8 ) + ( (uint64_t)pVal64BigEndianPlus1[7]       );
+				uint64_t mask_2      =(~(uint64_t)0) >> (64-overhangInNext64);
+				uint64_t val_2       = val64_2;
+				uint32_t valmasked_2 = (uint32_t)( val_2 & mask_2 );
+
+				valmasked |= valmasked_2;
+			}
+			blockArrayValue = valmasked;
+		}
+
+		if( (uint32_t)pChunk_->palette[ section_ ].size > blockArrayValue )
+		{
+			uint32_t paletteValue = pChunk_->palette[ section_ ].pNumericIDs[ blockArrayValue ];
+			retVal = (uint8_t)paletteValue;
+		}
+		else
+		{
+			assert( 0 );
+			retVal = 1; // default
+		}
+		
+	}
+	else
+	{
+		uint8_t* pVoxel = pSection + posArray;
+		retVal = *pVoxel;
+	}
 	return retVal;
 }
 

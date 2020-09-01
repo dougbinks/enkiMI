@@ -711,6 +711,7 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 			int32_t lengthOfName = enkiNBTReadInt16( pStream_ );
 			if( lengthOfName )
 			{
+				assert( pStream_->pCurrPos+lengthOfName < pStream_->pDataEnd );
 				// move and null terminate, flag as 
 				*( pStream_->pCurrPos - 2 ) = 0xff; // this value will not be seen as a length since it will be negative
 				pStream_->currentTag.pName = ( char* )( pStream_->pCurrPos - 1 );
@@ -1028,7 +1029,7 @@ uint8_t enkiGetChunkSectionVoxel(enkiChunkBlockData * pChunk_, int32_t section_,
 			// do not need to handle bits spread across two uint64_t values
 			uint32_t numPer64 = 64 / numBits;
 			uint32_t pos64   = posArray / numPer64;
-			uint32_t posIn64 = posArray - (pos64 * numPer64);
+			uint32_t posIn64 = numBits * ( posArray - (pos64 * numPer64) );
 
 			assert( pChunk_->palette[ section_ ].blockArraySize > pos64 );
 
@@ -1043,6 +1044,8 @@ uint8_t enkiGetChunkSectionVoxel(enkiChunkBlockData * pChunk_, int32_t section_,
 
 			uint64_t mask = (~(uint64_t)0) >> (64-numBits);
 			uint32_t valmasked = (uint32_t)( val & mask );
+			blockArrayValue = valmasked;
+			assert( (uint32_t)pChunk_->palette[ section_ ].size > blockArrayValue );
 		}
 		else
 		{
@@ -1085,6 +1088,7 @@ uint8_t enkiGetChunkSectionVoxel(enkiChunkBlockData * pChunk_, int32_t section_,
 				valmasked |= valmasked_2;
 			}
 			blockArrayValue = valmasked;
+			assert( (uint32_t)pChunk_->palette[ section_ ].size > blockArrayValue );
 		}
 
 		if( (uint32_t)pChunk_->palette[ section_ ].size > blockArrayValue )
@@ -1092,11 +1096,7 @@ uint8_t enkiGetChunkSectionVoxel(enkiChunkBlockData * pChunk_, int32_t section_,
 			uint32_t paletteValue = pChunk_->palette[ section_ ].pNumericIDs[ blockArrayValue ];
 			retVal = (uint8_t)paletteValue;
 		}
-		else
-		{
-			assert( 0 );
-			retVal = 1; // default
-		}
+
 		
 	}
 	else

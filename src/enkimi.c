@@ -662,7 +662,7 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 		}
 		pStream_->parentTags[ pStream_->level ] = pStream_->currentTag;
 	}
-	if( ( pStream_->level >= 0 ) && ( enkiNBTTAG_List == pStream_->parentTags[ pStream_->level ].tagId ) )
+	while( ( pStream_->level >= 0 ) && ( enkiNBTTAG_List == pStream_->parentTags[ pStream_->level ].tagId ) )
 	{
 		if( pStream_->parentTags[ pStream_->level ].listCurrItem == pStream_->parentTags[ pStream_->level ].listNumItems )
 		{
@@ -677,6 +677,7 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 				pStream_->currentTag.listItemTagId = *(pStream_->pCurrPos++);
 				pStream_->currentTag.listNumItems = enkiNBTReadInt32( pStream_ );
 				pStream_->currentTag.listCurrItem = 0;
+				pStream_->pNextTag = pStream_->pCurrPos;
 			}
 			SkipDataToNextTag( pStream_ );
 			pStream_->pCurrPos = pStream_->pNextTag;

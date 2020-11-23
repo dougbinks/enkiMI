@@ -763,9 +763,12 @@ enkiRegionFile enkiRegionFileLoad( FILE * fp_ )
 	regionFile.regionDataSize = ftell( fp_ );
 	fseek( fp_, 0, SEEK_SET ); // return to start position
 
-	// get the data in the chunks data section
-	regionFile.pRegionData = (uint8_t*)malloc( regionFile.regionDataSize );
-	fread( regionFile.pRegionData, 1, regionFile.regionDataSize, fp_ ); // note: because sectionDataChunks is an array of single bytes, sizeof( sectionDataChunks ) == sectionDataSize
+	if( regionFile.regionDataSize )
+	{
+		// get the data in the chunks data section
+		regionFile.pRegionData = (uint8_t*)malloc( regionFile.regionDataSize );
+		fread( regionFile.pRegionData, 1, regionFile.regionDataSize, fp_ ); // note: because sectionDataChunks is an array of single bytes, sizeof( sectionDataChunks ) == sectionDataSize
+	}
 
 	return regionFile;
 }

@@ -46,10 +46,10 @@ fclose( fp );
 
 * [ephtracy for the Minecraft palette colours](http://ephtracy.github.io/)
 
-* Thanks to [WesterosCraft](http://www.westeroscraft.com/guide) and [MrBatou](https://www.planetminecraft.com/project/cuirass-dsd-401-by-mrbatou-download-cinematic/) for letting us use their Minecraft constructions to test the importer with our game [Avoyd](https://www.avoyd.com):
+* Thanks to [WesterosCraft](http://www.westeroscraft.com/guide), [MrBatou](https://www.planetminecraft.com/project/cuirass-dsd-401-by-mrbatou-download-cinematic/), and [Greenfield City](http://www.greenfieldmc.net) for letting us use their Minecraft constructions to test the importer with our game [Avoyd](https://www.avoyd.com):
 
-![Two Minecraft constructions imported into Avoyd: WesterosCraft King's Landing and MrBatou Cuirassé DSD-401](https://storage.googleapis.com/enkisoftware-images/Avoyd_2017-04-15_Westeroscraft_Kings_Landing_MrBatou_Spaceship.jpg)
-[Video: two Minecraft levels imported into Avoyd](https://www.youtube.com/watch?v=cJRFqXPuNe8)
+[![Two Minecraft constructions imported into Avoyd: Greenfield City and MrBatou Cuirassé DSD-401 with link to Youtube showcase video](https://raw.githubusercontent.com/dougbinks/images/master/Avoyd_2021-01-18_YoutubeThumbnailForGithub.jpg)](https://www.youtube.com/watch?v=n8oiVRhzwxE)
+
 
 ## License (zlib)
 

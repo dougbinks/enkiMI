@@ -779,18 +779,24 @@ uint8_t enkiHasChunk( enkiRegionFile regionFile_, int32_t chunkNr_ )
 	uint8_t hasChunk = 0;
 	RegionHeader* header = (RegionHeader*)regionFile_.pRegionData;
 	uint32_t locationOffset = GetChunkLocation( header->sectionChunksInfos[ chunkNr_ ] );
-	if( locationOffset >= sizeof( RegionHeader ) )
+	if( locationOffset >= sizeof( RegionHeader ) && ( locationOffset + 6 ) <= regionFile_.regionDataSize )
 	{
-		hasChunk = 1;
+		uint32_t length = Get32BitInt(  *( BigEndian4BytesTo32BitInt* )&regionFile_.pRegionData[ locationOffset ] );
+		if( ( length + locationOffset + 4 ) <= regionFile_.regionDataSize )
+		{
+			hasChunk = 1;
+		}
 	}
 	return hasChunk;
 }
 
 void enkiInitNBTDataStreamForChunk( enkiRegionFile regionFile_, int32_t chunkNr_, enkiNBTDataStream* pStream_ )
 {
+	enkiNBTInitFromMemoryUncompressed( pStream_, NULL, 0 ); // clears stream
+
 	RegionHeader* header = (RegionHeader*)regionFile_.pRegionData;
 	uint32_t locationOffset = GetChunkLocation( header->sectionChunksInfos[ chunkNr_ ] );
-	if( locationOffset >= sizeof( RegionHeader ) )
+	if( locationOffset >= sizeof( RegionHeader ) && ( locationOffset + 6 ) <= regionFile_.regionDataSize )
 	{
 		uint32_t length = Get32BitInt(  *( BigEndian4BytesTo32BitInt* )&regionFile_.pRegionData[ locationOffset ] );
 		uint8_t compression_type = regionFile_.pRegionData[ locationOffset + 4 ]; // we ignore this as unused for now
@@ -798,12 +804,11 @@ void enkiInitNBTDataStreamForChunk( enkiRegionFile regionFile_, int32_t chunkNr_
 		(void)compression_type;
 		--length; // length includes compression_type
 		// get the data and decompress it
-		uint8_t* dataCompressed = &regionFile_.pRegionData[ locationOffset + 5 ];
-		enkiNBTInitFromMemoryCompressed( pStream_, dataCompressed, length, 0 );
-	}
-	else
-	{
-		enkiNBTInitFromMemoryUncompressed( pStream_, NULL, 0 ); // clears stream
+		if( ( length + locationOffset + 5 ) <= regionFile_.regionDataSize )
+		{
+			uint8_t* dataCompressed = &regionFile_.pRegionData[ locationOffset + 5 ];
+			enkiNBTInitFromMemoryCompressed( pStream_, dataCompressed, length, 0 );
+		}
 	}
 }
 

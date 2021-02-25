@@ -38,15 +38,12 @@ fclose( fp );
 
 ## Credits
 
-* [Miniz from richgel999](https://github.com/richgel999/miniz)
-
-* Example model [r.1.0.mca Dinner Party](http://www.planetminecraft.com/project/minecraft-custom-modeling-dinner-party/) by Vanillaburp - [Youtube](https://www.youtube.com/user/vanillaburp) - [Twitter @Vanillaburp](https://www.twitter.com/Vanillaburp)
-
-* Thanks to Voxtric for their [C# Minecraft Level Ripper](https://github.com/Voxtric/Minecraft-Level-Ripper) which got us started.
-
-* [ephtracy for the Minecraft palette colours](http://ephtracy.github.io/)
-
-* Thanks to [WesterosCraft](http://www.westeroscraft.com/guide), [MrBatou](https://www.planetminecraft.com/project/cuirass-dsd-401-by-mrbatou-download-cinematic/), and [Greenfield City](http://www.greenfieldmc.net) for letting us use their Minecraft constructions to test the importer with our game [Avoyd](https://www.avoyd.com):
+* [Miniz from richgel999](https://github.com/richgel999/miniz)  
+* Example model [r.1.0.mca Dinner Party](http://www.planetminecraft.com/project/minecraft-custom-modeling-dinner-party/) by Vanillaburp - [Youtube](https://www.youtube.com/user/vanillaburp) - [Twitter @Vanillaburp](https://www.twitter.com/Vanillaburp)  
+* Thanks to Voxtric for their [C# Minecraft Level Ripper](https://github.com/Voxtric/Minecraft-Level-Ripper) which got us started  
+* [ephtracy for the Minecraft palette colours](http://ephtracy.github.io/)  
+* Thanks to [WesterosCraft](http://www.westeroscraft.com/guide), [MrBatou](https://www.planetminecraft.com/project/cuirass-dsd-401-by-mrbatou-download-cinematic/), and [Greenfield City](http://www.greenfieldmc.net) for letting us use their Minecraft constructions to test the importer with our game [Avoyd](https://www.avoyd.com)  
+* Breno Machado for reporting a chunk loading issue and assisting with testing
 
 [![Two Minecraft constructions imported into Avoyd: Greenfield City and MrBatou Cuirassé DSD-401 with link to Youtube showcase video](https://raw.githubusercontent.com/dougbinks/images/master/Avoyd_2021-01-18_YoutubeThumbnailForGithub.jpg)](https://www.youtube.com/watch?v=n8oiVRhzwxE)
 

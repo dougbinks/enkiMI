@@ -180,16 +180,18 @@ typedef struct enkiMIBlockID_s
 
 typedef struct enkiChunkSectionPalette_s
 {
-	uint32_t  size;
-	uint32_t  numBitsPerBlock;
-	uint32_t  blockArraySize;
-	uint32_t* pNumericIDs;
+	uint32_t       size;
+	uint32_t       numBitsPerBlock;
+	uint32_t       blockArraySize;
+	int32_t*       pDefaultBlockIndex;  // lookup index into the default enkiMIBlockID table - these values may change with versions of enkiMI, <0 means not found
+	enkiNBTString* pNamespaceIDStrings; // e.g. "minecraft:stone"
 } enkiChunkSectionPalette;
 
 typedef struct enkiChunkBlockData_s
 {
 	uint8_t* sections[ ENKI_MI_NUM_SECTIONS_PER_CHUNK ];
-	enkiChunkSectionPalette palette[ ENKI_MI_NUM_SECTIONS_PER_CHUNK ]; // if there is a paletteSize, then sections represents BlockStates
+	uint8_t* dataValues[ ENKI_MI_NUM_SECTIONS_PER_CHUNK ];
+	enkiChunkSectionPalette palette[ ENKI_MI_NUM_SECTIONS_PER_CHUNK ]; // if there is a palette[k].size, then sections[k] represents BlockStates
 	int32_t xPos; // section coordinates
 	int32_t zPos; // section coordinates
 	int32_t countOfSections;
@@ -200,7 +202,6 @@ typedef struct enkiChunkBlockData_s
 void enkiChunkInit( enkiChunkBlockData* pChunk_ );
 
 // enkiNBTReadChunk gets a chunk from an enkiNBTDataStream
-// No allocation occurs - section data points to enkiNBTDataStream.
 // pStream_ mush be kept valid whilst chunk is in use.
 enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream* pStream_ );
 
@@ -217,6 +218,23 @@ enkiMICoordinate enkiGetChunkSectionOrigin( enkiChunkBlockData* pChunk_, int32_t
 uint8_t enkiGetChunkSectionVoxel( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ );
 
 uint32_t* enkiGetMineCraftPalette(); //returns a 256 array of uint32_t's in uint8_t rgba order.
+
+typedef struct enkiMIVoxelData_s {
+	
+	uint8_t        blockID;     // pre-flattening blockIDs values, as returned by enkiGetChunkSectionVoxel(), can use to index into enkiGetMineCraftPalette
+	uint8_t        dataValue;   // pre-flattening data values, blockId::dataValue identifies block varients
+	int32_t        paletteIndex; // if >=0 index into enkiChunkBlockData.palette[section].pDefaultBlockIndex and enkiChunkBlockData.palette[section].pNamespaceIDStrings
+} enkiMIVoxelData;
+
+enkiMIVoxelData enkiGetChunkSectionVoxelData( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ );
+
+typedef struct enkiMIBlockIDTable_s {
+	
+	uint32_t       numBlockIDs;
+	enkiMIBlockID* blockIDs;
+} enkiMIBlockIDTable;
+
+enkiMIBlockIDTable enkiGetMineBlockIDTable();
 
 #ifdef __cplusplus
 };

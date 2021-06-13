@@ -335,9 +335,30 @@ static enkiMIBlockID defaultBlockIDs[] =
 	{ "minecraft:black_glazed_terracotta", 250 }, 
 	{ "minecraft:gray_concrete", 251 }, 
 	{ "minecraft:gray_concrete_powder", 252 }, 
+	{ "minecraft:unused_253", 253 }, // pre-flattening unused blockid, added here to ensure have all old id's covered
+	{ "minecraft:unused_254", 254 }, // pre-flattening unused blockid, added here to ensure have all old id's covered
 	{ "minecraft:structure_block", 255 }
 };
 
+static const uint32_t numDefaultBlockIDs = (uint32_t)sizeof(defaultBlockIDs)/sizeof(enkiMIBlockID);
+
+static uint32_t minecraftPaletteIdToBlockIDs[] = {
+	0,1,3,6,7,8,9,10,11,12,13,14,15,16,17,18,
+	19,20,21,26,27,28,29,30,31,32,33,34,35,36,37,38,
+	40,41,42,43,-1,44,45,46,47,48,49,50,51,52,54,55,
+	56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,
+	72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,
+	88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,
+	104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,
+	120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,
+	136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,
+	152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,
+	168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,
+	184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,
+	200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,
+	216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,
+	232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,
+	248,249,250,251,252,253,254,255,256,257,258,259,260,261,262,263 };
 
 typedef struct SectionChunkInfo_s
 {
@@ -877,6 +898,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 					int32_t levelParent = pStream_->level;
 					int8_t sectionY = 0;
 					uint8_t* pBlocks = NULL;
+					uint8_t* pData = NULL;
 					uint8_t* pBlockStates = NULL;
 					enkiChunkSectionPalette sectionPalette = {0};
 					do
@@ -890,6 +912,20 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						{
 							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pBlocks = pStream_->pCurrPos;
+						}
+						// TODO: process Data and Add sections
+						 // https://minecraft.fandom.com/el/wiki/Chunk_format
+						// Add: May not exist. 2048 bytes of additional block ID data. The value to add to (combine with) the above block ID to form the true block ID in the range 0 to 4095. 4 bits per block. Combining is done by shifting this value to the left 8 bits and then adding it to the block ID from above.
+                        // Data: 2048 bytes of block data additionally defining parts of the terrain. 4 bits per block.
+						if( enkiAreStringsEqual( "Add", pStream_->currentTag.pName ) )
+						{
+							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
+							// NOT YET HANDLED
+						}
+						if( enkiAreStringsEqual( "Data", pStream_->currentTag.pName ) )
+						{
+							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
+							pData = pStream_->pCurrPos;
 						}
 						if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
 						{
@@ -915,8 +951,10 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 							}
 							sectionPalette.numBitsPerBlock = numBits;
 
-							sectionPalette.pNumericIDs = (uint32_t*)malloc(sizeof(uint32_t)*sectionPalette.size);
-							enkiNBTAddAllocation( pStream_, sectionPalette.pNumericIDs );
+							sectionPalette.pDefaultBlockIndex = (int32_t*)malloc(sizeof(int32_t)*sectionPalette.size);
+							enkiNBTAddAllocation( pStream_, sectionPalette.pDefaultBlockIndex );
+							sectionPalette.pNamespaceIDStrings = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.size);
+							enkiNBTAddAllocation( pStream_, sectionPalette.pNamespaceIDStrings );
 							// read palettes
 							int levelPalette = pStream_->level;
    						    uint32_t paletteNum = 0;
@@ -930,22 +968,17 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 									enkiNBTString paletteEntry = enkiNBTReadString( pStream_ );
 									// find in palette
 									// enkiMIBlockID defaultBlockIDs[]
-									uint32_t numBlockIDs = (uint32_t)sizeof(defaultBlockIDs)/sizeof(enkiMIBlockID);
-									sectionPalette.pNumericIDs[ paletteNum ] = 256; // 1 is normally stone. TODO: Allow default to be set
-									for( uint32_t id=0; id <numBlockIDs; ++id )
+									sectionPalette.pDefaultBlockIndex[ paletteNum ] = -1;
+									sectionPalette.pNamespaceIDStrings[ paletteNum ] = paletteEntry;
+									for( uint32_t id=0; id <numDefaultBlockIDs; ++id )
 									{
 										size_t len = strlen( defaultBlockIDs[id].pNamespaceID );
 										if(    len == paletteEntry.size
 											&& 0 == memcmp( defaultBlockIDs[id].pNamespaceID, paletteEntry.pStrNotNullTerminated, len ) )
 										{
-											sectionPalette.pNumericIDs[ paletteNum ] = defaultBlockIDs[id].numericID;
+											sectionPalette.pDefaultBlockIndex[ paletteNum ] = id;
 											break;
 										}
-									}
-									if( sectionPalette.pNumericIDs[ paletteNum ] == 256 )
-									{
-										// not found.
-										sectionPalette.pNumericIDs[ paletteNum ] = 1;
 									}
 									++paletteNum;
 								}
@@ -957,8 +990,10 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 							{
 								chunk.countOfSections++;
 								assert( sectionPalette.size == 0 ); // a given chunk should use the same format
-								chunk.sections[ sectionY ] = pBlocks;
+								chunk.sections[ sectionY ]   = pBlocks;
+								chunk.dataValues[ sectionY ] = pData;
 								pBlocks = NULL;
+								pData   = NULL;
 								pBlockStates = NULL;
 							}
 							if( pBlockStates  && sectionPalette.size )
@@ -967,6 +1002,8 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 								assert( pBlocks == NULL ); // a given chunk should use the same format
 								chunk.palette[ sectionY ]  = sectionPalette;
 								chunk.sections[ sectionY ] = pBlockStates;
+								pBlocks = NULL;
+								pData   = NULL;
 								pBlockStates = NULL;
 								memset( &sectionPalette, 0, sizeof(sectionPalette) );
 							}
@@ -1017,9 +1054,13 @@ enkiMICoordinate enkiGetChunkSectionOrigin(enkiChunkBlockData * pChunk_, int32_t
 	return retVal;
 }
 
-uint8_t enkiGetChunkSectionVoxel(enkiChunkBlockData * pChunk_, int32_t section_, enkiMICoordinate sectionOffset_)
+enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32_t section_, enkiMICoordinate sectionOffset_)
 {
-	uint8_t  retVal = 0;
+	enkiMIVoxelData retVal;
+	retVal.blockID     = 0;
+	retVal.dataValue   = 0;
+	retVal.paletteIndex = -1;
+
 	uint8_t* pSection    = pChunk_->sections[ section_ ];
 	uint32_t paletteSize = pChunk_->palette[ section_ ].size;
 	uint32_t posArray    = sectionOffset_.y*ENKI_MI_SIZE_SECTIONS*ENKI_MI_SIZE_SECTIONS + sectionOffset_.z*ENKI_MI_SIZE_SECTIONS + sectionOffset_.x;
@@ -1101,8 +1142,14 @@ uint8_t enkiGetChunkSectionVoxel(enkiChunkBlockData * pChunk_, int32_t section_,
 
 		if( (uint32_t)pChunk_->palette[ section_ ].size > blockArrayValue )
 		{
-			uint32_t paletteValue = pChunk_->palette[ section_ ].pNumericIDs[ blockArrayValue ];
-			retVal = (uint8_t)paletteValue;
+			int32_t index = pChunk_->palette[ section_ ].pDefaultBlockIndex[ blockArrayValue ];
+			uint32_t paletteValue = 1; // default to 1, stone
+			if( index >= 0 )
+			{
+				paletteValue = defaultBlockIDs[index].numericID;
+			}
+			retVal.blockID = (uint8_t)paletteValue;
+			retVal.paletteIndex = (int32_t)blockArrayValue;
 		}
 
 		
@@ -1110,12 +1157,34 @@ uint8_t enkiGetChunkSectionVoxel(enkiChunkBlockData * pChunk_, int32_t section_,
 	else
 	{
 		uint8_t* pVoxel = pSection + posArray;
-		retVal = *pVoxel;
+		retVal.blockID = *pVoxel;
+		if( pChunk_->dataValues[ section_ ] )
+		{
+			// 4 bit values
+			uint32_t posByte = posArray / 2;
+			uint32_t offsetByte = 4 * ( posArray - (2*posByte) );
+			uint8_t byte = *( pChunk_->dataValues[ section_ ] + posByte );
+			retVal.dataValue  = 0xF & ( byte >> offsetByte );
+		}
 	}
 	return retVal;
+}
+
+uint8_t enkiGetChunkSectionVoxel( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ )
+{
+	enkiMIVoxelData voxelData = enkiGetChunkSectionVoxelData( pChunk_, section_, sectionOffset_ );
+	return voxelData.blockID;
 }
 
 uint32_t* enkiGetMineCraftPalette()
 {
 	return minecraftPalette;
+}
+
+enkiMIBlockIDTable enkiGetMineBlockIDTable()
+{
+	enkiMIBlockIDTable defaultBlockIDTable;
+	defaultBlockIDTable.numBlockIDs = numDefaultBlockIDs;
+	defaultBlockIDTable.blockIDs    = defaultBlockIDs;
+	return defaultBlockIDTable;
 }

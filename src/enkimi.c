@@ -74,7 +74,6 @@ static uint32_t minecraftPalette[] =
 
 // BlockIds from: https://minecraft.fandom.com/wiki/Java_Edition_data_values/Pre-flattening/Block_IDs
 // Then get dataValue from each material's page: https://minecraft.fandom.com/wiki/Stone#Data_values
-// Aslso see https://minecraftitemids.com/
 static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] = 
 {
 	{ "minecraft:air", 0, 0  }, 
@@ -134,18 +133,19 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:spruce_leaves", 18, 5  }, // check for decay (if no log within 4 blocks decay)
 	{ "minecraft:birch_leaves",  18, 6  }, // check for decay (if no log within 4 blocks decay)
 	{ "minecraft:jungle_leaves", 18, 7  }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:oak_leaves",    18, 8  }, // presistent
-	{ "minecraft:spruce_leaves", 18, 9  }, // presistent
-	{ "minecraft:birch_leaves",  18, 10 }, // presistent
-	{ "minecraft:jungle_leaves", 18, 11 }, // presistent
-	{ "minecraft:oak_leaves",    18, 12 }, // presistent (12-15 same as 8-11)
-	{ "minecraft:spruce_leaves", 18, 13 }, // presistent (12-15 same as 8-11)
-	{ "minecraft:birch_leaves",  18, 14 }, // presistent (12-15 same as 8-11)
-	{ "minecraft:jungle_leaves", 18, 15 }, // presistent (12-15 same as 8-11)
+	{ "minecraft:oak_leaves",    18, 8  }, // persistent
+	{ "minecraft:spruce_leaves", 18, 9  }, // persistent
+	{ "minecraft:birch_leaves",  18, 10 }, // persistent
+	{ "minecraft:jungle_leaves", 18, 11 }, // persistent
+	{ "minecraft:oak_leaves",    18, 12 }, // persistent (12-15 same as 8-11)
+	{ "minecraft:spruce_leaves", 18, 13 }, // persistent (12-15 same as 8-11)
+	{ "minecraft:birch_leaves",  18, 14 }, // persistent (12-15 same as 8-11)
+	{ "minecraft:jungle_leaves", 18, 15 }, // persistent (12-15 same as 8-11)
 	{ "minecraft:sponge",     19, 0  }, 
 	{ "minecraft:wet_sponge", 19, 1  }, 
 	{ "minecraft:glass", 20, 0  }, 
 	{ "minecraft:lapis_ore", 21, 0  }, 
+	{ "minecraft:deepslate_lapis_ore", 21, 1  },  // Added after flattening, data value not correct
 	{ "minecraft:lapis_block", 22, 0  }, 
 	{ "minecraft:dispenser", 23, 0  }, 
 	{ "minecraft:sandstone", 24, 0  }, 
@@ -305,14 +305,14 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:dark_oak_leaves", 161, 1  }, // check for decay (if no log within 4 blocks decay)
 	{ "minecraft:removed0_leaves", 161, 2  }, // check for decay (if no log within 4 blocks decay)
 	{ "minecraft:removed1_leaves", 161, 3  }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:acacia_leaves",   161, 4  }, // presistent
-	{ "minecraft:dark_oak_leaves", 161, 5  }, // presistent
-	{ "minecraft:removed0_leaves", 161, 6  }, // presistent
-	{ "minecraft:removed1_leaves", 161, 7  }, // presistent
-	{ "minecraft:acacia_leaves",   161, 8  }, // presistent (12-15 same as 8-11)
-	{ "minecraft:dark_oak_leaves", 161, 9  }, // presistent (12-15 same as 8-11)
-	{ "minecraft:removed0_leaves", 161, 10 }, // presistent (12-15 same as 8-11)
-	{ "minecraft:removed1_leaves", 161, 11 }, // presistent (12-15 same as 8-11)
+	{ "minecraft:acacia_leaves",   161, 4  }, // persistent
+	{ "minecraft:dark_oak_leaves", 161, 5  }, // persistent
+	{ "minecraft:removed0_leaves", 161, 6  }, // persistent
+	{ "minecraft:removed1_leaves", 161, 7  }, // persistent
+	{ "minecraft:acacia_leaves",   161, 8  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:dark_oak_leaves", 161, 9  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:removed0_leaves", 161, 10 }, // persistent (12-15 same as 8-11)
+	{ "minecraft:removed1_leaves", 161, 11 }, // persistent (12-15 same as 8-11)
 	{ "minecraft:oak_wood", 162, 0  }, 
 	{ "minecraft:spruce_wood", 162, 1  }, 
 	{ "minecraft:birch_wood", 162, 2  }, 

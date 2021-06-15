@@ -77,42 +77,47 @@ static uint32_t minecraftPalette[] =
 static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] = 
 {
 	{ "minecraft:air", 0, 0  }, 
+	{ "minecraft:cave_air", 0, 1  }, // Added after flattening, data value not correct
+	{ "minecraft:void_air", 0, 2  }, // Added after flattening, data value not correct
 	{ "minecraft:stone", 1, 0  }, 
 	{ "minecraft:granite", 1, 1  }, 
-	{ "minecraft:polished_granite", 1, 2  }, 
+	{ "minecraft:polished_granite", 1, 2  },
 	{ "minecraft:diorite", 1, 3  }, 
-	{ "minecraft:polished_diorite", 1, 4  }, 
+	{ "minecraft:polished_diorite", 1, 4  },
 	{ "minecraft:andesite", 1, 5  }, 
-	{ "minecraft:polished_andesite", 1, 6  }, 
-	{ "minecraft:seagrass", 2, 0  }, 
-	{ "minecraft:grass", 2, 0  }, 
-	{ "minecraft:grass_block", 2, 0  }, 
+	{ "minecraft:polished_andesite", 1, 6  },
+	{ "minecraft:grass_block", 2, 0  }, // https://minecraft.fandom.com/wiki/Grass_Block
 	{ "minecraft:dirt", 3, 0  }, 
 	{ "minecraft:coarse_dirt", 3, 1  }, 
-	{ "minecraft:cobblestone", 4, 0  }, 
-	{ "minecraft:oak_planks", 5, 0  }, 
-	{ "minecraft:spruce_planks", 5, 1  }, 
-	{ "minecraft:birch_planks", 5, 2  }, 
-	{ "minecraft:jungle_planks", 5, 3  }, 
-	{ "minecraft:acacia_planks", 5, 4  }, 
-	{ "minecraft:dark_oak_planks", 5, 5  }, 
-	{ "minecraft:oak_sapling", 6, 0  }, 
-	{ "minecraft:spruce_sapling", 6, 1  }, 
-	{ "minecraft:birch_sapling", 6, 2  }, 
-	{ "minecraft:jungle_sapling", 6, 3  }, 
-	{ "minecraft:acacia_sapling", 6, 4  }, 
-	{ "minecraft:dark_oak_sapling", 6, 5  }, 
-	{ "minecraft:bedrock", 7, 0  }, 
-	{ "minecraft:flowing_water", 8, 0  }, 
-	{ "minecraft:water", 9, 0  }, 
-	{ "minecraft:flowing_lava", 10, 0  }, 
-	{ "minecraft:lava", 11, 0  }, 
-	{ "minecraft:sand", 12, 0  }, 
-	{ "minecraft:red_sand", 12, 1  }, 
-	{ "minecraft:gravel", 13, 0  }, 
-	{ "minecraft:gold_ore", 14, 0  }, 
-	{ "minecraft:iron_ore", 15, 0  }, 
-	{ "minecraft:coal_ore", 16, 0  }, 
+	{ "minecraft:cobblestone", 4, 0  },
+	{ "minecraft:oak_planks", 5, 0  },
+	{ "minecraft:spruce_planks", 5, 1  },
+	{ "minecraft:birch_planks", 5, 2  },
+	{ "minecraft:jungle_planks", 5, 3  },
+	{ "minecraft:acacia_planks", 5, 4  },
+	{ "minecraft:dark_oak_planks", 5, 5  },
+	{ "minecraft:crimson_planks",           5, 6   },
+	{ "minecraft:warped_planks",            5, 7   },
+	{ "minecraft:oak_sapling", 6, 0  },
+	{ "minecraft:spruce_sapling", 6, 1  },
+	{ "minecraft:birch_sapling", 6, 2  },
+	{ "minecraft:jungle_sapling", 6, 3  },
+	{ "minecraft:acacia_sapling", 6, 4  },
+	{ "minecraft:dark_oak_sapling", 6, 5  },
+	{ "minecraft:bedrock", 7, 0  },
+	{ "minecraft:flowing_water", 8, 0  },
+	{ "minecraft:water", 9, 0  },
+	{ "minecraft:flowing_lava", 10, 0  },
+	{ "minecraft:lava", 11, 0  },
+	{ "minecraft:sand", 12, 0  },
+	{ "minecraft:red_sand", 12, 1  },
+	{ "minecraft:gravel", 13, 0  },
+	{ "minecraft:gold_ore", 14, 0  },
+	{ "minecraft:deepslate_gold_ore", 14, 1  },
+	{ "minecraft:iron_ore", 15, 0  },
+	{ "minecraft:deepslate_iron_ore", 15, 1  },
+	{ "minecraft:coal_ore", 16, 0  },
+	{ "minecraft:deepslate_coal_ore", 16, 1  },
 	{ "minecraft:oak_log",       17, 0  }, // up-down
 	{ "minecraft:spruce_log",    17, 1  }, // up-down
 	{ "minecraft:birch_log",     17, 2  }, // up-down
@@ -148,28 +153,105 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:deepslate_lapis_ore", 21, 1  },  // Added after flattening, data value not correct
 	{ "minecraft:lapis_block", 22, 0  }, 
 	{ "minecraft:dispenser", 23, 0  }, 
-	{ "minecraft:sandstone", 24, 0  }, 
+	{ "minecraft:sandstone", 24, 0  },
+	{ "minecraft:chiseled_sandstone", 24, 1  },
+	{ "minecraft:cut_sandstone", 24, 2  },
+	{ "minecraft:smooth_sandstone", 24, 3  },
 	{ "minecraft:note_block", 25, 0  }, 
-	{ "minecraft:red_bed", 26, 0  }, 
+	{ "minecraft:white_bed",                26, 0   }, 
+	{ "minecraft:orange_bed",               26, 1   }, 
+	{ "minecraft:magenta_bed",              26, 2   }, 
+	{ "minecraft:light_blue_bed",           26, 3   }, 
+	{ "minecraft:yellow_bed",               26, 4   }, 
+	{ "minecraft:lime_bed",                 26, 5   }, 
+	{ "minecraft:pink_bed",                 26, 6   }, 
+	{ "minecraft:gray_bed",                 26, 7   }, 
+	{ "minecraft:light_gray_bed",           26, 8   }, 
+	{ "minecraft:cyan_bed",                 26, 9   }, 
+	{ "minecraft:purple_bed",               26, 10  }, 
+	{ "minecraft:blue_bed",                 26, 11  }, 
+	{ "minecraft:brown_bed",                26, 12  }, 
+	{ "minecraft:green_bed",                26, 13  }, 
+	{ "minecraft:red_bed",                  26, 14  }, 
+	{ "minecraft:black_bed",                26, 15  }, 
 	{ "minecraft:powered_rail", 27, 0  }, 
-	{ "minecraft:detector_rail", 28, 0  }, 
-	{ "minecraft:sticky_piston", 29, 0  }, 
+	{ "minecraft:detector_rail",            28, 0   },
+	{ "minecraft:sticky_piston",            29, 0   }, // facing down
+	{ "minecraft:sticky_piston",            29, 1   }, // facing up
+	{ "minecraft:sticky_piston",            29, 2   }, // facing north
+	{ "minecraft:sticky_piston",            29, 3   }, // facing south
+	{ "minecraft:sticky_piston",            29, 4   }, // facing west
+	{ "minecraft:sticky_piston",            29, 5   }, // facing east
+	{ "minecraft:piston",                   33, 0   }, // facing down
+	{ "minecraft:piston",                   33, 1   }, // facing up
+	{ "minecraft:piston",                   33, 2   }, // facing north
+	{ "minecraft:piston",                   33, 3   }, // facing south
+	{ "minecraft:piston",                   33, 4   }, // facing west
+	{ "minecraft:piston",                   33, 5   }, // facing east
+	{ "minecraft:piston_head",              34, 0   }, // facing down
+	{ "minecraft:piston_head",              34, 1   }, // facing up
+	{ "minecraft:piston_head",              34, 2   }, // facing north
+	{ "minecraft:piston_head",              34, 3   }, // facing south
+	{ "minecraft:piston_head",              34, 4   }, // facing west
+	{ "minecraft:piston_head",              34, 5   }, // facing east
+	{ "minecraft:moving_piston",            250, 0  }, // facing down
+	{ "minecraft:moving_piston",            250, 1  }, // facing up
+	{ "minecraft:moving_piston",            250, 2  }, // facing north
+	{ "minecraft:moving_piston",            250, 3  }, // facing south
+	{ "minecraft:moving_piston",            250, 4  }, // facing west
+	{ "minecraft:moving_piston",            250, 5  }, // facing east
 	{ "minecraft:cobweb", 30, 0  },
-	{ "minecraft:tall_grass", 31, 0  }, 
-	{ "minecraft:tall_seagrass", 31, 0  }, 
-	{ "minecraft:dead_bush", 32, 0  }, 
-	{ "minecraft:piston", 33, 0  }, 
-	{ "minecraft:piston_head", 34, 0  }, 
+	{ "minecraft:grass",                    31, 0   }, // short plants, https://minecraft.fandom.com/wiki/Grass
+	{ "minecraft:fern",                     31, 1   }, // short plants, 
+	{ "minecraft:tall_grass",               175, 0  }, // tall plants, two-block lower
+	{ "minecraft:tall_grass",               175, 1  }, // tall plants, two-block upper
+	{ "minecraft:large_fern",               175, 2  }, // tall plants, two-block lower
+	{ "minecraft:large_fern",               175, 3  }, // tall plants, two-block upper
+	{ "minecraft:dead_bush",                32, 0   }, 
+	{ "minecraft:white_wool",               35, 0   }, 
+	{ "minecraft:orange_wool",              35, 1   }, 
+	{ "minecraft:magenta_wool",             35, 2   }, 
+	{ "minecraft:light_blue_wool",          35, 3   }, 
+	{ "minecraft:yellow_wool",              35, 4   }, 
+	{ "minecraft:lime_wool",                35, 5   }, 
+	{ "minecraft:pink_wool",                35, 6   }, 
+	{ "minecraft:gray_wool",                35, 7   }, 
+	{ "minecraft:light_gray_wool",          35, 8   }, 
+	{ "minecraft:cyan_wool",                35, 9   }, 
+	{ "minecraft:purple_wool",              35, 10  }, 
+	{ "minecraft:blue_wool",                35, 11  }, 
+	{ "minecraft:brown_wool",               35, 12  }, 
+	{ "minecraft:green_wool",               35, 13  }, 
+	{ "minecraft:red_wool",                 35, 14  }, 
+	{ "minecraft:black_wool",               35, 15  }, 
 	{ "minecraft:white_concrete", 35, 0  }, 
-	{ "minecraft:dandelion", 37, 0  }, 
-	{ "minecraft:poppy", 38, 0  }, 
+	{ "minecraft:dandelion",                37, 0   }, 
+	{ "minecraft:poppy",                    38, 0   }, // small flowers
+	{ "minecraft:blue_orchid",              38, 1   }, // small flowers
+	{ "minecraft:Allium",                   38, 2   }, // small flowers
+	{ "minecraft:azure_bluet",              38, 3   }, // small flowers
+	{ "minecraft:red_tulip",                38, 4   }, // small flowers
+	{ "minecraft:orange_tulip",             38, 5   }, // small flowers
+	{ "minecraft:white_tulip",              38, 6   }, // small flowers
+	{ "minecraft:pink_tulip",               38, 7   }, // small flowers
+	{ "minecraft:oxeye_daisy",              38, 8   }, // small flowers
+	{ "minecraft:cornflower",               38, 9   }, // small flowers
+	{ "minecraft:lily_of_the_valley",       38, 10  }, // small flowers
+	{ "minecraft:wither_rose",              38, 11  }, // small flowers
+	{ "minecraft:sunflower",                175, 0  }, // tall flowers, two-block lower
+	{ "minecraft:sunflower",                175, 1  }, // tall flowers, two-block upper
+	{ "minecraft:lilac",                    175, 2  }, // tall flowers, two-block lower
+	{ "minecraft:lilac",                    175, 3  }, // tall flowers, two-block upper
+	{ "minecraft:rose_bush",                175, 4  }, // tall flowers, two-block lower
+	{ "minecraft:rose_bush",                175, 5  }, // tall flowers, two-block upper
+	{ "minecraft:peony",                    175, 6  }, // tall flowers, two-block lower
+	{ "minecraft:peony",                    175, 7  }, // tall flowers, two-block upper
 	{ "minecraft:brown_mushroom", 39, 0  }, 
 	{ "minecraft:red_mushroom", 40, 0  }, 
 	{ "minecraft:gold_block", 41, 0  }, 
 	{ "minecraft:iron_block", 42, 0  }, 
 	{ "minecraft:smooth_stone_slab", 43, 0  }, 
-	{ "minecraft:stone_slab", 44, 0  }, 
-	{ "minecraft:brick_wall", 45, 0  }, 
+	{ "minecraft:stone_slab", 44, 0  },
 	{ "minecraft:bricks", 45, 0  }, 
 	{ "minecraft:tnt", 46, 0  }, 
 	{ "minecraft:bookshelf", 47, 0  }, 
@@ -320,13 +402,13 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:acacia_wood", 162, 4  }, 
 	{ "minecraft:dark_oak_wood", 162, 5  }, 
 	{ "minecraft:crimson_hyphae", 162, 6  }, 
-	{ "minecraft:warped_hypha", 162, 7  }, 
+	{ "minecraft:warped_hyphae", 162, 7  }, 
 	{ "minecraft:stripped_oak_wood", 162, 8  }, 
 	{ "minecraft:stripped_spruce_wood", 162, 9  }, 
 	{ "minecraft:stripped_birch_wood", 162, 10  }, 
 	{ "minecraft:stripped_jungle_wood", 162, 11 }, 
 	{ "minecraft:stripped_acacia_wood", 162, 12 }, 
-	{ "minecraft:stripped_crimson_hyphae", 162, 14 },  // 
+	{ "minecraft:stripped_crimson_hyphae", 162, 14 },
 	{ "minecraft:stripped_warped_hyphae", 162, 15 }, 
 	{ "minecraft:acacia_stairs", 163, 0  }, 
 	{ "minecraft:dark_oak_stairs", 164, 0  }, 
@@ -347,7 +429,11 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:red_sandstone", 179, 0  }, 
 	{ "minecraft:red_sandstone_stairs", 180, 0  }, 
 	{ "minecraft:red_sandstone_wall", 181, 0  }, 
-	{ "minecraft:red_sandstone_slab", 182, 0  }, 
+	{ "minecraft:red_sandstone_slab", 182, 0  },
+    { "minecraft:red_sandstone", 179, 0  },
+	{ "minecraft:chiseled_red_sandstone", 179, 1  },
+	{ "minecraft:cut_red_sandstone", 179, 2  },
+	{ "minecraft:smooth_red_sandstone", 179, 3  },
 	{ "minecraft:spruce_fence_gate", 183, 0  }, 
 	{ "minecraft:birch_fence_gate", 184, 0  }, 
 	{ "minecraft:jungle_fence_gate", 185, 0  }, 

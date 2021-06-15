@@ -172,11 +172,12 @@ typedef struct enkiMICoordinate_s
 	int32_t z;
 } enkiMICoordinate;
 
-typedef struct enkiMIBlockID_s
+typedef struct enkiMINamespaceAndBlockID_s
 {
 	const char* pNamespaceID; // e.g. "minecraft:stone"
-	uint32_t    numericID;    // numeric ID returned by enkiGetChunkSectionVoxel
-} enkiMIBlockID;
+	uint8_t     blockID;    // block ID returned by enkiGetChunkSectionVoxel and enkiGetChunkSectionVoxelData
+	uint8_t     dataValue;  // dataValue returned by enkiGetChunkSectionVoxelData
+} enkiMINamespaceAndBlockID;
 
 typedef struct enkiChunkSectionPalette_s
 {
@@ -228,13 +229,13 @@ typedef struct enkiMIVoxelData_s {
 
 enkiMIVoxelData enkiGetChunkSectionVoxelData( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ );
 
-typedef struct enkiMIBlockIDTable_s {
+typedef struct enkiMINamespaceAndBlockIDTable_s {
 	
-	uint32_t       numBlockIDs;
-	enkiMIBlockID* blockIDs;
-} enkiMIBlockIDTable;
+	enkiMINamespaceAndBlockID* namespaceAndBlockIDs;
+	uint32_t                   size;
+} enkiMINamespaceAndBlockIDTable;
 
-enkiMIBlockIDTable enkiGetMineBlockIDTable();
+enkiMINamespaceAndBlockIDTable enkiGetMineBlockIDTable();
 
 #ifdef __cplusplus
 };

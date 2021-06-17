@@ -430,6 +430,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:redstone_wall_torch", 75, 0  }, 
 	{ "minecraft:redstone_torch", 76, 0  }, 
 	{ "minecraft:stone_button", 77, 0  }, 
+	{ "minecraft:polished_blackstone_button", 77, 1  },    // Added after flattening, data value not correct
 	{ "minecraft:snow_block", 78, 0  }, 
 	{ "minecraft:ice", 79, 0  }, 
 	{ "minecraft:snow", 80, 0  }, 
@@ -510,7 +511,14 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:flower_pot", 140, 0  }, 
 	{ "minecraft:carrots", 141, 0  }, 
 	{ "minecraft:potatoes", 142, 0  }, 
-	{ "minecraft:oak_button", 143, 0  }, 
+	{ "minecraft:oak_button", 143, 1  }, 
+	{ "minecraft:spruce_button", 143, 2  }, 
+	{ "minecraft:birch_button", 143, 3  }, 
+	{ "minecraft:jungle_button", 143, 4  }, 
+	{ "minecraft:acacia_button", 143, 5  }, 
+	{ "minecraft:dark_oak_button", 143, 6  }, 
+	{ "minecraft:crimson_button", 143, 7  },        // Added after flattening, data value not correct
+	{ "minecraft:warped_button", 143, 8  },         // Added after flattening, data value not correct
 	{ "minecraft:skeleton_wall_skull", 144, 0  }, 
 	{ "minecraft:anvil", 145, 0  }, 
 	{ "minecraft:trapped_chest", 146, 0  }, 

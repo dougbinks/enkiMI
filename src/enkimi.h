@@ -184,7 +184,7 @@ typedef struct enkiChunkSectionPalette_s
 	uint32_t       size;
 	uint32_t       numBitsPerBlock;
 	uint32_t       blockArraySize;
-	int32_t*       pDefaultBlockIndex;  // lookup index into the default enkiMIBlockID table - these values may change with versions of enkiMI, <0 means not found
+	int32_t*       pDefaultBlockIndex;  // lookup index into the default enkiMINamespaceAndBlockIDTable - these values may change with versions of enkiMI, <0 means not found
 	enkiNBTString* pNamespaceIDStrings; // e.g. "minecraft:stone"
 } enkiChunkSectionPalette;
 
@@ -235,7 +235,7 @@ typedef struct enkiMINamespaceAndBlockIDTable_s {
 	uint32_t                   size;
 } enkiMINamespaceAndBlockIDTable;
 
-enkiMINamespaceAndBlockIDTable enkiGetMineBlockIDTable();
+enkiMINamespaceAndBlockIDTable enkiGetNamespaceAndBlockIDTable();
 
 #ifdef __cplusplus
 };

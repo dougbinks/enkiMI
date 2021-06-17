@@ -659,7 +659,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:gray_concrete_powder", 252, 0  }, 
 	{ "minecraft:unused_253", 253, 0  }, // pre-flattening unused blockid, added here to ensure have all old id's covered
 	{ "minecraft:unused_254", 254, 0  }, // pre-flattening unused blockid, added here to ensure have all old id's covered
-	{ "minecraft:structure_block", 255 }
+	{ "minecraft:structure_block", 255, 0 }
 };
 
 static const uint32_t numDefaultNamespaceAndBlockIDs = (uint32_t)sizeof(defaultNamespaceAndBlockIDs)/sizeof(enkiMINamespaceAndBlockID);

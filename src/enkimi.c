@@ -76,272 +76,280 @@ static uint32_t minecraftPalette[] =
 // Then get dataValue from each material's page: https://minecraft.fandom.com/wiki/Stone#Data_values
 static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] = 
 {
-	{ "minecraft:air",                              0,   0   }, 
-	{ "minecraft:cave_air",                         0,   1   }, // Added after flattening, data value not correct
-	{ "minecraft:void_air",                         0,   2   }, // Added after flattening, data value not correct
-	{ "minecraft:stone",                            1,   0   }, 
-	{ "minecraft:granite",                          1,   1   }, 
-	{ "minecraft:polished_granite",                 1,   2   },
-	{ "minecraft:diorite",                          1,   3   }, 
-	{ "minecraft:polished_diorite",                 1,   4   },
-	{ "minecraft:andesite",                         1,   5   }, 
-	{ "minecraft:polished_andesite",                1,   6   },
-	{ "minecraft:grass_block",                      2,   0   }, // https://minecraft.fandom.com/wiki/Grass_Block
-	{ "minecraft:dirt",                             3,   0   }, 
-	{ "minecraft:coarse_dirt",                      3,   1   }, 
-	{ "minecraft:cobblestone",                      4,   0   },
-	{ "minecraft:oak_planks",                       5,   0   },
-	{ "minecraft:spruce_planks",                    5,   1   },
-	{ "minecraft:birch_planks",                     5,   2   },
-	{ "minecraft:jungle_planks",                    5,   3   },
-	{ "minecraft:acacia_planks",                    5,   4   },
-	{ "minecraft:dark_oak_planks",                  5,   5   },
-	{ "minecraft:crimson_planks",                   5,   6   },
-	{ "minecraft:warped_planks",                    5,   7   },
-	{ "minecraft:oak_sapling",                      6,   0   },
-	{ "minecraft:spruce_sapling",                   6,   1   },
-	{ "minecraft:birch_sapling",                    6,   2   },
-	{ "minecraft:jungle_sapling",                   6,   3   },
-	{ "minecraft:acacia_sapling",                   6,   4   },
-	{ "minecraft:dark_oak_sapling",                 6,   5   },
-	{ "minecraft:bedrock",                          7,   0   },
-	{ "minecraft:flowing_water",                    8,   0   },
-	{ "minecraft:water",                            9,   0   },
-	{ "minecraft:flowing_lava",                     10,  0   },
-	{ "minecraft:lava",                             11,  0   },
-	{ "minecraft:sand",                             12,  0   },
-	{ "minecraft:red_sand",                         12,  1   },
-	{ "minecraft:gravel",                           13,  0   },
-	{ "minecraft:gold_ore",                         14,  0   },
-	{ "minecraft:deepslate_gold_ore",               14,  1   },
-	{ "minecraft:iron_ore",                         15,  0   },
-	{ "minecraft:deepslate_iron_ore",               15,  1   },
-	{ "minecraft:coal_ore",                         16,  0   },
-	{ "minecraft:deepslate_coal_ore",               16,  1   },
-	{ "minecraft:oak_log",                          17,  0   }, // up-down
-	{ "minecraft:spruce_log",                       17,  1   }, // up-down
-	{ "minecraft:birch_log",                        17,  2   }, // up-down
-	{ "minecraft:jungle_log",                       17,  3   }, // up-down
-	{ "minecraft:oak_log",                          17,  4   }, // east-west
-	{ "minecraft:spruce_log",                       17,  5   }, // east-west
-	{ "minecraft:birch_log",                        17,  6   }, // east-west
-	{ "minecraft:jungle_log",                       17,  7   }, // east-west
-	{ "minecraft:oak_log",                          17,  8   }, // north-south
-	{ "minecraft:spruce_log",                       17,  9   }, // north-south
-	{ "minecraft:birch_log",                        17,  10  }, // north-south
-	{ "minecraft:jungle_log",                       17,  11  }, // north-south 
-	{ "minecraft:oak_leaves",                       18,  0   }, 
-	{ "minecraft:spruce_leaves",                    18,  1   }, 
-	{ "minecraft:birch_leaves",                     18,  2   }, 
-	{ "minecraft:jungle_leaves",                    18,  3   }, 
-	{ "minecraft:oak_leaves",                       18,  4   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:spruce_leaves",                    18,  5   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:birch_leaves",                     18,  6   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:jungle_leaves",                    18,  7   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:oak_leaves",                       18,  8   }, // persistent
-	{ "minecraft:spruce_leaves",                    18,  9   }, // persistent
-	{ "minecraft:birch_leaves",                     18,  10  }, // persistent
-	{ "minecraft:jungle_leaves",                    18,  11  }, // persistent
-	{ "minecraft:oak_leaves",                       18,  12  }, // persistent (12-15 same as 8-11)
-	{ "minecraft:spruce_leaves",                    18,  13  }, // persistent (12-15 same as 8-11)
-	{ "minecraft:birch_leaves",                     18,  14  }, // persistent (12-15 same as 8-11)
-	{ "minecraft:jungle_leaves",                    18,  15  }, // persistent (12-15 same as 8-11)
-	{ "minecraft:sponge",                           19,  0   }, 
-	{ "minecraft:wet_sponge",                       19,  1   }, 
-	{ "minecraft:glass",                            20,  0   }, 
-	{ "minecraft:lapis_ore",                        21,  0   }, 
-	{ "minecraft:deepslate_lapis_ore",              21,  1   },  // Added after flattening, data value not correct
-	{ "minecraft:lapis_block",                      22,  0   }, 
-	{ "minecraft:dispenser",                        23,  0   }, 
-	{ "minecraft:sandstone",                        24,  0   },
-	{ "minecraft:chiseled_sandstone",               24,  1   },
-	{ "minecraft:cut_sandstone",                    24,  2   },
-	{ "minecraft:smooth_sandstone",                 24,  3   },
-	{ "minecraft:note_block",                       25,  0   }, 
-	{ "minecraft:white_bed",                        26,  0   }, 
-	{ "minecraft:orange_bed",                       26,  1   }, 
-	{ "minecraft:magenta_bed",                      26,  2   }, 
-	{ "minecraft:light_blue_bed",                   26,  3   }, 
-	{ "minecraft:yellow_bed",                       26,  4   }, 
-	{ "minecraft:lime_bed",                         26,  5   }, 
-	{ "minecraft:pink_bed",                         26,  6   }, 
-	{ "minecraft:gray_bed",                         26,  7   }, 
-	{ "minecraft:light_gray_bed",                   26,  8   }, 
-	{ "minecraft:cyan_bed",                         26,  9   }, 
-	{ "minecraft:purple_bed",                       26,  10  }, 
-	{ "minecraft:blue_bed",                         26,  11  }, 
-	{ "minecraft:brown_bed",                        26,  12  }, 
-	{ "minecraft:green_bed",                        26,  13  }, 
-	{ "minecraft:red_bed",                          26,  14  }, 
-	{ "minecraft:black_bed",                        26,  15  }, 
-	{ "minecraft:powered_rail",                     27,  0   }, 
-	{ "minecraft:detector_rail",                    28,  0   },
-	{ "minecraft:sticky_piston",                    29,  0   }, // facing down
-	{ "minecraft:sticky_piston",                    29,  1   }, // facing up
-	{ "minecraft:sticky_piston",                    29,  2   }, // facing north
-	{ "minecraft:sticky_piston",                    29,  3   }, // facing south
-	{ "minecraft:sticky_piston",                    29,  4   }, // facing west
-	{ "minecraft:sticky_piston",                    29,  5   }, // facing east
-	{ "minecraft:cobweb",                           30,  0   },
-	{ "minecraft:grass",                            31,  0   }, // short plants, https://minecraft.fandom.com/wiki/Grass
-	{ "minecraft:fern",                             31,  1   }, // short plants, 
-	{ "minecraft:seagrass",                         31,  2   }, // short plants, - Added after flattening, data value not correct
-	{ "minecraft:dead_bush",                        32,  0   }, 
-	{ "minecraft:piston",                           33,  0   }, // facing down
-	{ "minecraft:piston",                           33,  1   }, // facing up
-	{ "minecraft:piston",                           33,  2   }, // facing north
-	{ "minecraft:piston",                           33,  3   }, // facing south
-	{ "minecraft:piston",                           33,  4   }, // facing west
-	{ "minecraft:piston",                           33,  5   }, // facing east
-	{ "minecraft:piston_head",                      34,  0   }, // facing down
-	{ "minecraft:piston_head",                      34,  1   }, // facing up
-	{ "minecraft:piston_head",                      34,  2   }, // facing north
-	{ "minecraft:piston_head",                      34,  3   }, // facing south
-	{ "minecraft:piston_head",                      34,  4   }, // facing west
-	{ "minecraft:piston_head",                      34,  5   }, // facing east
-	{ "minecraft:white_wool",                       35,  0   }, 
-	{ "minecraft:orange_wool",                      35,  1   }, 
-	{ "minecraft:magenta_wool",                     35,  2   }, 
-	{ "minecraft:light_blue_wool",                  35,  3   }, 
-	{ "minecraft:yellow_wool",                      35,  4   }, 
-	{ "minecraft:lime_wool",                        35,  5   }, 
-	{ "minecraft:pink_wool",                        35,  6   }, 
-	{ "minecraft:gray_wool",                        35,  7   }, 
-	{ "minecraft:light_gray_wool",                  35,  8   }, 
-	{ "minecraft:cyan_wool",                        35,  9   }, 
-	{ "minecraft:purple_wool",                      35,  10  }, 
-	{ "minecraft:black_wool",                       35,  15  }, 
-	{ "minecraft:blue_wool",                        35,  11  }, 
-	{ "minecraft:brown_wool",                       35,  12  }, 
-	{ "minecraft:green_wool",                       35,  13  }, 
-	{ "minecraft:red_wool",                         35,  14  },
-	{ "minecraft:moving_piston",                    36, 0   }, // facing down
-	{ "minecraft:moving_piston",                    36, 1   }, // facing up
-	{ "minecraft:moving_piston",                    36, 2   }, // facing north
-	{ "minecraft:moving_piston",                    36, 3   }, // facing south
-	{ "minecraft:moving_piston",                    36, 4   }, // facing west
-	{ "minecraft:moving_piston",                    36, 5   }, // facing east
-	{ "minecraft:dandelion",                        37,  0   }, 
-	{ "minecraft:poppy",                            38,  0   }, // small flowers
-	{ "minecraft:blue_orchid",                      38,  1   }, // small flowers
-	{ "minecraft:Allium",                           38,  2   }, // small flowers
-	{ "minecraft:azure_bluet",                      38,  3   }, // small flowers
-	{ "minecraft:red_tulip",                        38,  4   }, // small flowers
-	{ "minecraft:orange_tulip",                     38,  5   }, // small flowers
-	{ "minecraft:white_tulip",                      38,  6   }, // small flowers
-	{ "minecraft:pink_tulip",                       38,  7   }, // small flowers
-	{ "minecraft:oxeye_daisy",                      38,  8   }, // small flowers
-	{ "minecraft:cornflower",                       38,  9   }, // small flowers
-	{ "minecraft:lily_of_the_valley",               38,  10  }, // small flowers
-	{ "minecraft:wither_rose",                      38,  11  }, // small flowers
-	{ "minecraft:brown_mushroom",                   39,  0   },
-	{ "minecraft:red_mushroom",                     40,  0   },
-	{ "minecraft:gold_block",                       41,  0   },
-	{ "minecraft:iron_block",                       42,  0   },
-	{ "minecraft:smooth_stone_slab",                43,  0   }, 
-	{ "minecraft:stone_slab",                       44,  0   },
-	{ "minecraft:bricks",                           45,  0   },
-	{ "minecraft:tnt",                              46,  0   },
-	{ "minecraft:bookshelf",                        47,  0   },
-	{ "minecraft:mossy_cobblestone",                48,  0   },
-	{ "minecraft:obsidian",                         49,  0   },
-	{ "minecraft:torch",                            50,  0   },
-	{ "minecraft:wall_torch",                       50,  1   }, // facing east
-	{ "minecraft:wall_torch",                       50,  2   }, // facing north
-	{ "minecraft:wall_torch",                       50,  3   }, // facing south
-	{ "minecraft:wall_torch",                       50,  4   }, // facing west
-	{ "minecraft:soul_torch",                       50,  5   },
-	{ "minecraft:sould_wall_torch",                 50,  6   }, // facing east  - Added after flattening, data value not correct
-	{ "minecraft:sould_wall_torch",                 50,  7   }, // facing north - Added after flattening, data value not correct
-	{ "minecraft:sould_wall_torch",                 50,  8   }, // facing south - Added after flattening, data value not correct
-	{ "minecraft:sould_wall_torch",                 50,  9   }, // facing west  - Added after flattening, data value not correct
-	{ "minecraft:fire",                             51,  0   },
-	{ "minecraft:soul_fire",                        51,  1   }, // Added after flattening, data value not correct
-	{ "minecraft:spawner",                          52,  0   }, 
-	{ "minecraft:mob_spawner",                      52,  1   }, 
-	{ "minecraft:oak_stairs",                       53,  0   }, 
-	{ "minecraft:chest",                            54,  0   }, 
-	{ "minecraft:redstone_wire",                    55,  0   }, 
-	{ "minecraft:redstone",                         55,  1   }, 
-	{ "minecraft:diamond_ore",                      56,  0   }, 
-	{ "minecraft:deepslate_diamond_ore",            56,  1   }, 
-	{ "minecraft:diamond_block",                    57,  0   }, 
-	{ "minecraft:crafting_table",                   58,  0   },      
-	{ "minecraft:farmland",                         60,  0   }, 
-	{ "minecraft:furnace",                          61,  0   }, // facing east
-	{ "minecraft:furnace",                          61,  1   }, // facing north
-	{ "minecraft:furnace",                          61,  2   }, // facing south
-	{ "minecraft:furnace",                          61,  3   }, // facing west
-    { "minecraft:lit_furnace",                      62,  0   }, // facing east
-	{ "minecraft:lit_furnace",                      62,  1   }, // facing north
-	{ "minecraft:lit_furnace",                      62,  2   }, // facing south
-	{ "minecraft:lit_furnace",                      62,  3   }, // facing west
-	{ "minecraft:oak_sign",                         63,  0   },
-	{ "minecraft:spruce_sign",                      63,  1   },
-	{ "minecraft:birch_sign",                       63,  2   },
-	{ "minecraft:jungle_sign",                      63,  3   },
-	{ "minecraft:acacia_sign",                      63,  4   },
-	{ "minecraft:dark_oak_sign",                    63,  5   },
-	{ "minecraft:crimson_sign",                     63,  6   },
-	{ "minecraft:warped_sign",                      63,  7   },
-    { "minecraft:iron_door",                        71,  0   }, // facing east
-	{ "minecraft:iron_door",                        71,  1   }, // facing north
-	{ "minecraft:iron_door",                        71,  2   }, // facing south
-	{ "minecraft:iron_door",                        71,  3   }, // facing west
-    { "minecraft:oak_door",                         64,  0   }, // facing east
-	{ "minecraft:oak_door",                         64,  1   }, // facing north
-	{ "minecraft:oak_door",                         64,  2   }, // facing south
-	{ "minecraft:oak_door",                         64,  3   }, // facing west
-    { "minecraft:ladder",                           65,  0   }, // facing east
-	{ "minecraft:ladder",                           65,  1   }, // facing north
-	{ "minecraft:ladder",                           65,  2   }, // facing south
-	{ "minecraft:ladder",                           65,  3   }, // facing west
-    { "minecraft:rail",                             66,  0   }, // east-west
-	{ "minecraft:rail",                             66,  1   }, // north-south
-	{ "minecraft:oak_stairs",                       53,  0   }, // facing east 
-	{ "minecraft:oak_stairs",                       53,  1   }, // facing north 
-	{ "minecraft:oak_stairs",                       53,  2   }, // facing south 
-	{ "minecraft:oak_stairs",                       53,  3   }, // facing west 
-	{ "minecraft:cobblestone_stairs",               67,  0   }, // facing east 
-	{ "minecraft:cobblestone_stairs",               67,  1   }, // facing north 
-	{ "minecraft:cobblestone_stairs",               67,  2   }, // facing south 
-	{ "minecraft:cobblestone_stairs",               67,  3   }, // facing west 
-	{ "minecraft:oak_wall_sign",                    68,  0   }, // facing east
-	{ "minecraft:oak_wall_sign",                    68,  1   }, // facing north
-	{ "minecraft:oak_wall_sign",                    68,  2   }, // facing south
-	{ "minecraft:oak_wall_sign",                    68,  3   }, // facing west
-    { "minecraft:spruce_wall_sign",                 68,  4   }, // facing east
-    { "minecraft:spruce_wall_sign",                 68,  5   }, // facing north
-    { "minecraft:spruce_wall_sign",                 68,  6   }, // facing south
-    { "minecraft:spruce_wall_sign",                 68,  7   }, // facing west
-	{ "minecraft:birch_wall_sign",                  68,  8   }, // facing east
-	{ "minecraft:birch_wall_sign",                  68,  9   }, // facing north
-	{ "minecraft:birch_wall_sign",                  68,  10  }, // facing south
-	{ "minecraft:birch_wall_sign",                  68,  11  }, // facing west
-	{ "minecraft:jungle_wall_sign",                 68,  12  }, // facing east
-	{ "minecraft:jungle_wall_sign",                 68,  13  }, // facing north
-	{ "minecraft:jungle_wall_sign",                 68,  14  }, // facing south
-	{ "minecraft:jungle_wall_sign",                 68,  15  }, // facing west
-	{ "minecraft:acacia_wall_sign",                 68,  16  }, // facing east
-	{ "minecraft:acacia_wall_sign",                 68,  17  }, // facing north
-	{ "minecraft:acacia_wall_sign",                 68,  18  }, // facing south
-	{ "minecraft:acacia_wall_sign",                 68,  19  }, // facing west
-    { "minecraft:dark_oak_wall_sign",               68,  20  }, // facing east
-	{ "minecraft:dark_oak_wall_sign",               68,  21  }, // facing north
-	{ "minecraft:dark_oak_wall_sign",               68,  22  }, // facing south
-	{ "minecraft:dark_oak_wall_sign",               68,  23  }, // facing west
-    { "minecraft:crimson_wall_sign",                68,  24  }, // facing east
-	{ "minecraft:crimson_wall_sign",                68,  25  }, // facing north
-	{ "minecraft:crimson_wall_sign",                68,  26  }, // facing south
-	{ "minecraft:crimson_wall_sign",                68,  27  }, // facing west
-    { "minecraft:warped_wall_sign",                 68,  28  }, // facing east
-	{ "minecraft:warped_wall_sign",                 68,  29  }, // facing north
-	{ "minecraft:warped_wall_sign",                 68,  30  }, // facing south
-	{ "minecraft:warped_wall_sign",                 68,  31  }, // facing west
-	{ "minecraft:lever", 69, 0  }, 
-	{ "minecraft:stone_pressure_plate", 70, 0  }, 
+	{ "minecraft:air",                                  0,   0   }, 
+	{ "minecraft:cave_air",                             0,   1   }, // Added after flattening, data value not correct
+	{ "minecraft:void_air",                             0,   2   }, // Added after flattening, data value not correct
+	{ "minecraft:stone",                                1,   0   }, 
+	{ "minecraft:granite",                              1,   1   }, 
+	{ "minecraft:polished_granite",                     1,   2   },
+	{ "minecraft:diorite",                              1,   3   }, 
+	{ "minecraft:polished_diorite",                     1,   4   },
+	{ "minecraft:andesite",                             1,   5   }, 
+	{ "minecraft:polished_andesite",                    1,   6   },
+	{ "minecraft:grass_block",                          2,   0   }, // https://minecraft.fandom.com/wiki/Grass_Block
+	{ "minecraft:dirt",                                 3,   0   }, 
+	{ "minecraft:coarse_dirt",                          3,   1   }, 
+	{ "minecraft:cobblestone",                          4,   0   },
+	{ "minecraft:oak_planks",                           5,   0   },
+	{ "minecraft:spruce_planks",                        5,   1   },
+	{ "minecraft:birch_planks",                         5,   2   },
+	{ "minecraft:jungle_planks",                        5,   3   },
+	{ "minecraft:acacia_planks",                        5,   4   },
+	{ "minecraft:dark_oak_planks",                      5,   5   },
+	{ "minecraft:crimson_planks",                       5,   6   },
+	{ "minecraft:warped_planks",                        5,   7   },
+	{ "minecraft:oak_sapling",                          6,   0   },
+	{ "minecraft:spruce_sapling",                       6,   1   },
+	{ "minecraft:birch_sapling",                        6,   2   },
+	{ "minecraft:jungle_sapling",                       6,   3   },
+	{ "minecraft:acacia_sapling",                       6,   4   },
+	{ "minecraft:dark_oak_sapling",                     6,   5   },
+	{ "minecraft:bedrock",                              7,   0   },
+	{ "minecraft:flowing_water",                        8,   0   },
+	{ "minecraft:water",                                9,   0   },
+	{ "minecraft:flowing_lava",                         10,  0   },
+	{ "minecraft:lava",                                 11,  0   },
+	{ "minecraft:sand",                                 12,  0   },
+	{ "minecraft:red_sand",                             12,  1   },
+	{ "minecraft:gravel",                               13,  0   },
+	{ "minecraft:gold_ore",                             14,  0   },
+	{ "minecraft:deepslate_gold_ore",                   14,  1   },
+	{ "minecraft:iron_ore",                             15,  0   },
+	{ "minecraft:deepslate_iron_ore",                   15,  1   },
+	{ "minecraft:coal_ore",                             16,  0   },
+	{ "minecraft:deepslate_coal_ore",                   16,  1   },
+	{ "minecraft:oak_log",                              17,  0   }, // up-down
+	{ "minecraft:spruce_log",                           17,  1   }, // up-down
+	{ "minecraft:birch_log",                            17,  2   }, // up-down
+	{ "minecraft:jungle_log",                           17,  3   }, // up-down
+	{ "minecraft:oak_log",                              17,  4   }, // east-west
+	{ "minecraft:spruce_log",                           17,  5   }, // east-west
+	{ "minecraft:birch_log",                            17,  6   }, // east-west
+	{ "minecraft:jungle_log",                           17,  7   }, // east-west
+	{ "minecraft:oak_log",                              17,  8   }, // north-south
+	{ "minecraft:spruce_log",                           17,  9   }, // north-south
+	{ "minecraft:birch_log",                            17,  10  }, // north-south
+	{ "minecraft:jungle_log",                           17,  11  }, // north-south 
+	{ "minecraft:oak_leaves",                           18,  0   }, 
+	{ "minecraft:spruce_leaves",                        18,  1   }, 
+	{ "minecraft:birch_leaves",                         18,  2   }, 
+	{ "minecraft:jungle_leaves",                        18,  3   }, 
+	{ "minecraft:oak_leaves",                           18,  4   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:spruce_leaves",                        18,  5   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:birch_leaves",                         18,  6   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:jungle_leaves",                        18,  7   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:oak_leaves",                           18,  8   }, // persistent
+	{ "minecraft:spruce_leaves",                        18,  9   }, // persistent
+	{ "minecraft:birch_leaves",                         18,  10  }, // persistent
+	{ "minecraft:jungle_leaves",                        18,  11  }, // persistent
+	{ "minecraft:oak_leaves",                           18,  12  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:spruce_leaves",                        18,  13  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:birch_leaves",                         18,  14  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:jungle_leaves",                        18,  15  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:sponge",                               19,  0   }, 
+	{ "minecraft:wet_sponge",                           19,  1   }, 
+	{ "minecraft:glass",                                20,  0   }, 
+	{ "minecraft:lapis_ore",                            21,  0   }, 
+	{ "minecraft:deepslate_lapis_ore",                  21,  1   },  // Added after flattening, data value not correct
+	{ "minecraft:lapis_block",                          22,  0   }, 
+	{ "minecraft:dispenser",                            23,  0   }, 
+	{ "minecraft:sandstone",                            24,  0   },
+	{ "minecraft:chiseled_sandstone",                   24,  1   },
+	{ "minecraft:cut_sandstone",                        24,  2   },
+	{ "minecraft:smooth_sandstone",                     24,  3   },
+	{ "minecraft:note_block",                           25,  0   }, 
+	{ "minecraft:white_bed",                            26,  0   }, 
+	{ "minecraft:orange_bed",                           26,  1   }, 
+	{ "minecraft:magenta_bed",                          26,  2   }, 
+	{ "minecraft:light_blue_bed",                       26,  3   }, 
+	{ "minecraft:yellow_bed",                           26,  4   }, 
+	{ "minecraft:lime_bed",                             26,  5   }, 
+	{ "minecraft:pink_bed",                             26,  6   }, 
+	{ "minecraft:gray_bed",                             26,  7   }, 
+	{ "minecraft:light_gray_bed",                       26,  8   }, 
+	{ "minecraft:cyan_bed",                             26,  9   }, 
+	{ "minecraft:purple_bed",                           26,  10  }, 
+	{ "minecraft:blue_bed",                             26,  11  }, 
+	{ "minecraft:brown_bed",                            26,  12  }, 
+	{ "minecraft:green_bed",                            26,  13  }, 
+	{ "minecraft:red_bed",                              26,  14  }, 
+	{ "minecraft:black_bed",                            26,  15  }, 
+	{ "minecraft:powered_rail",                         27,  0   }, 
+	{ "minecraft:detector_rail",                        28,  0   },
+	{ "minecraft:sticky_piston",                        29,  0   }, // facing down
+	{ "minecraft:sticky_piston",                        29,  1   }, // facing up
+	{ "minecraft:sticky_piston",                        29,  2   }, // facing north
+	{ "minecraft:sticky_piston",                        29,  3   }, // facing south
+	{ "minecraft:sticky_piston",                        29,  4   }, // facing west
+	{ "minecraft:sticky_piston",                        29,  5   }, // facing east
+	{ "minecraft:cobweb",                               30,  0   },
+	{ "minecraft:grass",                                31,  0   }, // short plants, https://minecraft.fandom.com/wiki/Grass
+	{ "minecraft:fern",                                 31,  1   }, // short plants, 
+	{ "minecraft:seagrass",                             31,  2   }, // short plants, - Added after flattening, data value not correct
+	{ "minecraft:dead_bush",                            32,  0   }, 
+	{ "minecraft:piston",                               33,  0   }, // facing down
+	{ "minecraft:piston",                               33,  1   }, // facing up
+	{ "minecraft:piston",                               33,  2   }, // facing north
+	{ "minecraft:piston",                               33,  3   }, // facing south
+	{ "minecraft:piston",                               33,  4   }, // facing west
+	{ "minecraft:piston",                               33,  5   }, // facing east
+	{ "minecraft:piston_head",                          34,  0   }, // facing down
+	{ "minecraft:piston_head",                          34,  1   }, // facing up
+	{ "minecraft:piston_head",                          34,  2   }, // facing north
+	{ "minecraft:piston_head",                          34,  3   }, // facing south
+	{ "minecraft:piston_head",                          34,  4   }, // facing west
+	{ "minecraft:piston_head",                          34,  5   }, // facing east
+	{ "minecraft:white_wool",                           35,  0   }, 
+	{ "minecraft:orange_wool",                          35,  1   }, 
+	{ "minecraft:magenta_wool",                         35,  2   }, 
+	{ "minecraft:light_blue_wool",                      35,  3   }, 
+	{ "minecraft:yellow_wool",                          35,  4   }, 
+	{ "minecraft:lime_wool",                            35,  5   }, 
+	{ "minecraft:pink_wool",                            35,  6   }, 
+	{ "minecraft:gray_wool",                            35,  7   }, 
+	{ "minecraft:light_gray_wool",                      35,  8   }, 
+	{ "minecraft:cyan_wool",                            35,  9   }, 
+	{ "minecraft:purple_wool",                          35,  10  }, 
+	{ "minecraft:black_wool",                           35,  15  }, 
+	{ "minecraft:blue_wool",                            35,  11  }, 
+	{ "minecraft:brown_wool",                           35,  12  }, 
+	{ "minecraft:green_wool",                           35,  13  }, 
+	{ "minecraft:red_wool",                             35,  14  },
+	{ "minecraft:moving_piston",                        36,  0   }, // facing down
+	{ "minecraft:moving_piston",                        36,  1   }, // facing up
+	{ "minecraft:moving_piston",                        36,  2   }, // facing north
+	{ "minecraft:moving_piston",                        36,  3   }, // facing south
+	{ "minecraft:moving_piston",                        36,  4   }, // facing west
+	{ "minecraft:moving_piston",                        36,  5   }, // facing east
+	{ "minecraft:dandelion",                            37,  0   }, 
+	{ "minecraft:poppy",                                38,  0   }, // small flowers
+	{ "minecraft:blue_orchid",                          38,  1   }, // small flowers
+	{ "minecraft:Allium",                               38,  2   }, // small flowers
+	{ "minecraft:azure_bluet",                          38,  3   }, // small flowers
+	{ "minecraft:red_tulip",                            38,  4   }, // small flowers
+	{ "minecraft:orange_tulip",                         38,  5   }, // small flowers
+	{ "minecraft:white_tulip",                          38,  6   }, // small flowers
+	{ "minecraft:pink_tulip",                           38,  7   }, // small flowers
+	{ "minecraft:oxeye_daisy",                          38,  8   }, // small flowers
+	{ "minecraft:cornflower",                           38,  9   }, // small flowers
+	{ "minecraft:lily_of_the_valley",                   38,  10  }, // small flowers
+	{ "minecraft:wither_rose",                          38,  11  }, // small flowers
+	{ "minecraft:brown_mushroom",                       39,  0   },
+	{ "minecraft:red_mushroom",                         40,  0   },
+	{ "minecraft:gold_block",                           41,  0   },
+	{ "minecraft:iron_block",                           42,  0   },
+	{ "minecraft:smooth_stone_slab",                    43,  0   }, 
+	{ "minecraft:stone_slab",                           44,  0   },
+	{ "minecraft:bricks",                               45,  0   },
+	{ "minecraft:tnt",                                  46,  0   },
+	{ "minecraft:bookshelf",                            47,  0   },
+	{ "minecraft:mossy_cobblestone",                    48,  0   },
+	{ "minecraft:obsidian",                             49,  0   },
+	{ "minecraft:torch",                                50,  0   },
+	{ "minecraft:wall_torch",                           50,  1   }, // facing east
+	{ "minecraft:wall_torch",                           50,  2   }, // facing north
+	{ "minecraft:wall_torch",                           50,  3   }, // facing south
+	{ "minecraft:wall_torch",                           50,  4   }, // facing west
+	{ "minecraft:soul_torch",                           50,  5   },
+	{ "minecraft:sould_wall_torch",                     50,  6   }, // facing east  - Added after flattening, data value not correct
+	{ "minecraft:sould_wall_torch",                     50,  7   }, // facing north - Added after flattening, data value not correct
+	{ "minecraft:sould_wall_torch",                     50,  8   }, // facing south - Added after flattening, data value not correct
+	{ "minecraft:sould_wall_torch",                     50,  9   }, // facing west  - Added after flattening, data value not correct
+	{ "minecraft:fire",                                 51,  0   },
+	{ "minecraft:soul_fire",                            51,  1   }, // Added after flattening, data value not correct
+	{ "minecraft:spawner",                              52,  0   }, 
+	{ "minecraft:mob_spawner",                          52,  1   }, 
+	{ "minecraft:oak_stairs",                           53,  0   }, 
+	{ "minecraft:chest",                                54,  0   }, 
+	{ "minecraft:redstone_wire",                        55,  0   }, 
+	{ "minecraft:redstone",                             55,  1   }, 
+	{ "minecraft:diamond_ore",                          56,  0   }, 
+	{ "minecraft:deepslate_diamond_ore",                56,  1   }, 
+	{ "minecraft:diamond_block",                        57,  0   }, 
+	{ "minecraft:crafting_table",                       58,  0   },      
+	{ "minecraft:farmland",                             60,  0   }, 
+	{ "minecraft:furnace",                              61,  0   }, // facing east
+	{ "minecraft:furnace",                              61,  1   }, // facing north
+	{ "minecraft:furnace",                              61,  2   }, // facing south
+	{ "minecraft:furnace",                              61,  3   }, // facing west
+    { "minecraft:lit_furnace",                          62,  0   }, // facing east
+	{ "minecraft:lit_furnace",                          62,  1   }, // facing north
+	{ "minecraft:lit_furnace",                          62,  2   }, // facing south
+	{ "minecraft:lit_furnace",                          62,  3   }, // facing west
+	{ "minecraft:oak_sign",                             63,  0   },
+	{ "minecraft:spruce_sign",                          63,  1   },
+	{ "minecraft:birch_sign",                           63,  2   },
+	{ "minecraft:jungle_sign",                          63,  3   },
+	{ "minecraft:acacia_sign",                          63,  4   },
+	{ "minecraft:dark_oak_sign",                        63,  5   },
+	{ "minecraft:crimson_sign",                         63,  6   },
+	{ "minecraft:warped_sign",                          63,  7   },
+    { "minecraft:iron_door",                            71,  0   }, // facing east
+	{ "minecraft:iron_door",                            71,  1   }, // facing north
+	{ "minecraft:iron_door",                            71,  2   }, // facing south
+	{ "minecraft:iron_door",                            71,  3   }, // facing west
+    { "minecraft:oak_door",                             64,  0   }, // facing east
+	{ "minecraft:oak_door",                             64,  1   }, // facing north
+	{ "minecraft:oak_door",                             64,  2   }, // facing south
+	{ "minecraft:oak_door",                             64,  3   }, // facing west
+    { "minecraft:ladder",                               65,  0   }, // facing east
+	{ "minecraft:ladder",                               65,  1   }, // facing north
+	{ "minecraft:ladder",                               65,  2   }, // facing south
+	{ "minecraft:ladder",                               65,  3   }, // facing west
+    { "minecraft:rail",                                 66,  0   }, // east-west
+	{ "minecraft:rail",                                 66,  1   }, // north-south
+	{ "minecraft:oak_stairs",                           53,  0   }, // facing east 
+	{ "minecraft:oak_stairs",                           53,  1   }, // facing north 
+	{ "minecraft:oak_stairs",                           53,  2   }, // facing south 
+	{ "minecraft:oak_stairs",                           53,  3   }, // facing west 
+	{ "minecraft:cobblestone_stairs",                   67,  0   }, // facing east 
+	{ "minecraft:cobblestone_stairs",                   67,  1   }, // facing north 
+	{ "minecraft:cobblestone_stairs",                   67,  2   }, // facing south 
+	{ "minecraft:cobblestone_stairs",                   67,  3   }, // facing west 
+	{ "minecraft:oak_wall_sign",                        68,  0   }, // facing east
+	{ "minecraft:oak_wall_sign",                        68,  1   }, // facing north
+	{ "minecraft:oak_wall_sign",                        68,  2   }, // facing south
+	{ "minecraft:oak_wall_sign",                        68,  3   }, // facing west
+    { "minecraft:spruce_wall_sign",                     68,  4   }, // facing east
+    { "minecraft:spruce_wall_sign",                     68,  5   }, // facing north
+    { "minecraft:spruce_wall_sign",                     68,  6   }, // facing south
+    { "minecraft:spruce_wall_sign",                     68,  7   }, // facing west
+	{ "minecraft:birch_wall_sign",                      68,  8   }, // facing east
+	{ "minecraft:birch_wall_sign",                      68,  9   }, // facing north
+	{ "minecraft:birch_wall_sign",                      68,  10  }, // facing south
+	{ "minecraft:birch_wall_sign",                      68,  11  }, // facing west
+	{ "minecraft:jungle_wall_sign",                     68,  12  }, // facing east
+	{ "minecraft:jungle_wall_sign",                     68,  13  }, // facing north
+	{ "minecraft:jungle_wall_sign",                     68,  14  }, // facing south
+	{ "minecraft:jungle_wall_sign",                     68,  15  }, // facing west
+	{ "minecraft:acacia_wall_sign",                     68,  16  }, // facing east
+	{ "minecraft:acacia_wall_sign",                     68,  17  }, // facing north
+	{ "minecraft:acacia_wall_sign",                     68,  18  }, // facing south
+	{ "minecraft:acacia_wall_sign",                     68,  19  }, // facing west
+    { "minecraft:dark_oak_wall_sign",                   68,  20  }, // facing east
+	{ "minecraft:dark_oak_wall_sign",                   68,  21  }, // facing north
+	{ "minecraft:dark_oak_wall_sign",                   68,  22  }, // facing south
+	{ "minecraft:dark_oak_wall_sign",                   68,  23  }, // facing west
+    { "minecraft:crimson_wall_sign",                    68,  24  }, // facing east
+	{ "minecraft:crimson_wall_sign",                    68,  25  }, // facing north
+	{ "minecraft:crimson_wall_sign",                    68,  26  }, // facing south
+	{ "minecraft:crimson_wall_sign",                    68,  27  }, // facing west
+    { "minecraft:warped_wall_sign",                     68,  28  }, // facing east
+	{ "minecraft:warped_wall_sign",                     68,  29  }, // facing north
+	{ "minecraft:warped_wall_sign",                     68,  30  }, // facing south
+	{ "minecraft:warped_wall_sign",                     68,  31  }, // facing west
+	{ "minecraft:lever",                                69,  0   }, 
+	{ "minecraft:stone_pressure_plate",                 70,  0   },
+	{ "minecraft:polished_blackstone_pressure_plate",   70,  0   },
 	{ "minecraft:iron_door", 71, 0  }, 
-	{ "minecraft:oak_pressure_plate", 72, 0  }, 
+	{ "minecraft:oak_pressure_plate",                   72,  0   }, 
+	{ "minecraft:spruce_pressure_plate",                72,  1   }, 
+	{ "minecraft:birch_pressure_plate",                 72,  2   }, 
+	{ "minecraft:jungle_pressure_plate",                72,  3   }, 
+	{ "minecraft:acacia_pressure_plate",                72,  4   }, 
+	{ "minecraft:dark_oak_pressure_plate",              72,  5   }, 
+	{ "minecraft:crimson_pressure_plate",               72,  6   }, 
+	{ "minecraft:warped_pressure_plate",                72,  7   }, 
 	{ "minecraft:redstone_ore", 73, 0  }, 
 	{ "minecraft:red_concrete", 74, 0  }, 
 	{ "minecraft:redstone_wall_torch", 75, 0  }, 
@@ -365,22 +373,22 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:cake", 92, 0  }, 
 	{ "minecraft:repeater", 93, 0  }, 
 	{ "minecraft:skeleton_skull", 94, 0  }, 
-	{ "minecraft:white_stained_glass",              95,  0   }, 
-	{ "minecraft:orange_stained_glass",             95,  1   }, 
-	{ "minecraft:magenta_stained_glass",            95,  2   }, 
-	{ "minecraft:light_blue_stained_glass",         95,  3   }, 
-	{ "minecraft:yellow_stained_glass",             95,  4   }, 
-	{ "minecraft:lime_stained_glass",               95,  5   }, 
-	{ "minecraft:pink_stained_glass",               95,  6   }, 
-	{ "minecraft:gray_stained_glass",               95,  7   }, 
-	{ "minecraft:light_gray_stained_glass",         95,  8   }, 
-	{ "minecraft:cyan_stained_glass",               95,  9   }, 
-	{ "minecraft:purple_stained_glass",             95,  10  }, 
-	{ "minecraft:blue_stained_glass",               95,  11  }, 
-	{ "minecraft:brown_stained_glass",              95,  12  }, 
-	{ "minecraft:green_stained_glass",              95,  13  }, 
-	{ "minecraft:red_stained_glass",                95,  14  }, 
-	{ "minecraft:black_stained_glass",              95,  15  }, 
+	{ "minecraft:white_stained_glass",                  95,  0   }, 
+	{ "minecraft:orange_stained_glass",                 95,  1   }, 
+	{ "minecraft:magenta_stained_glass",                95,  2   }, 
+	{ "minecraft:light_blue_stained_glass",             95,  3   }, 
+	{ "minecraft:yellow_stained_glass",                 95,  4   }, 
+	{ "minecraft:lime_stained_glass",                   95,  5   }, 
+	{ "minecraft:pink_stained_glass",                   95,  6   }, 
+	{ "minecraft:gray_stained_glass",                   95,  7   }, 
+	{ "minecraft:light_gray_stained_glass",             95,  8   }, 
+	{ "minecraft:cyan_stained_glass",                   95,  9   }, 
+	{ "minecraft:purple_stained_glass",                 95,  10  }, 
+	{ "minecraft:blue_stained_glass",                   95,  11  }, 
+	{ "minecraft:brown_stained_glass",                  95,  12  }, 
+	{ "minecraft:green_stained_glass",                  95,  13  }, 
+	{ "minecraft:red_stained_glass",                    95,  14  }, 
+	{ "minecraft:black_stained_glass",                  95,  15  }, 
 	{ "minecraft:oak_trapdoor", 96, 0  }, 
 	{ "minecraft:turtle_egg", 97, 0  }, 
 	{ "minecraft:stone_bricks", 98, 0  }, 
@@ -419,19 +427,19 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:tripwire_hook", 131, 0  }, 
 	{ "minecraft:tripwire", 132, 0  }, 
 	{ "minecraft:emerald_block", 133, 0  }, 
-    { "minecraft:spruce_stairs",                    134, 0   }, // facing east 
-	{ "minecraft:spruce_stairs",                    134, 1   }, // facing north 
-	{ "minecraft:spruce_stairs",                    134, 2   }, // facing south 
-	{ "minecraft:spruce_stairs",                    134, 3   }, // facing west 
-    { "minecraft:birch_stairs",                     135, 0   }, // facing east 
-	{ "minecraft:birch_stairs",                     135, 1   }, // facing north 
-	{ "minecraft:birch_stairs",                     135, 2   }, // facing south 
-	{ "minecraft:birch_stairs",                     135, 3   }, // facing west 
-    { "minecraft:jungle_stairs",                    136, 0   }, // facing east 
-	{ "minecraft:jungle_stairs",                    136, 1   }, // facing north 
-	{ "minecraft:jungle_stairs",                    136, 2   }, // facing south 
-	{ "minecraft:jungle_stairs",                    136, 3   }, // facing west 
-	{ "minecraft:command_block",                    137, 0  }, 
+    { "minecraft:spruce_stairs",                        134, 0   }, // facing east 
+	{ "minecraft:spruce_stairs",                        134, 1   }, // facing north 
+	{ "minecraft:spruce_stairs",                        134, 2   }, // facing south 
+	{ "minecraft:spruce_stairs",                        134, 3   }, // facing west 
+    { "minecraft:birch_stairs",                         135, 0   }, // facing east 
+	{ "minecraft:birch_stairs",                         135, 1   }, // facing north 
+	{ "minecraft:birch_stairs",                         135, 2   }, // facing south 
+	{ "minecraft:birch_stairs",                         135, 3   }, // facing west 
+    { "minecraft:jungle_stairs",                        136, 0   }, // facing east 
+	{ "minecraft:jungle_stairs",                        136, 1   }, // facing north 
+	{ "minecraft:jungle_stairs",                        136, 2   }, // facing south 
+	{ "minecraft:jungle_stairs",                        136, 3   }, // facing west 
+	{ "minecraft:command_block",                        137, 0  }, 
 	{ "minecraft:beacon", 138, 0  }, 
 	{ "minecraft:cobblestone_wall", 139, 0  }, 
 	{ "minecraft:flower_pot", 140, 0  }, 
@@ -448,8 +456,8 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:skeleton_wall_skull", 144, 0  }, 
 	{ "minecraft:anvil", 145, 0  }, 
 	{ "minecraft:trapped_chest", 146, 0  }, 
-	{ "minecraft:light_weighted_pressure_plate",    147, 0  }, 
-	{ "minecraft:heavy_weighted_pressure_plate",    148, 0  }, 
+	{ "minecraft:light_weighted_pressure_plate",        147, 0  }, 
+	{ "minecraft:heavy_weighted_pressure_plate",        148, 0  }, 
 	{ "minecraft:comparator", 149, 0  }, 
 	{ "minecraft:chain", 150, 0  }, 
 	{ "minecraft:daylight_detector", 151, 0  }, 
@@ -460,35 +468,35 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:quartz_stairs", 156, 0  }, 
 	{ "minecraft:activator_rail", 157, 0  }, 
 	{ "minecraft:dropper", 158, 0  }, 
-	{ "minecraft:white_terracotta",                 159, 0   }, 
-	{ "minecraft:orange_terracotta",                159, 1   }, 
-	{ "minecraft:magenta_terracotta",               159, 2   }, 
-	{ "minecraft:light_blue_terracotta",            159, 3   }, 
-	{ "minecraft:yellow_terracotta",                159, 4   }, 
-	{ "minecraft:lime_terracotta",                  159, 5   }, 
-	{ "minecraft:pink_terracotta",                  159, 6   }, 
-	{ "minecraft:gray_terracotta",                  159, 7   }, 
-	{ "minecraft:light_gray_terracotta",            159, 8   }, 
-	{ "minecraft:cyan_terracotta",                  159, 9   }, 
-	{ "minecraft:purple_terracotta",                159, 10  }, 
-	{ "minecraft:blue_terracotta",                  159, 11  }, 
-	{ "minecraft:brown_terracotta",                 159, 12  }, 
-	{ "minecraft:green_terracotta",                 159, 13  }, 
-	{ "minecraft:red_terracotta",                   159, 14  }, 
-	{ "minecraft:black_terracotta",                 159, 15  }, 
-	{ "minecraft:white_stained_glass_pane",         160, 0  }, 
-	{ "minecraft:acacia_leaves",                    161, 0   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:dark_oak_leaves",                  161, 1   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:removed0_leaves",                  161, 2   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:removed1_leaves",                  161, 3   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:acacia_leaves",                    161, 4   }, // persistent
-	{ "minecraft:dark_oak_leaves",                  161, 5   }, // persistent
-	{ "minecraft:removed0_leaves",                  161, 6   }, // persistent
-	{ "minecraft:removed1_leaves",                  161, 7   }, // persistent
-	{ "minecraft:acacia_leaves",                    161, 8   }, // persistent (12-15 same as 8-11)
-	{ "minecraft:dark_oak_leaves",                  161, 9   }, // persistent (12-15 same as 8-11)
-	{ "minecraft:removed0_leaves",                  161, 10  }, // persistent (12-15 same as 8-11)
-	{ "minecraft:removed1_leaves",                  161, 11  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:white_terracotta",                     159, 0   }, 
+	{ "minecraft:orange_terracotta",                    159, 1   }, 
+	{ "minecraft:magenta_terracotta",                   159, 2   }, 
+	{ "minecraft:light_blue_terracotta",                159, 3   }, 
+	{ "minecraft:yellow_terracotta",                    159, 4   }, 
+	{ "minecraft:lime_terracotta",                      159, 5   }, 
+	{ "minecraft:pink_terracotta",                      159, 6   }, 
+	{ "minecraft:gray_terracotta",                      159, 7   }, 
+	{ "minecraft:light_gray_terracotta",                159, 8   }, 
+	{ "minecraft:cyan_terracotta",                      159, 9   }, 
+	{ "minecraft:purple_terracotta",                    159, 10  }, 
+	{ "minecraft:blue_terracotta",                      159, 11  }, 
+	{ "minecraft:brown_terracotta",                     159, 12  }, 
+	{ "minecraft:green_terracotta",                     159, 13  }, 
+	{ "minecraft:red_terracotta",                       159, 14  }, 
+	{ "minecraft:black_terracotta",                     159, 15  }, 
+	{ "minecraft:white_stained_glass_pane",             160, 0  }, 
+	{ "minecraft:acacia_leaves",                        161, 0   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:dark_oak_leaves",                      161, 1   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:removed0_leaves",                      161, 2   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:removed1_leaves",                      161, 3   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:acacia_leaves",                        161, 4   }, // persistent
+	{ "minecraft:dark_oak_leaves",                      161, 5   }, // persistent
+	{ "minecraft:removed0_leaves",                      161, 6   }, // persistent
+	{ "minecraft:removed1_leaves",                      161, 7   }, // persistent
+	{ "minecraft:acacia_leaves",                        161, 8   }, // persistent (12-15 same as 8-11)
+	{ "minecraft:dark_oak_leaves",                      161, 9   }, // persistent (12-15 same as 8-11)
+	{ "minecraft:removed0_leaves",                      161, 10  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:removed1_leaves",                      161, 11  }, // persistent (12-15 same as 8-11)
 	{ "minecraft:oak_wood", 162, 0  }, 
 	{ "minecraft:spruce_wood", 162, 1  }, 
 	{ "minecraft:birch_wood", 162, 2  }, 
@@ -504,26 +512,26 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:stripped_acacia_wood", 162, 12 }, 
 	{ "minecraft:stripped_crimson_hyphae", 162, 14 },
 	{ "minecraft:stripped_warped_hyphae", 162, 15 }, 
-    { "minecraft:acacia_stairs",                    163, 0   }, // facing east 
-	{ "minecraft:acacia_stairs",                    163, 1   }, // facing north 
-	{ "minecraft:acacia_stairs",                    163, 2   }, // facing south 
-	{ "minecraft:acacia_stairs",                    163, 3   }, // facing west
-    { "minecraft:dark_oak_stairs",                  164, 0   }, // facing east
-	{ "minecraft:dark_oak_stairs",                  164, 1   }, // facing north
-	{ "minecraft:dark_oak_stairs",                  164, 2   }, // facing south
-	{ "minecraft:dark_oak_stairs",                  164, 3   }, // facing west
-    { "minecraft:crimson_stairs",                   164, 4   }, // facing east	  - Added after flattening, data value not correct
-	{ "minecraft:crimson_stairs",                   164, 5   }, // facing north	  - Added after flattening, data value not correct
-	{ "minecraft:crimson_stairs",                   164, 6   }, // facing south	  - Added after flattening, data value not correct
-	{ "minecraft:crimson_stairs",                   164, 7   }, // facing west	  - Added after flattening, data value not correct
-    { "minecraft:warped_stairs",                    164, 8   }, // facing east	  - Added after flattening, data value not correct
-	{ "minecraft:warped_stairs",                    164, 9   }, // facing north	  - Added after flattening, data value not correct
-	{ "minecraft:warped_stairs",                    164, 10  }, // facing south	  - Added after flattening, data value not correct
-	{ "minecraft:warped_stairs",                    164, 11  }, // facing west	  - Added after flattening, data value not correct
-    { "minecraft:stone_stairs",                     164, 12  }, // facing east	  - Added after flattening, data value not correct
-	{ "minecraft:stone_stairs",                     164, 13  }, // facing north	  - Added after flattening, data value not correct
-	{ "minecraft:stone_stairs",                     164, 14  }, // facing south	  - Added after flattening, data value not correct
-	{ "minecraft:stone_stairs",                     164, 15  }, // facing west	  - Added after flattening, data value not correct
+    { "minecraft:acacia_stairs",                        163, 0   }, // facing east 
+	{ "minecraft:acacia_stairs",                        163, 1   }, // facing north 
+	{ "minecraft:acacia_stairs",                        163, 2   }, // facing south 
+	{ "minecraft:acacia_stairs",                        163, 3   }, // facing west
+    { "minecraft:dark_oak_stairs",                      164, 0   }, // facing east
+	{ "minecraft:dark_oak_stairs",                      164, 1   }, // facing north
+	{ "minecraft:dark_oak_stairs",                      164, 2   }, // facing south
+	{ "minecraft:dark_oak_stairs",                      164, 3   }, // facing west
+    { "minecraft:crimson_stairs",                       164, 4   }, // facing east	  - Added after flattening, data value not correct
+	{ "minecraft:crimson_stairs",                       164, 5   }, // facing north	  - Added after flattening, data value not correct
+	{ "minecraft:crimson_stairs",                       164, 6   }, // facing south	  - Added after flattening, data value not correct
+	{ "minecraft:crimson_stairs",                       164, 7   }, // facing west	  - Added after flattening, data value not correct
+    { "minecraft:warped_stairs",                        164, 8   }, // facing east	  - Added after flattening, data value not correct
+	{ "minecraft:warped_stairs",                        164, 9   }, // facing north	  - Added after flattening, data value not correct
+	{ "minecraft:warped_stairs",                        164, 10  }, // facing south	  - Added after flattening, data value not correct
+	{ "minecraft:warped_stairs",                        164, 11  }, // facing west	  - Added after flattening, data value not correct
+    { "minecraft:stone_stairs",                         164, 12  }, // facing east	  - Added after flattening, data value not correct
+	{ "minecraft:stone_stairs",                         164, 13  }, // facing north	  - Added after flattening, data value not correct
+	{ "minecraft:stone_stairs",                         164, 14  }, // facing south	  - Added after flattening, data value not correct
+	{ "minecraft:stone_stairs",                         164, 15  }, // facing west	  - Added after flattening, data value not correct
 	{ "minecraft:slime_block", 165, 0  }, 
 	{ "minecraft:barrier", 166, 0  }, 
 	{ "minecraft:iron_trapdoor", 167, 0  }, 
@@ -534,13 +542,13 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:terracotta", 172, 0  }, 
 	{ "minecraft:coal_block", 173, 0  }, 
 	{ "minecraft:packed_ice", 174, 0  }, 
-	{ "minecraft:sunflower",                        175, 0   }, // tall flowers, two-block lower - data values may not be correct
-	{ "minecraft:lilac",                            175, 1   }, // tall flowers, two-block lower - data values may not be correct
-	{ "minecraft:tall_grass",                       175, 2   }, // tall plants, two-block lower - data values may not be correct
-	{ "minecraft:large_fern",                       175, 3   }, // tall plants, two-block lower - data values may not be correct
-	{ "minecraft:rose_bush",                        175, 4   }, // tall flowers, two-block lower - data values may not be correct
-	{ "minecraft:peony",                            175, 5   }, // tall flowers, two-block lower - data values may not be correct
-	{ "minecraft:tall_seagrass",                    175, 6   }, // tall plants, two-block upper - Added after flattening, data value not correct
+	{ "minecraft:sunflower",                            175, 0   }, // tall flowers, two-block lower - data values may not be correct
+	{ "minecraft:lilac",                                175, 1   }, // tall flowers, two-block lower - data values may not be correct
+	{ "minecraft:tall_grass",                           175, 2   }, // tall plants, two-block lower - data values may not be correct
+	{ "minecraft:large_fern",                           175, 3   }, // tall plants, two-block lower - data values may not be correct
+	{ "minecraft:rose_bush",                            175, 4   }, // tall flowers, two-block lower - data values may not be correct
+	{ "minecraft:peony",                                175, 5   }, // tall flowers, two-block lower - data values may not be correct
+	{ "minecraft:tall_seagrass",                        175, 6   }, // tall plants, two-block upper - Added after flattening, data value not correct
 	{ "minecraft:white_banner", 176, 0  }, 
 	{ "minecraft:white_wall_banner", 177, 0  }, 
 	{ "minecraft:white_concrete_powder", 178, 0  }, 
@@ -562,34 +570,34 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:jungle_fence", 190, 0  }, 
 	{ "minecraft:dark_oak_fence", 191, 0  }, 
 	{ "minecraft:acacia_fence", 192, 0  },
-    { "minecraft:spruce_door",                      193, 0   }, // facing east
-    { "minecraft:spruce_door",                      193, 1   }, // facing north
-    { "minecraft:spruce_door",                      193, 2   }, // facing south
-    { "minecraft:spruce_door",                      193, 3   }, // facing west
-	{ "minecraft:birch_door",                       194, 0   }, // facing east
-	{ "minecraft:birch_door",                       194, 1   }, // facing north
-	{ "minecraft:birch_door",                       194, 2   }, // facing south
-	{ "minecraft:birch_door",                       194, 3   }, // facing west
-	{ "minecraft:jungle_door",                      195, 0   }, // facing east
-	{ "minecraft:jungle_door",                      195, 1   }, // facing north
-	{ "minecraft:jungle_door",                      195, 2   }, // facing south
-	{ "minecraft:jungle_door",                      195, 3   }, // facing west
-	{ "minecraft:acacia_door",                      196, 0   }, // facing east
-	{ "minecraft:acacia_door",                      196, 1   }, // facing north
-	{ "minecraft:acacia_door",                      196, 2   }, // facing south
-	{ "minecraft:acacia_door",                      196, 3   }, // facing west
-    { "minecraft:dark_oak_door",                    197, 0   }, // facing east
-	{ "minecraft:dark_oak_door",                    197, 1   }, // facing north
-	{ "minecraft:dark_oak_door",                    197, 2   }, // facing south
-	{ "minecraft:dark_oak_door",                    197, 3   }, // facing west
-    { "minecraft:crimson_door",                     197, 4   }, // facing east	 - Added after flattening, data value not correct
-	{ "minecraft:crimson_door",                     197, 5   }, // facing north	 - Added after flattening, data value not correct
-	{ "minecraft:crimson_door",                     197, 6   }, // facing south	 - Added after flattening, data value not correct
-	{ "minecraft:crimson_door",                     197, 7   }, // facing west	 - Added after flattening, data value not correct
-    { "minecraft:warped_door",                      197, 8   }, // facing east	 - Added after flattening, data value not correct
-	{ "minecraft:warped_door",                      197, 9   }, // facing north	 - Added after flattening, data value not correct
-	{ "minecraft:warped_door",                      197, 10   }, // facing south - Added after flattening, data value not correct
-	{ "minecraft:warped_door",                      197, 11   }, // facing west	 - Added after flattening, data value not correct
+    { "minecraft:spruce_door",                          193, 0   }, // facing east
+    { "minecraft:spruce_door",                          193, 1   }, // facing north
+    { "minecraft:spruce_door",                          193, 2   }, // facing south
+    { "minecraft:spruce_door",                          193, 3   }, // facing west
+	{ "minecraft:birch_door",                           194, 0   }, // facing east
+	{ "minecraft:birch_door",                           194, 1   }, // facing north
+	{ "minecraft:birch_door",                           194, 2   }, // facing south
+	{ "minecraft:birch_door",                           194, 3   }, // facing west
+	{ "minecraft:jungle_door",                          195, 0   }, // facing east
+	{ "minecraft:jungle_door",                          195, 1   }, // facing north
+	{ "minecraft:jungle_door",                          195, 2   }, // facing south
+	{ "minecraft:jungle_door",                          195, 3   }, // facing west
+	{ "minecraft:acacia_door",                          196, 0   }, // facing east
+	{ "minecraft:acacia_door",                          196, 1   }, // facing north
+	{ "minecraft:acacia_door",                          196, 2   }, // facing south
+	{ "minecraft:acacia_door",                          196, 3   }, // facing west
+    { "minecraft:dark_oak_door",                        197, 0   }, // facing east
+	{ "minecraft:dark_oak_door",                        197, 1   }, // facing north
+	{ "minecraft:dark_oak_door",                        197, 2   }, // facing south
+	{ "minecraft:dark_oak_door",                        197, 3   }, // facing west
+    { "minecraft:crimson_door",                         197, 4   }, // facing east	 - Added after flattening, data value not correct
+	{ "minecraft:crimson_door",                         197, 5   }, // facing north	 - Added after flattening, data value not correct
+	{ "minecraft:crimson_door",                         197, 6   }, // facing south	 - Added after flattening, data value not correct
+	{ "minecraft:crimson_door",                         197, 7   }, // facing west	 - Added after flattening, data value not correct
+    { "minecraft:warped_door",                          197, 8   }, // facing east	 - Added after flattening, data value not correct
+	{ "minecraft:warped_door",                          197, 9   }, // facing north	 - Added after flattening, data value not correct
+	{ "minecraft:warped_door",                          197, 10   }, // facing south - Added after flattening, data value not correct
+	{ "minecraft:warped_door",                          197, 11   }, // facing west	 - Added after flattening, data value not correct
 	{ "minecraft:end_rod", 198, 0  }, 
 	{ "minecraft:chorus_plant", 199, 0  }, 
 	{ "minecraft:chorus_flower", 200, 0  }, 

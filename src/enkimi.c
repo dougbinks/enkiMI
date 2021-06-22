@@ -465,13 +465,22 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:oak_fence_gate",                       107, 0   }, 
 	{ "minecraft:crimson_fence_gate",                   107, 1   }, 
 	{ "minecraft:warped_fence_gate",                    107, 2   }, 
-	{ "minecraft:brick_stairs", 108, 0  }, 
-	{ "minecraft:stone_brick_stairs", 109, 0  }, 
+	{ "minecraft:brick_stairs",                         108, 0   }, // facing east 
+	{ "minecraft:brick_stairs",                         108, 1   }, // facing north
+	{ "minecraft:brick_stairs",                         108, 2   }, // facing south
+	{ "minecraft:brick_stairs",                         108, 3   }, // facing west 
+	{ "minecraft:stone_brick_stairs",                   109, 0   }, // facing east 
+	{ "minecraft:stone_brick_stairs",                   109, 1   }, // facing north
+	{ "minecraft:stone_brick_stairs",                   109, 2   }, // facing south
+	{ "minecraft:stone_brick_stairs",                   109, 3   }, // facing west 
 	{ "minecraft:mycelium", 110, 0  }, 
 	{ "minecraft:light_gray_concrete", 111, 0  }, 
 	{ "minecraft:nether_brick", 112, 0  }, 
 	{ "minecraft:nether_brick_fence",                   113, 0   }, 
-	{ "minecraft:nether_brick_stairs", 114, 0  }, 
+	{ "minecraft:nether_brick_stairs",                  114, 0   }, // facing east 
+	{ "minecraft:nether_brick_stairs",                  114, 1   }, // facing north
+	{ "minecraft:nether_brick_stairs",                  114, 2   }, // facing south
+	{ "minecraft:nether_brick_stairs",                  114, 3   }, // facing west 
 	{ "minecraft:nether_wart", 115, 0  }, 
 	{ "minecraft:enchanting_table", 116, 0  }, 
 	{ "minecraft:brewing_stand", 117, 0  }, 
@@ -485,7 +494,10 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:oak_wood", 125, 0  }, 
 	{ "minecraft:oak_slab", 126, 0  }, 
 	{ "minecraft:cocoa", 127, 0  }, 
-	{ "minecraft:sandstone_stairs", 128, 0  }, 
+	{ "minecraft:sandstone_stairs",                     128, 0   }, // facing east 
+	{ "minecraft:sandstone_stairs",                     128, 1   }, // facing north
+	{ "minecraft:sandstone_stairs",                     128, 2   }, // facing south
+	{ "minecraft:sandstone_stairs",                     128, 3   }, // facing west 
 	{ "minecraft:emerald_ore", 129, 0  }, 
 	{ "minecraft:ender_chest", 130, 0  }, 
 	{ "minecraft:tripwire_hook", 131, 0  }, 
@@ -529,7 +541,10 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:nether_quartz_ore", 153, 0  }, 
 	{ "minecraft:hopper", 154, 0  }, 
 	{ "minecraft:quartz_block", 155, 0  }, 
-	{ "minecraft:quartz_stairs", 156, 0  }, 
+	{ "minecraft:quartz_stairs",                        156, 0   }, // facing east 
+	{ "minecraft:quartz_stairs",                        156, 1   }, // facing north
+	{ "minecraft:quartz_stairs",                        156, 2   }, // facing south
+	{ "minecraft:quartz_stairs",                        156, 3   }, // facing west 
 	{ "minecraft:activator_rail", 157, 0  }, 
 	{ "minecraft:dropper", 158, 0  }, 
 	{ "minecraft:white_terracotta",                     159, 0   }, 
@@ -636,7 +651,10 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:chiseled_red_sandstone", 179, 1  },
 	{ "minecraft:cut_red_sandstone", 179, 2  },
 	{ "minecraft:smooth_red_sandstone", 179, 3  },
-	{ "minecraft:red_sandstone_stairs", 180, 0  }, 
+	{ "minecraft:red_sandstone_stairs",                 180, 0   }, // facing east 
+	{ "minecraft:red_sandstone_stairs",                 180, 1   }, // facing north
+	{ "minecraft:red_sandstone_stairs",                 180, 2   }, // facing south
+	{ "minecraft:red_sandstone_stairs",                 180, 3   }, // facing west 
 	{ "minecraft:red_sandstone_wall", 181, 0  }, 
 	{ "minecraft:red_sandstone_slab", 182, 0  },
 	{ "minecraft:spruce_fence_gate",                    183, 0   }, 
@@ -682,7 +700,10 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:chorus_flower", 200, 0  }, 
 	{ "minecraft:purpur_block", 201, 0  }, 
 	{ "minecraft:purpur_pillar", 202, 0  }, 
-	{ "minecraft:purpur_stairs", 203, 0  }, 
+	{ "minecraft:purpur_stairs",                        203, 0   }, // facing east 
+	{ "minecraft:purpur_stairs",                        203, 1   }, // facing north
+	{ "minecraft:purpur_stairs",                        203, 2   }, // facing south
+	{ "minecraft:purpur_stairs",                        203, 3   }, // facing west 
 	{ "minecraft:purple_stained_glass", 204, 0  }, 
 	{ "minecraft:purpur_slab", 205, 0  }, 
 	{ "minecraft:end_stone_bricks", 206, 0  }, 

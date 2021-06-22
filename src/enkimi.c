@@ -473,15 +473,15 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:stone_brick_stairs",                   109, 1   }, // facing north
 	{ "minecraft:stone_brick_stairs",                   109, 2   }, // facing south
 	{ "minecraft:stone_brick_stairs",                   109, 3   }, // facing west 
-	{ "minecraft:mycelium", 110, 0  }, 
-	{ "minecraft:light_gray_concrete", 111, 0  }, 
-	{ "minecraft:nether_brick", 112, 0  }, 
-	{ "minecraft:nether_brick_fence",                   113, 0   }, 
+	{ "minecraft:mycelium",                             110, 0   }, 
+	{ "minecraft:lily_pad",                             111, 0   },
+	{ "minecraft:nether_bricks",                        112, 0   },
+	{ "minecraft:nether_brick_fence",                   113, 0   },
 	{ "minecraft:nether_brick_stairs",                  114, 0   }, // facing east 
 	{ "minecraft:nether_brick_stairs",                  114, 1   }, // facing north
 	{ "minecraft:nether_brick_stairs",                  114, 2   }, // facing south
 	{ "minecraft:nether_brick_stairs",                  114, 3   }, // facing west 
-	{ "minecraft:nether_wart", 115, 0  }, 
+	{ "minecraft:nether_wart",                          115, 0   }, 
 	{ "minecraft:enchanting_table", 116, 0  }, 
 	{ "minecraft:brewing_stand", 117, 0  }, 
 	{ "minecraft:cauldron", 118, 0  }, 
@@ -706,7 +706,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:purpur_stairs",                        203, 3   }, // facing west 
 	{ "minecraft:purple_stained_glass", 204, 0  }, 
 	{ "minecraft:purpur_slab", 205, 0  }, 
-	{ "minecraft:end_stone_bricks", 206, 0  }, 
+	{ "minecraft:end_stone_bricks",                     206, 0   }, 
 	{ "minecraft:beetroots", 207, 0  }, 
 	{ "minecraft:grass_path", 208, 0  }, 
 	{ "minecraft:end_gateway", 209, 0  }, 
@@ -715,7 +715,9 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:frosted_ice",                          212, 0   }, 
 	{ "minecraft:magma_block", 213, 0  }, 
 	{ "minecraft:nether_wart_block", 214, 0  }, 
-	{ "minecraft:red_nether_bricks", 215, 0  }, 
+	{ "minecraft:red_nether_bricks",                    215, 0   },
+	{ "minecraft:cracked_nether_bricks",                215, 1   },
+	{ "minecraft:chiseled_nether_bricks",               215, 2   },
 	{ "minecraft:bone_block", 216, 0  }, 
 	{ "minecraft:structure_void", 217, 0  }, 
 	{ "minecraft:observer", 218, 0  }, 

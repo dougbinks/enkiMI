@@ -247,14 +247,16 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:obsidian",                             49,  0   },
 	{ "minecraft:torch",                                50,  0   },
 	{ "minecraft:wall_torch",                           50,  1   }, // facing east
-	{ "minecraft:wall_torch",                           50,  2   }, // facing north
+	{ "minecraft:wall_torch",                           50,  2   }, // facing west
 	{ "minecraft:wall_torch",                           50,  3   }, // facing south
-	{ "minecraft:wall_torch",                           50,  4   }, // facing west
-	{ "minecraft:soul_torch",                           50,  5   },
-	{ "minecraft:sould_wall_torch",                     50,  6   }, // facing east  - Added after flattening, data value not correct
-	{ "minecraft:sould_wall_torch",                     50,  7   }, // facing north - Added after flattening, data value not correct
-	{ "minecraft:sould_wall_torch",                     50,  8   }, // facing south - Added after flattening, data value not correct
-	{ "minecraft:sould_wall_torch",                     50,  9   }, // facing west  - Added after flattening, data value not correct
+	{ "minecraft:wall_torch",                           50,  4   }, // facing north
+	{ "minecraft:wall_torch",                           50,  5   }, // facing up
+	{ "minecraft:soul_torch",                           50,  6   },
+	{ "minecraft:soul_wall_torch",                      50,  7   }, // facing east - Added after flattening, data value not correct
+	{ "minecraft:soul_wall_torch",                      50,  8   }, // facing west - Added after flattening, data value not correct
+	{ "minecraft:soul_wall_torch",                      50,  9   }, // facing south - Added after flattening, data value not correct
+	{ "minecraft:soul_wall_torch",                      50,  10  }, // facing north - Added after flattening, data value not correct
+	{ "minecraft:soul_wall_torch",                      50,  11  }, // facing up  - Added after flattening, data value not correct
 	{ "minecraft:fire",                                 51,  0   },
 	{ "minecraft:soul_fire",                            51,  1   }, // Added after flattening, data value not correct
 	{ "minecraft:spawner",                              52,  0   }, 
@@ -356,15 +358,27 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:dark_oak_pressure_plate",              72,  5   }, 
 	{ "minecraft:crimson_pressure_plate",               72,  6   }, 
 	{ "minecraft:warped_pressure_plate",                72,  7   }, 
-	{ "minecraft:redstone_ore", 73, 0  }, 
-	{ "minecraft:red_concrete", 74, 0  }, 
-	{ "minecraft:redstone_wall_torch", 75, 0  }, 
-	{ "minecraft:redstone_torch", 76, 0  }, 
-	{ "minecraft:stone_button", 77, 0  }, 
-	{ "minecraft:polished_blackstone_button", 77, 1  },    // Added after flattening, data value not correct
-	{ "minecraft:snow_block", 78, 0  }, 
-	{ "minecraft:ice", 79, 0  }, 
-	{ "minecraft:snow", 80, 0  }, 
+	{ "minecraft:redstone_ore",                         73,  0   }, 
+	{ "minecraft:deepslate_redstone_ore",               73,  1   }, 
+	{ "minecraft:lit_redstone_ore",                     74,  0   }, 
+	{ "minecraft:lit_deepslate_redstone_ore",           74,  1   }, 
+	{ "minecraft:redstone_torch",                       75,  0   }, // unlit
+	{ "minecraft:redstone_torch",                       75,  1   }, // lit
+	{ "minecraft:redstone_wall_torch",                  76,  0   }, // unlit - facing east
+	{ "minecraft:redstone_wall_torch",                  76,  1   }, // unlit - facing west
+	{ "minecraft:redstone_wall_torch",                  76,  2   }, // unlit - facing south
+	{ "minecraft:redstone_wall_torch",                  76,  3   }, // unlit - facing north
+	{ "minecraft:redstone_wall_torch",                  76,  4   }, // unlit - facing up
+	{ "minecraft:redstone_wall_torch",                  76,  5   }, // lit - facing east
+	{ "minecraft:redstone_wall_torch",                  76,  6   }, // lit - facing west
+	{ "minecraft:redstone_wall_torch",                  76,  7   }, // lit - facing south
+	{ "minecraft:redstone_wall_torch",                  76,  8   }, // lit - facing north
+	{ "minecraft:redstone_wall_torch",                  76,  9   }, // lit - facing up
+	{ "minecraft:stone_button",                         77,  0   }, 
+	{ "minecraft:polished_blackstone_button",           77,  1   }, // Added after flattening, data value not correct
+	{ "minecraft:snow",                                 78,  0   }, // layer
+	{ "minecraft:ice",                                  79,  0   }, 
+	{ "minecraft:snow_block",                           80,  0   }, 
 	{ "minecraft:cactus", 81, 0  }, 
 	{ "minecraft:clay", 82, 0  }, 
 	{ "minecraft:bamboo", 83, 0  }, 
@@ -445,20 +459,20 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:jungle_stairs",                        136, 1   }, // facing north 
 	{ "minecraft:jungle_stairs",                        136, 2   }, // facing south 
 	{ "minecraft:jungle_stairs",                        136, 3   }, // facing west 
-	{ "minecraft:command_block",                        137, 0  }, 
+	{ "minecraft:command_block",                        137, 0   }, 
 	{ "minecraft:beacon", 138, 0  }, 
 	{ "minecraft:cobblestone_wall", 139, 0  }, 
 	{ "minecraft:flower_pot", 140, 0  }, 
 	{ "minecraft:carrots", 141, 0  }, 
 	{ "minecraft:potatoes", 142, 0  }, 
-	{ "minecraft:oak_button", 143, 1  }, 
-	{ "minecraft:spruce_button", 143, 2  }, 
-	{ "minecraft:birch_button", 143, 3  }, 
-	{ "minecraft:jungle_button", 143, 4  }, 
-	{ "minecraft:acacia_button", 143, 5  }, 
-	{ "minecraft:dark_oak_button", 143, 6  }, 
-	{ "minecraft:crimson_button", 143, 7  },        // Added after flattening, data value not correct
-	{ "minecraft:warped_button", 143, 8  },         // Added after flattening, data value not correct
+	{ "minecraft:oak_button",                           143, 1   }, 
+	{ "minecraft:spruce_button",                        143, 2   }, 
+	{ "minecraft:birch_button",                         143, 3   }, 
+	{ "minecraft:jungle_button",                        143, 4   }, 
+	{ "minecraft:acacia_button",                        143, 5   }, 
+	{ "minecraft:dark_oak_button",                      143, 6   }, 
+	{ "minecraft:crimson_button",                       143, 7   }, // Added after flattening, data value not correct
+	{ "minecraft:warped_button",                        143, 8   }, // Added after flattening, data value not correct
 	{ "minecraft:skeleton_wall_skull", 144, 0  }, 
 	{ "minecraft:anvil", 145, 0  }, 
 	{ "minecraft:trapped_chest", 146, 0  }, 
@@ -547,7 +561,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:white_carpet", 171, 0  }, 
 	{ "minecraft:terracotta", 172, 0  }, 
 	{ "minecraft:coal_block", 173, 0  }, 
-	{ "minecraft:packed_ice", 174, 0  }, 
+	{ "minecraft:packed_ice",                           174, 0   }, 
 	{ "minecraft:sunflower",                            175, 0   }, // tall flowers, two-block lower - data values may not be correct
 	{ "minecraft:lilac",                                175, 1   }, // tall flowers, two-block lower - data values may not be correct
 	{ "minecraft:tall_grass",                           175, 2   }, // tall plants, two-block lower - data values may not be correct
@@ -602,8 +616,8 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:crimson_door",                         197, 7   }, // facing west	 - Added after flattening, data value not correct
     { "minecraft:warped_door",                          197, 8   }, // facing east	 - Added after flattening, data value not correct
 	{ "minecraft:warped_door",                          197, 9   }, // facing north	 - Added after flattening, data value not correct
-	{ "minecraft:warped_door",                          197, 10   }, // facing south - Added after flattening, data value not correct
-	{ "minecraft:warped_door",                          197, 11   }, // facing west	 - Added after flattening, data value not correct
+	{ "minecraft:warped_door",                          197, 10  }, // facing south - Added after flattening, data value not correct
+	{ "minecraft:warped_door",                          197, 11  }, // facing west	 - Added after flattening, data value not correct
 	{ "minecraft:end_rod", 198, 0  }, 
 	{ "minecraft:chorus_plant", 199, 0  }, 
 	{ "minecraft:chorus_flower", 200, 0  }, 
@@ -618,7 +632,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:end_gateway", 209, 0  }, 
 	{ "minecraft:repeating_command_block", 210, 0  }, 
 	{ "minecraft:chain_command_block", 211, 0  }, 
-	{ "minecraft:frosted_ice", 212, 0  }, 
+	{ "minecraft:frosted_ice",                          212, 0   }, 
 	{ "minecraft:magma_block", 213, 0  }, 
 	{ "minecraft:nether_wart_block", 214, 0  }, 
 	{ "minecraft:red_nether_bricks", 215, 0  }, 

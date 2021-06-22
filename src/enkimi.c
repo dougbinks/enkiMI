@@ -258,8 +258,11 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:fire",                                 51,  0   },
 	{ "minecraft:soul_fire",                            51,  1   }, // Added after flattening, data value not correct
 	{ "minecraft:spawner",                              52,  0   }, 
-	{ "minecraft:mob_spawner",                          52,  1   }, 
-	{ "minecraft:oak_stairs",                           53,  0   }, 
+	{ "minecraft:mob_spawner",                          52,  1   },
+	{ "minecraft:oak_stairs",                           53,  0   }, // facing east 
+	{ "minecraft:oak_stairs",                           53,  1   }, // facing north 
+	{ "minecraft:oak_stairs",                           53,  2   }, // facing south 
+	{ "minecraft:oak_stairs",                           53,  3   }, // facing west 
 	{ "minecraft:chest",                                54,  0   }, 
 	{ "minecraft:redstone_wire",                        55,  0   }, 
 	{ "minecraft:redstone",                             55,  1   }, 
@@ -267,6 +270,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:deepslate_diamond_ore",                56,  1   }, 
 	{ "minecraft:diamond_block",                        57,  0   }, 
 	{ "minecraft:crafting_table",                       58,  0   },      
+	{ "minecraft:wheat",                                59,  0   }, // https://minecraft.fandom.com/wiki/Wheat_Seeds
 	{ "minecraft:farmland",                             60,  0   }, 
 	{ "minecraft:furnace",                              61,  0   }, // facing east
 	{ "minecraft:furnace",                              61,  1   }, // facing north
@@ -284,10 +288,6 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:dark_oak_sign",                        63,  5   },
 	{ "minecraft:crimson_sign",                         63,  6   },
 	{ "minecraft:warped_sign",                          63,  7   },
-    { "minecraft:iron_door",                            71,  0   }, // facing east
-	{ "minecraft:iron_door",                            71,  1   }, // facing north
-	{ "minecraft:iron_door",                            71,  2   }, // facing south
-	{ "minecraft:iron_door",                            71,  3   }, // facing west
     { "minecraft:oak_door",                             64,  0   }, // facing east
 	{ "minecraft:oak_door",                             64,  1   }, // facing north
 	{ "minecraft:oak_door",                             64,  2   }, // facing south
@@ -298,10 +298,6 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:ladder",                               65,  3   }, // facing west
     { "minecraft:rail",                                 66,  0   }, // east-west
 	{ "minecraft:rail",                                 66,  1   }, // north-south
-	{ "minecraft:oak_stairs",                           53,  0   }, // facing east 
-	{ "minecraft:oak_stairs",                           53,  1   }, // facing north 
-	{ "minecraft:oak_stairs",                           53,  2   }, // facing south 
-	{ "minecraft:oak_stairs",                           53,  3   }, // facing west 
 	{ "minecraft:cobblestone_stairs",                   67,  0   }, // facing east 
 	{ "minecraft:cobblestone_stairs",                   67,  1   }, // facing north 
 	{ "minecraft:cobblestone_stairs",                   67,  2   }, // facing south 
@@ -341,7 +337,10 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:lever",                                69,  0   }, 
 	{ "minecraft:stone_pressure_plate",                 70,  0   },
 	{ "minecraft:polished_blackstone_pressure_plate",   70,  0   },
-	{ "minecraft:iron_door", 71, 0  }, 
+    { "minecraft:iron_door",                            71,  0   }, // facing east
+	{ "minecraft:iron_door",                            71,  1   }, // facing north
+	{ "minecraft:iron_door",                            71,  2   }, // facing south
+	{ "minecraft:iron_door",                            71,  3   }, // facing west
 	{ "minecraft:oak_pressure_plate",                   72,  0   }, 
 	{ "minecraft:spruce_pressure_plate",                72,  1   }, 
 	{ "minecraft:birch_pressure_plate",                 72,  2   }, 
@@ -553,13 +552,13 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:white_wall_banner", 177, 0  }, 
 	{ "minecraft:white_concrete_powder", 178, 0  }, 
 	{ "minecraft:red_sandstone", 179, 0  }, 
-	{ "minecraft:red_sandstone_stairs", 180, 0  }, 
-	{ "minecraft:red_sandstone_wall", 181, 0  }, 
-	{ "minecraft:red_sandstone_slab", 182, 0  },
     { "minecraft:red_sandstone", 179, 0  },
 	{ "minecraft:chiseled_red_sandstone", 179, 1  },
 	{ "minecraft:cut_red_sandstone", 179, 2  },
 	{ "minecraft:smooth_red_sandstone", 179, 3  },
+	{ "minecraft:red_sandstone_stairs", 180, 0  }, 
+	{ "minecraft:red_sandstone_wall", 181, 0  }, 
+	{ "minecraft:red_sandstone_slab", 182, 0  },
 	{ "minecraft:spruce_fence_gate", 183, 0  }, 
 	{ "minecraft:birch_fence_gate", 184, 0  }, 
 	{ "minecraft:jungle_fence_gate", 185, 0  }, 

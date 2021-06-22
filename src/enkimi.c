@@ -271,6 +271,13 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:diamond_block",                        57,  0   }, 
 	{ "minecraft:crafting_table",                       58,  0   },      
 	{ "minecraft:wheat",                                59,  0   }, // https://minecraft.fandom.com/wiki/Wheat_Seeds
+	{ "minecraft:wheat",                                59,  1   }, // growth
+	{ "minecraft:wheat",                                59,  2   }, // growth 
+	{ "minecraft:wheat",                                59,  3   }, // growth 
+	{ "minecraft:wheat",                                59,  4   }, // growth 
+	{ "minecraft:wheat",                                59,  5   }, // growth 
+	{ "minecraft:wheat",                                59,  6   }, // growth 
+	{ "minecraft:wheat",                                59,  7   }, // growth 
 	{ "minecraft:farmland",                             60,  0   }, 
 	{ "minecraft:furnace",                              61,  0   }, // facing east
 	{ "minecraft:furnace",                              61,  1   }, // facing north

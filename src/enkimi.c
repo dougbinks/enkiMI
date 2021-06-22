@@ -482,27 +482,37 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:nether_brick_stairs",                  114, 2   }, // facing south
 	{ "minecraft:nether_brick_stairs",                  114, 3   }, // facing west 
 	{ "minecraft:nether_wart",                          115, 0   }, 
-	{ "minecraft:enchanting_table", 116, 0  }, 
-	{ "minecraft:brewing_stand", 117, 0  }, 
-	{ "minecraft:cauldron", 118, 0  }, 
-	{ "minecraft:end_portal", 119, 0  }, 
-	{ "minecraft:end_portal_frame", 120, 0  }, 
-	{ "minecraft:end_stone", 121, 0  }, 
-	{ "minecraft:dragon_egg", 122, 0  }, 
-	{ "minecraft:redstone_lamp", 123, 0  }, 
-	{ "minecraft:shroomlight", 124, 0  }, 
+	{ "minecraft:enchanting_table",                     116, 0   }, 
+	{ "minecraft:brewing_stand",                        117, 0   }, 
+	{ "minecraft:cauldron",                             118, 0   }, 
+	{ "minecraft:lava_cauldron",                        118, 1   }, 
+	{ "minecraft:powder_snow_cauldron",                 118, 2   }, 
+	{ "minecraft:water_cauldron",                       118, 3   }, 
+	{ "minecraft:end_portal",                           119, 0   }, 
+	{ "minecraft:end_portal_frame",                     120, 0   }, // facing east 
+	{ "minecraft:end_portal_frame",                     120, 1   }, // facing north
+	{ "minecraft:end_portal_frame",                     120, 2   }, // facing south
+	{ "minecraft:end_portal_frame",                     120, 3   }, // facing west 
+	{ "minecraft:end_stone",                            121, 0   }, 
+	{ "minecraft:dragon_egg",                           122, 0   }, 
+	{ "minecraft:redstone_lamp",                        123, 0   }, // inactive
+	{ "minecraft:redstone_lamp",                        124, 0   }, // active
 	{ "minecraft:oak_wood", 125, 0  }, 
 	{ "minecraft:oak_slab", 126, 0  }, 
-	{ "minecraft:cocoa", 127, 0  }, 
+	{ "minecraft:cocoa",                                127, 0   }, 
 	{ "minecraft:sandstone_stairs",                     128, 0   }, // facing east 
 	{ "minecraft:sandstone_stairs",                     128, 1   }, // facing north
 	{ "minecraft:sandstone_stairs",                     128, 2   }, // facing south
 	{ "minecraft:sandstone_stairs",                     128, 3   }, // facing west 
-	{ "minecraft:emerald_ore", 129, 0  }, 
-	{ "minecraft:ender_chest", 130, 0  }, 
-	{ "minecraft:tripwire_hook", 131, 0  }, 
-	{ "minecraft:tripwire", 132, 0  }, 
-	{ "minecraft:emerald_block", 133, 0  }, 
+	{ "minecraft:emerald_ore",                          129, 0   },
+	{ "minecraft:deepslate_emerald_ore",                129, 0   },
+	{ "minecraft:ender_chest",                          130, 0   }, // facing east 
+	{ "minecraft:ender_chest",                          130, 1   }, // facing north
+	{ "minecraft:ender_chest",                          130, 2   }, // facing south
+	{ "minecraft:ender_chest",                          130, 3   }, // facing west 
+	{ "minecraft:tripwire_hook",                        131, 0   }, 
+	{ "minecraft:tripwire",                             132, 0   }, 
+	{ "minecraft:emerald_block",                        133, 0   }, 
     { "minecraft:spruce_stairs",                        134, 0   }, // facing east 
 	{ "minecraft:spruce_stairs",                        134, 1   }, // facing north 
 	{ "minecraft:spruce_stairs",                        134, 2   }, // facing south 
@@ -515,21 +525,81 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:jungle_stairs",                        136, 1   }, // facing north 
 	{ "minecraft:jungle_stairs",                        136, 2   }, // facing south 
 	{ "minecraft:jungle_stairs",                        136, 3   }, // facing west 
-	{ "minecraft:command_block",                        137, 0   }, 
-	{ "minecraft:beacon", 138, 0  }, 
-	{ "minecraft:cobblestone_wall", 139, 0  }, 
-	{ "minecraft:flower_pot", 140, 0  }, 
-	{ "minecraft:carrots", 141, 0  }, 
-	{ "minecraft:potatoes", 142, 0  }, 
-	{ "minecraft:oak_button",                           143, 1   }, 
-	{ "minecraft:spruce_button",                        143, 2   }, 
-	{ "minecraft:birch_button",                         143, 3   }, 
-	{ "minecraft:jungle_button",                        143, 4   }, 
-	{ "minecraft:acacia_button",                        143, 5   }, 
-	{ "minecraft:dark_oak_button",                      143, 6   }, 
-	{ "minecraft:crimson_button",                       143, 7   }, // Added after flattening, data value not correct
-	{ "minecraft:warped_button",                        143, 8   }, // Added after flattening, data value not correct
-	{ "minecraft:skeleton_wall_skull", 144, 0  }, 
+	{ "minecraft:command_block",                        137, 0   },
+	{ "minecraft:beacon",                               138, 0   }, 
+	{ "minecraft:cobblestone_wall", 139, 0  },
+	{ "minecraft:flower_pot",                           140, 0   },
+	{ "minecraft:potted_dandelion",                     140, 1   },
+	{ "minecraft:potted_poppy",                         140, 2   },
+	{ "minecraft:potted_blue_orchid",                   140, 3   },
+	{ "minecraft:potted_allium",                        140, 4   },
+	{ "minecraft:potted_azure_bluet",                   140, 5   },
+	{ "minecraft:potted_red_tulip",                     140, 6   },
+	{ "minecraft:potted_orange_tulip",                  140, 7   },
+	{ "minecraft:potted_white_tulip",                   140, 8   },
+	{ "minecraft:potted_pink_tulip",                    140, 9   },
+	{ "minecraft:potted_oxeye_daisy",                   140, 10  },
+	{ "minecraft:potted_cornflower",                    140, 11  },
+	{ "minecraft:potted_lily_of_the_valley",            140, 12  },
+	{ "minecraft:potted_wither_rose",                   140, 13  },
+	{ "minecraft:potted_oak_sapling",                   140, 14  },
+	{ "minecraft:potted_spruce_sapling",                140, 15  },
+	{ "minecraft:potted_birch_sapling",                 140, 16  },
+	{ "minecraft:potted_jungle_sapling",                140, 17  },
+	{ "minecraft:potted_acacia_sapling",                140, 18  },
+	{ "minecraft:potted_dark_oak_sapling",              140, 19  },
+	{ "minecraft:potted_red_mushroom",                  140, 20  },
+	{ "minecraft:potted_brown_mushroom",                140, 21  },
+	{ "minecraft:potted_fern",                          140, 22  },
+	{ "minecraft:potted_dead_bush",                     140, 23  },
+	{ "minecraft:potted_cactus",                        140, 24  },
+	{ "minecraft:potted_bamboo",                        140, 25  },
+	{ "minecraft:potted_azalea_bush",                   140, 26  },
+	{ "minecraft:potted_flowering_azalea_bush",         140, 27  },
+	{ "minecraft:potted_crimson_fungus",                140, 28  },
+	{ "minecraft:potted_warped_fungus",                 140, 29  },
+	{ "minecraft:potted_crimson_roots",                 140, 30  },
+	{ "minecraft:potted_warped_roots",                  140, 31  },
+	{ "minecraft:carrots",                              141, 0   }, 
+	{ "minecraft:potatoes",                             142, 0   }, 
+	{ "minecraft:oak_button",                           143, 0   }, 
+	{ "minecraft:spruce_button",                        143, 1   }, 
+	{ "minecraft:birch_button",                         143, 2   }, 
+	{ "minecraft:jungle_button",                        143, 3   }, 
+	{ "minecraft:acacia_button",                        143, 4   }, 
+	{ "minecraft:dark_oak_button",                      143, 5   }, 
+	{ "minecraft:crimson_button",                       143, 6   }, // Added after flattening, data value not correct
+	{ "minecraft:warped_button",                        143, 7   }, // Added after flattening, data value not correct
+	{ "minecraft:skeleton_skull",                       144, 0   },
+	{ "minecraft:wither_skeleton_skull",                144, 1   },
+	{ "minecraft:zombie_head",                          144, 2   },
+	{ "minecraft:player_head",                          144, 3   },
+	{ "minecraft:creeper_head",                         144, 4   },
+	{ "minecraft:dragon_head",                          144, 5   },
+	{ "minecraft:skeleton_wall_skull",                  144, 6   }, // facing east
+	{ "minecraft:skeleton_wall_skull",                  144, 7   }, // facing north
+	{ "minecraft:skeleton_wall_skull",                  144, 8   }, // facing south
+	{ "minecraft:skeleton_wall_skull",                  144, 9   }, // facing west
+	{ "minecraft:wither_skeleton_wall_skull",           144, 10  }, // facing east
+	{ "minecraft:wither_skeleton_wall_skull",           144, 11  }, // facing north
+	{ "minecraft:wither_skeleton_wall_skull",           144, 12  }, // facing south
+	{ "minecraft:wither_skeleton_wall_skull",           144, 13  }, // facing west
+	{ "minecraft:zombie_wall_head",                     144, 14  }, // facing east
+	{ "minecraft:zombie_wall_head",                     144, 15  }, // facing north
+	{ "minecraft:zombie_wall_head",                     144, 16  }, // facing south
+	{ "minecraft:zombie_wall_head",                     144, 17  }, // facing west
+	{ "minecraft:player_wall_head",                     144, 18  }, // facing east
+	{ "minecraft:player_wall_head",                     144, 19  }, // facing north
+	{ "minecraft:player_wall_head",                     144, 20  }, // facing south
+	{ "minecraft:player_wall_head",                     144, 21  }, // facing west
+	{ "minecraft:creeper_wall_head",                    144, 22  }, // facing east
+	{ "minecraft:creeper_wall_head",                    144, 23  }, // facing north
+	{ "minecraft:creeper_wall_head",                    144, 24  }, // facing south
+	{ "minecraft:creeper_wall_head",                    144, 25  }, // facing west
+	{ "minecraft:dragon_wall_head",                     144, 26  }, // facing east
+	{ "minecraft:dragon_wall_head",                     144, 27  }, // facing north
+	{ "minecraft:dragon_wall_head",                     144, 28  }, // facing south
+	{ "minecraft:dragon_wall_head",                     144, 29  }, // facing west
 	{ "minecraft:anvil", 145, 0  }, 
 	{ "minecraft:trapped_chest", 146, 0  }, 
 	{ "minecraft:light_weighted_pressure_plate",        147, 0  }, 
@@ -710,8 +780,8 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:beetroots", 207, 0  }, 
 	{ "minecraft:grass_path", 208, 0  }, 
 	{ "minecraft:end_gateway", 209, 0  }, 
-	{ "minecraft:repeating_command_block", 210, 0  }, 
-	{ "minecraft:chain_command_block", 211, 0  }, 
+	{ "minecraft:repeating_command_block",              210, 0   }, 
+	{ "minecraft:chain_command_block",                  211, 0   }, 
 	{ "minecraft:frosted_ice",                          212, 0   }, 
 	{ "minecraft:magma_block", 213, 0  }, 
 	{ "minecraft:nether_wart_block", 214, 0  }, 

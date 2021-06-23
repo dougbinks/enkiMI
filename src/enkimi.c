@@ -1604,7 +1604,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 							sectionPalette.pNamespaceIDStrings = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.size);
 							enkiNBTAddAllocation( pStream_, sectionPalette.pNamespaceIDStrings );
 							sectionPalette.pBlockStateProperties = (enkiMIProperties*)malloc(sizeof(enkiMIProperties)*sectionPalette.size);
-							memset( sectionPalette.pBlockStateProperties, 0, sizeof(uint8_t*)*sectionPalette.size );
+							memset( sectionPalette.pBlockStateProperties, 0, sizeof(enkiMIProperties)*sectionPalette.size );
 							enkiNBTAddAllocation( pStream_, sectionPalette.pBlockStateProperties );
 
 							// read palettes

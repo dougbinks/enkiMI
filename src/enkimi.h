@@ -184,9 +184,9 @@ typedef struct enkiMIProperty_s {
 	enkiNBTString value;
 } enkiMIProperty;
 
-// can be increased 
+// ENKI_MI_MAX_PROPERTIES can be modified but 6 appears to be the maximum
 #ifndef ENKI_MI_MAX_PROPERTIES
-	#define ENKI_MI_MAX_PROPERTIES 32
+	#define ENKI_MI_MAX_PROPERTIES 6
 #endif
 
 typedef struct enkiMIProperties_s {

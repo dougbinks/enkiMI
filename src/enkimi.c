@@ -118,18 +118,22 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:deepslate_iron_ore",                   15,  1   },
 	{ "minecraft:coal_ore",                             16,  0   },
 	{ "minecraft:deepslate_coal_ore",                   16,  1   },
-	{ "minecraft:oak_log",                              17,  0   }, // east-west
-    { "minecraft:oak_log",                              17,  1   }, // north-south
-    { "minecraft:oak_log",                              17,  2   }, // up-down
-	{ "minecraft:spruce_log",                           17,  3   }, // east-west
-    { "minecraft:spruce_log",                           17,  4   }, // north-south
-    { "minecraft:spruce_log",                           17,  5   }, // up-down
+	{ "minecraft:oak_log",                              17,  0   }, // up-down
+    { "minecraft:spruce_log",                           17,  1   }, // up-down
+    { "minecraft:birch_log",                            17,  2   }, // up-down
+	{ "minecraft:jungle_log",                           17,  3   }, // up-down
+    { "minecraft:oak_log",                              17,  4   }, // east-west
+    { "minecraft:spruce_log",                           17,  5   }, // east-west
 	{ "minecraft:birch_log",                            17,  6   }, // east-west
-	{ "minecraft:birch_log",                            17,  7   }, // north-south    
-	{ "minecraft:birch_log",                            17,  8   }, // up-down
-	{ "minecraft:jungle_log",                           17,  9   }, // east-west
-    { "minecraft:jungle_log",                           17,  10  }, // north-south
-	{ "minecraft:jungle_log",                           17,  11  }, // up-down
+	{ "minecraft:jungle_log",                           17,  7   }, // east-west
+	{ "minecraft:oak_log",                              17,  8   }, // north-south
+	{ "minecraft:spruce_log",                           17,  9   }, // north-south
+    { "minecraft:birch_log",                            17,  10  }, // north-south
+	{ "minecraft:jungle_log",                           17,  11  }, // north-south
+	{ "minecraft:oak_wood",                             17,  12  }, // up-down
+    { "minecraft:spruce_wood",                          17,  13  }, // up-down
+    { "minecraft:birch_wood",                           17,  14  }, // up-down
+	{ "minecraft:jungle_wood",                          17,  15  }, // up-down
 	{ "minecraft:oak_leaves",                           18,  0   }, 
 	{ "minecraft:spruce_leaves",                        18,  1   }, 
 	{ "minecraft:birch_leaves",                         18,  2   }, 
@@ -224,7 +228,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:dandelion",                            37,  0   }, 
 	{ "minecraft:poppy",                                38,  0   }, // small flowers
 	{ "minecraft:blue_orchid",                          38,  1   }, // small flowers
-	{ "minecraft:Allium",                               38,  2   }, // small flowers
+	{ "minecraft:allium",                               38,  2   }, // small flowers
 	{ "minecraft:azure_bluet",                          38,  3   }, // small flowers
 	{ "minecraft:red_tulip",                            38,  4   }, // small flowers
 	{ "minecraft:orange_tulip",                         38,  5   }, // small flowers
@@ -500,8 +504,8 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:dragon_egg",                           122, 0   }, 
 	{ "minecraft:redstone_lamp",                        123, 0   }, // inactive
 	{ "minecraft:redstone_lamp",                        124, 0   }, // active
-	{ "minecraft:oak_wood", 125, 0  }, 
-	{ "minecraft:oak_slab", 126, 0  }, 
+	{ "minecraft:oak_wood", 125, 0  }, // TODO double_wooden_slab
+	{ "minecraft:oak_slab", 126, 0  }, // TODO wooden_slab
 	{ "minecraft:cocoa",                                127, 0   }, 
 	{ "minecraft:sandstone_stairs",                     128, 0   }, // facing east 
 	{ "minecraft:sandstone_stairs",                     128, 1   }, // facing north
@@ -689,21 +693,32 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:dark_oak_leaves",                      161, 9   }, // persistent (12-15 same as 8-11)
 	{ "minecraft:removed0_leaves",                      161, 10  }, // persistent (12-15 same as 8-11)
 	{ "minecraft:removed1_leaves",                      161, 11  }, // persistent (12-15 same as 8-11)
-	{ "minecraft:oak_wood", 162, 0  }, 
-	{ "minecraft:spruce_wood", 162, 1  }, 
-	{ "minecraft:birch_wood", 162, 2  }, 
-	{ "minecraft:jungle_wood", 162, 3  }, 
-	{ "minecraft:acacia_wood", 162, 4  }, 
-	{ "minecraft:dark_oak_wood", 162, 5  }, 
-	{ "minecraft:crimson_hyphae", 162, 6  }, 
-	{ "minecraft:warped_hyphae", 162, 7  }, 
-	{ "minecraft:stripped_oak_wood", 162, 8  }, 
-	{ "minecraft:stripped_spruce_wood", 162, 9  }, 
-	{ "minecraft:stripped_birch_wood", 162, 10  }, 
-	{ "minecraft:stripped_jungle_wood", 162, 11 }, 
-	{ "minecraft:stripped_acacia_wood", 162, 12 }, 
-	{ "minecraft:stripped_crimson_hyphae", 162, 14 },
-	{ "minecraft:stripped_warped_hyphae", 162, 15 }, 
+	{ "minecraft:acacia_log",                           162, 0   }, // up-down
+	{ "minecraft:dark_oak_log",                         162, 1   }, // up-down
+	{ "",                                               162, 2   }, // inaccessible
+	{ "",                                               162, 3   }, // inaccessible
+    { "minecraft:acacia_log",                           162, 4   }, // east-west
+	{ "minecraft:dark_oak_log",                         162, 5   }, // east-west
+	{ "",                                               162, 6   }, // inaccessible
+	{ "",                                               162, 7   }, // inaccessible
+    { "minecraft:acacia_log",                           162, 8   }, // north-south
+	{ "minecraft:dark_oak_log",                         162, 9   }, // north-south
+	{ "",                                               162, 10  }, // inaccessible
+	{ "",                                               162, 11  }, // inaccessible
+    { "minecraft:acacia_wood",                          162, 12  }, // up-down
+	{ "minecraft:dark_oak_wood",                        162, 13  }, // up-down
+	{ "",                                               162, 14  }, // inaccessible
+	{ "",                                               162, 15  }, // inaccessible 
+	{ "minecraft:crimson_hyphae",                       162, 16  }, 
+	{ "minecraft:warped_hyphae",                        162, 17  }, 
+	{ "minecraft:stripped_oak_wood",                    162, 18  }, 
+	{ "minecraft:stripped_spruce_wood",                 162, 19  }, 
+	{ "minecraft:stripped_birch_wood",                  162, 20  }, 
+	{ "minecraft:stripped_jungle_wood",                 162, 21  }, 
+	{ "minecraft:stripped_acacia_wood",                 162, 22  }, 
+	{ "minecraft:stripped_dark_oak_wood",               162, 23  }, 
+	{ "minecraft:stripped_crimson_hyphae",              162, 24  },
+	{ "minecraft:stripped_warped_hyphae",               162, 25  },
     { "minecraft:acacia_stairs",                        163, 0   }, // facing east 
 	{ "minecraft:acacia_stairs",                        163, 1   }, // facing north 
 	{ "minecraft:acacia_stairs",                        163, 2   }, // facing south 

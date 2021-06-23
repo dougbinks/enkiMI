@@ -533,9 +533,29 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:jungle_stairs",                        136, 2   }, // facing south 
 	{ "minecraft:jungle_stairs",                        136, 3   }, // facing west 
 	{ "minecraft:command_block",                        137, 0   },
-	{ "minecraft:beacon",                               138, 0   }, 
-	{ "minecraft:cobblestone_wall", 139, 0  },
-	{ "minecraft:flower_pot",                           140, 0   },
+	{ "minecraft:beacon",                               138, 0   },
+	{ "minecraft:cobblestone_wall",                     139, 0   },
+	{ "minecraft:mossy_cobblestone_wall",               139, 1   },
+	{ "minecraft:stone_brick_wall",                     139, 2   },
+	{ "minecraft:mossy_stone_brick_wall",               139, 3   },
+	{ "minecraft:andesite_wall",                        139, 4   },
+	{ "minecraft:diorite_wall",                         139, 5   },
+	{ "minecraft:granite_wall",                         139, 6   },
+	{ "minecraft:sandstone_wall",                       139, 7   },
+	{ "minecraft:red_sandstone_wall",                   139, 8   },
+	{ "minecraft:brick_wall",                           139, 9   },
+	{ "minecraft:prismarine_wall",                      139, 10  },
+	{ "minecraft:nether_brick_wall",                    139, 11  },
+	{ "minecraft:red_nether_brick_wall",                139, 12  },
+	{ "minecraft:end_stone_brick_wall",                 139, 13  },
+	{ "minecraft:blackstone_wall",                      139, 14  },
+	{ "minecraft:polished_blackstone_wall",             139, 15  },
+	{ "minecraft:polished_blackstone_brick_wall",       139, 16  },
+	{ "minecraft:cobbled_deepslate_wall",               139, 17  },
+	{ "minecraft:polished_deepslate_wall",              139, 18  },
+	{ "minecraft:deepslate_brick_wall",                 139, 19  },
+	{ "minecraft:deepslate_tile_wall",                  139, 20  },
+    { "minecraft:flower_pot",                           140, 0   },
 	{ "minecraft:potted_dandelion",                     140, 1   },
 	{ "minecraft:potted_poppy",                         140, 2   },
 	{ "minecraft:potted_blue_orchid",                   140, 3   },
@@ -822,8 +842,8 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:red_sandstone_stairs",                 180, 1   }, // facing north
 	{ "minecraft:red_sandstone_stairs",                 180, 2   }, // facing south
 	{ "minecraft:red_sandstone_stairs",                 180, 3   }, // facing west 
-	{ "minecraft:red_sandstone_wall", 181, 0  }, 
-	{ "minecraft:red_sandstone_slab", 182, 0  },
+	{ "minecraft:red_sandstone_wall", 181, 0  },    // TODO double_stone_slab2
+	{ "minecraft:red_sandstone_slab", 182, 0  },    // TODO stone_slab2
 	{ "minecraft:spruce_fence_gate",                    183, 0   }, 
 	{ "minecraft:birch_fence_gate",                     184, 0   }, 
 	{ "minecraft:jungle_fence_gate",                    185, 0   }, 

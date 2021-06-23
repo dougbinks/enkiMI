@@ -118,18 +118,18 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:deepslate_iron_ore",                   15,  1   },
 	{ "minecraft:coal_ore",                             16,  0   },
 	{ "minecraft:deepslate_coal_ore",                   16,  1   },
-	{ "minecraft:oak_log",                              17,  0   }, // up-down
-	{ "minecraft:spruce_log",                           17,  1   }, // up-down
-	{ "minecraft:birch_log",                            17,  2   }, // up-down
-	{ "minecraft:jungle_log",                           17,  3   }, // up-down
-	{ "minecraft:oak_log",                              17,  4   }, // east-west
-	{ "minecraft:spruce_log",                           17,  5   }, // east-west
+	{ "minecraft:oak_log",                              17,  0   }, // east-west
+    { "minecraft:oak_log",                              17,  1   }, // north-south
+    { "minecraft:oak_log",                              17,  2   }, // up-down
+	{ "minecraft:spruce_log",                           17,  3   }, // east-west
+    { "minecraft:spruce_log",                           17,  4   }, // north-south
+    { "minecraft:spruce_log",                           17,  5   }, // up-down
 	{ "minecraft:birch_log",                            17,  6   }, // east-west
-	{ "minecraft:jungle_log",                           17,  7   }, // east-west
-	{ "minecraft:oak_log",                              17,  8   }, // north-south
-	{ "minecraft:spruce_log",                           17,  9   }, // north-south
-	{ "minecraft:birch_log",                            17,  10  }, // north-south
-	{ "minecraft:jungle_log",                           17,  11  }, // north-south 
+	{ "minecraft:birch_log",                            17,  7   }, // north-south    
+	{ "minecraft:birch_log",                            17,  8   }, // up-down
+	{ "minecraft:jungle_log",                           17,  9   }, // east-west
+    { "minecraft:jungle_log",                           17,  10  }, // north-south
+	{ "minecraft:jungle_log",                           17,  11  }, // up-down
 	{ "minecraft:oak_leaves",                           18,  0   }, 
 	{ "minecraft:spruce_leaves",                        18,  1   }, 
 	{ "minecraft:birch_leaves",                         18,  2   }, 
@@ -177,28 +177,28 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:powered_rail",                         27,  0   }, 
 	{ "minecraft:detector_rail",                        28,  0   },
 	{ "minecraft:sticky_piston",                        29,  0   }, // facing down
-	{ "minecraft:sticky_piston",                        29,  1   }, // facing up
+	{ "minecraft:sticky_piston",                        29,  1   }, // facing east
 	{ "minecraft:sticky_piston",                        29,  2   }, // facing north
 	{ "minecraft:sticky_piston",                        29,  3   }, // facing south
-	{ "minecraft:sticky_piston",                        29,  4   }, // facing west
-	{ "minecraft:sticky_piston",                        29,  5   }, // facing east
+	{ "minecraft:sticky_piston",                        29,  4   }, // facing up
+	{ "minecraft:sticky_piston",                        29,  5   }, // facing west
 	{ "minecraft:cobweb",                               30,  0   },
 	{ "minecraft:grass",                                31,  0   }, // short plants, https://minecraft.fandom.com/wiki/Grass
 	{ "minecraft:fern",                                 31,  1   }, // short plants, 
 	{ "minecraft:seagrass",                             31,  2   }, // short plants, - Added after flattening, data value not correct
 	{ "minecraft:dead_bush",                            32,  0   }, 
 	{ "minecraft:piston",                               33,  0   }, // facing down
-	{ "minecraft:piston",                               33,  1   }, // facing up
+	{ "minecraft:piston",                               33,  1   }, // facing east
 	{ "minecraft:piston",                               33,  2   }, // facing north
 	{ "minecraft:piston",                               33,  3   }, // facing south
-	{ "minecraft:piston",                               33,  4   }, // facing west
-	{ "minecraft:piston",                               33,  5   }, // facing east
+	{ "minecraft:piston",                               33,  4   }, // facing up
+	{ "minecraft:piston",                               33,  5   }, // facing west
 	{ "minecraft:piston_head",                          34,  0   }, // facing down
-	{ "minecraft:piston_head",                          34,  1   }, // facing up
+	{ "minecraft:piston_head",                          34,  1   }, // facing east
 	{ "minecraft:piston_head",                          34,  2   }, // facing north
 	{ "minecraft:piston_head",                          34,  3   }, // facing south
-	{ "minecraft:piston_head",                          34,  4   }, // facing west
-	{ "minecraft:piston_head",                          34,  5   }, // facing east
+	{ "minecraft:piston_head",                          34,  4   }, // facing up
+	{ "minecraft:piston_head",                          34,  5   }, // facing west
 	{ "minecraft:white_wool",                           35,  0   }, 
 	{ "minecraft:orange_wool",                          35,  1   }, 
 	{ "minecraft:magenta_wool",                         35,  2   }, 
@@ -216,11 +216,11 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:green_wool",                           35,  13  }, 
 	{ "minecraft:red_wool",                             35,  14  },
 	{ "minecraft:moving_piston",                        36,  0   }, // facing down
-	{ "minecraft:moving_piston",                        36,  1   }, // facing up
+	{ "minecraft:moving_piston",                        36,  1   }, // facing east
 	{ "minecraft:moving_piston",                        36,  2   }, // facing north
 	{ "minecraft:moving_piston",                        36,  3   }, // facing south
-	{ "minecraft:moving_piston",                        36,  4   }, // facing west
-	{ "minecraft:moving_piston",                        36,  5   }, // facing east
+	{ "minecraft:moving_piston",                        36,  4   }, // facing up
+	{ "minecraft:moving_piston",                        36,  5   }, // facing west
 	{ "minecraft:dandelion",                            37,  0   }, 
 	{ "minecraft:poppy",                                38,  0   }, // small flowers
 	{ "minecraft:blue_orchid",                          38,  1   }, // small flowers
@@ -368,15 +368,15 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:redstone_torch",                       75,  0   }, // unlit
 	{ "minecraft:redstone_torch",                       75,  1   }, // lit
 	{ "minecraft:redstone_wall_torch",                  76,  0   }, // unlit - facing east
-	{ "minecraft:redstone_wall_torch",                  76,  1   }, // unlit - facing west
+	{ "minecraft:redstone_wall_torch",                  76,  1   }, // unlit - facing north
 	{ "minecraft:redstone_wall_torch",                  76,  2   }, // unlit - facing south
-	{ "minecraft:redstone_wall_torch",                  76,  3   }, // unlit - facing north
-	{ "minecraft:redstone_wall_torch",                  76,  4   }, // unlit - facing up
-	{ "minecraft:redstone_wall_torch",                  76,  5   }, // lit - facing east
-	{ "minecraft:redstone_wall_torch",                  76,  6   }, // lit - facing west
-	{ "minecraft:redstone_wall_torch",                  76,  7   }, // lit - facing south
-	{ "minecraft:redstone_wall_torch",                  76,  8   }, // lit - facing north
-	{ "minecraft:redstone_wall_torch",                  76,  9   }, // lit - facing up
+	{ "minecraft:redstone_wall_torch",                  76,  3   }, // unlit - facing up
+	{ "minecraft:redstone_wall_torch",                  76,  4   }, // unlit - facing west
+	{ "minecraft:redstone_wall_torch",                  76,  5   }, // lit   - facing east
+	{ "minecraft:redstone_wall_torch",                  76,  6   }, // lit   - facing north
+	{ "minecraft:redstone_wall_torch",                  76,  7   }, // lit   - facing south
+	{ "minecraft:redstone_wall_torch",                  76,  8   }, // lit   - facing up
+	{ "minecraft:redstone_wall_torch",                  76,  9   }, // lit   - facing west
 	{ "minecraft:stone_button",                         77,  0   }, 
 	{ "minecraft:polished_blackstone_button",           77,  1   }, // Added after flattening, data value not correct
 	{ "minecraft:snow",                                 78,  0   }, // layer
@@ -621,22 +621,24 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:trapped_chest",                        146, 3   }, // facing west  
 	{ "minecraft:light_weighted_pressure_plate",        147, 0   }, 
 	{ "minecraft:heavy_weighted_pressure_plate",        148, 0   }, 
-	{ "minecraft:comparator",                           149, 0   }, // unpowered comparator - facing east 
-	{ "minecraft:comparator",                           149, 1   }, // unpowered comparator - facing north 
-	{ "minecraft:comparator",                           149, 2   }, // unpowered comparator - facing south 
-	{ "minecraft:comparator",                           149, 3   }, // unpowered comparator - facing west 
-	{ "minecraft:comparator",                           150, 0   }, // powered comparator - facing east 
-	{ "minecraft:comparator",                           150, 1   }, // powered comparator - facing north 
-	{ "minecraft:comparator",                           150, 2   }, // powered comparator - facing south 
-	{ "minecraft:comparator",                           150, 3   }, // powered comparator - facing west  
+	{ "minecraft:comparator",                           149, 0   }, // unpowered - facing east 
+	{ "minecraft:comparator",                           149, 1   }, // unpowered - facing north 
+	{ "minecraft:comparator",                           149, 2   }, // unpowered - facing south 
+	{ "minecraft:comparator",                           149, 3   }, // unpowered - facing west 
+	{ "minecraft:comparator",                           150, 0   }, // powered   - facing east 
+	{ "minecraft:comparator",                           150, 1   }, // powered   - facing north 
+	{ "minecraft:comparator",                           150, 2   }, // powered   - facing south 
+	{ "minecraft:comparator",                           150, 3   }, // powered   - facing west  
 	{ "minecraft:daylight_detector",                    151, 0   }, 
 	{ "minecraft:redstone_block",                       152, 0   }, 
 	{ "minecraft:nether_quartz_ore",                    153, 0   }, 
 	{ "minecraft:hopper",                               154, 0   }, 
 	{ "minecraft:quartz_block",                         155, 0   }, 
 	{ "minecraft:chiseled_quartz_block",                155, 1   }, 
-	{ "minecraft:quartz_pillar",                        155, 2   }, 
-	{ "minecraft:quartz_bricks",                        155, 3   }, 
+	{ "minecraft:quartz_pillar",                        155, 2   }, // oriented east–west 
+	{ "minecraft:quartz_pillar",                        155, 3   }, // oriented vertically  
+	{ "minecraft:quartz_pillar",                        155, 4   }, // oriented north–south 
+	{ "minecraft:quartz_bricks",                        155, 5   }, 
 	{ "minecraft:quartz_stairs",                        156, 0   }, // facing east 
 	{ "minecraft:quartz_stairs",                        156, 1   }, // facing north
 	{ "minecraft:quartz_stairs",                        156, 2   }, // facing south
@@ -730,7 +732,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:dark_prismarine",                      168, 2   }, 
 	{ "minecraft:sea_lantern",                          169, 0   }, 
 	{ "minecraft:hay_block",                            170, 0   }, // oriented east–west
-	{ "minecraft:hay_block",                            170, 1   }, // oriented vertically
+	{ "minecraft:hay_block",                            170, 1   }, // oriented vertically 
 	{ "minecraft:hay_block",                            170, 2   }, // oriented north–south
 	{ "minecraft:white_carpet",                         171, 0   },
 	{ "minecraft:orange_carpet",                        171, 1   },
@@ -839,32 +841,53 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:warped_door",                          197, 9   }, // facing north	 - Added after flattening, data value not correct
 	{ "minecraft:warped_door",                          197, 10  }, // facing south - Added after flattening, data value not correct
 	{ "minecraft:warped_door",                          197, 11  }, // facing west	 - Added after flattening, data value not correct
-	{ "minecraft:end_rod", 198, 0  }, 
-	{ "minecraft:chorus_plant", 199, 0  }, 
-	{ "minecraft:chorus_flower", 200, 0  }, 
-	{ "minecraft:purpur_block", 201, 0  }, 
-	{ "minecraft:purpur_pillar", 202, 0  }, 
+	{ "minecraft:end_rod",                              198, 0   }, // facing down
+	{ "minecraft:end_rod",                              198, 1   }, // facing east
+	{ "minecraft:end_rod",                              198, 2   }, // facing north
+	{ "minecraft:end_rod",                              198, 3   }, // facing south
+	{ "minecraft:end_rod",                              198, 4   }, // facing up
+	{ "minecraft:end_rod",                              198, 5   }, // facing west
+	{ "minecraft:chorus_plant",                         199, 0   }, 
+	{ "minecraft:chorus_flower",                        200, 0   }, 
+	{ "minecraft:purpur_block",                         201, 0   }, 
+	{ "minecraft:purpur_pillar",                        202, 0   }, // oriented east–west
+	{ "minecraft:purpur_pillar",                        202, 1   }, // oriented vertically 
+	{ "minecraft:purpur_pillar",                        202, 2   }, // oriented north–south
 	{ "minecraft:purpur_stairs",                        203, 0   }, // facing east 
 	{ "minecraft:purpur_stairs",                        203, 1   }, // facing north
 	{ "minecraft:purpur_stairs",                        203, 2   }, // facing south
 	{ "minecraft:purpur_stairs",                        203, 3   }, // facing west 
-	{ "minecraft:purple_stained_glass", 204, 0  }, 
+	{ "minecraft:purpur_double_slab", 204, 0  }, 
 	{ "minecraft:purpur_slab", 205, 0  }, 
 	{ "minecraft:end_stone_bricks",                     206, 0   }, 
-	{ "minecraft:beetroots", 207, 0  }, 
-	{ "minecraft:grass_path", 208, 0  }, 
-	{ "minecraft:end_gateway", 209, 0  }, 
+	{ "minecraft:beetroots",                            207, 0   }, 
+	{ "minecraft:dirt_path",                            208, 0   }, 
+	{ "minecraft:end_gateway",                          209, 0   }, 
 	{ "minecraft:repeating_command_block",              210, 0   }, 
 	{ "minecraft:chain_command_block",                  211, 0   }, 
 	{ "minecraft:frosted_ice",                          212, 0   }, 
-	{ "minecraft:magma_block", 213, 0  }, 
-	{ "minecraft:nether_wart_block", 214, 0  }, 
+	{ "minecraft:magma_block",                          213, 0   }, 
+	{ "minecraft:nether_wart_block",                    214, 0   }, 
+	{ "minecraft:warped_wart_block",                    214, 1   }, 
 	{ "minecraft:red_nether_bricks",                    215, 0   },
 	{ "minecraft:cracked_nether_bricks",                215, 1   },
 	{ "minecraft:chiseled_nether_bricks",               215, 2   },
-	{ "minecraft:bone_block", 216, 0  }, 
-	{ "minecraft:structure_void", 217, 0  }, 
-	{ "minecraft:observer", 218, 0  }, 
+	{ "minecraft:bone_block",                           216, 0   }, // oriented east–west
+	{ "minecraft:bone_block",                           216, 1   }, // oriented vertically 
+	{ "minecraft:bone_block",                           216, 2   }, // oriented north–south
+	{ "minecraft:structure_void",                       217, 0   },
+	{ "minecraft:observer",                             218, 0   }, // unpowered - facing down 
+	{ "minecraft:observer",                             218, 1   }, // unpowered - facing east 
+	{ "minecraft:observer",                             218, 2   }, // unpowered - facing north 
+	{ "minecraft:observer",                             218, 3   }, // unpowered - facing south 
+	{ "minecraft:observer",                             218, 4   }, // unpowered - facing up 
+	{ "minecraft:observer",                             218, 5   }, // unpowered - facing west 
+	{ "minecraft:observer",                             218, 6   }, // powered   - facing down 
+	{ "minecraft:observer",                             218, 7   }, // powered   - facing east 
+	{ "minecraft:observer",                             218, 8   }, // powered   - facing north 
+	{ "minecraft:observer",                             218, 9   }, // powered   - facing south 
+	{ "minecraft:observer",                             218, 10  }, // powered   - facing up  
+	{ "minecraft:observer",                             218, 11  }, // powered   - facing west  
 	{ "minecraft:white_shulker_box",                    219, 0   }, 
 	{ "minecraft:orange_shulker_box",                   220, 0   }, 
 	{ "minecraft:magenta_shulker_box",                  221, 0   }, 
@@ -881,22 +904,70 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:green_shulker_box",                    232, 0   }, 
 	{ "minecraft:red_shulker_box",                      233, 0   }, 
 	{ "minecraft:black_shulker_box",                    234, 0   },
-	{ "minecraft:white_glazed_terracotta",              235, 0   }, 
-	{ "minecraft:orange_glazed_terracotta",             236, 0   }, 
-	{ "minecraft:magenta_glazed_terracotta",            237, 0   }, 
-	{ "minecraft:light_blue_glazed_terracotta",         238, 0   }, 
-	{ "minecraft:yellow_glazed_terracotta",             239, 0   }, 
-	{ "minecraft:lime_glazed_terracotta",               240, 0   }, 
-	{ "minecraft:pink_glazed_terracotta",               241, 0   }, 
-	{ "minecraft:gray_glazed_terracotta",               242, 0   }, 
-	{ "minecraft:light_gray_glazed_terracotta",         243, 0   }, 
-	{ "minecraft:cyan_glazed_terracotta",               244, 0   }, 
-	{ "minecraft:purple_glazed_terracotta",             245, 0   }, 
-	{ "minecraft:blue_glazed_terracotta",               246, 0   }, 
-	{ "minecraft:brown_glazed_terracotta",              247, 0   }, 
-	{ "minecraft:green_glazed_terracotta",              248, 0   }, 
-	{ "minecraft:red_glazed_terracotta",                249, 0   }, 
-	{ "minecraft:black_glazed_terracotta",              250, 0   }, 
+	{ "minecraft:white_glazed_terracotta",              235, 0   }, // facing east  
+	{ "minecraft:white_glazed_terracotta",              235, 1   }, // facing north 
+	{ "minecraft:white_glazed_terracotta",              235, 2   }, // facing south 
+	{ "minecraft:white_glazed_terracotta",              235, 3   }, // facing west  
+	{ "minecraft:orange_glazed_terracotta",             236, 0   }, // facing east  
+	{ "minecraft:orange_glazed_terracotta",             236, 1   }, // facing north 
+	{ "minecraft:orange_glazed_terracotta",             236, 2   }, // facing south 
+	{ "minecraft:orange_glazed_terracotta",             236, 3   }, // facing west  
+	{ "minecraft:magenta_glazed_terracotta",            237, 0   }, // facing east  
+	{ "minecraft:magenta_glazed_terracotta",            237, 1   }, // facing north 
+	{ "minecraft:magenta_glazed_terracotta",            237, 2   }, // facing south 
+	{ "minecraft:magenta_glazed_terracotta",            237, 3   }, // facing west  
+	{ "minecraft:light_blue_glazed_terracotta",         238, 0   }, // facing east  
+	{ "minecraft:light_blue_glazed_terracotta",         238, 1   }, // facing north 
+	{ "minecraft:light_blue_glazed_terracotta",         238, 2   }, // facing south 
+	{ "minecraft:light_blue_glazed_terracotta",         238, 3   }, // facing west  
+	{ "minecraft:yellow_glazed_terracotta",             239, 0   }, // facing east 
+	{ "minecraft:yellow_glazed_terracotta",             239, 1   }, // facing north
+	{ "minecraft:yellow_glazed_terracotta",             239, 2   }, // facing south
+	{ "minecraft:yellow_glazed_terracotta",             239, 3   }, // facing west 
+	{ "minecraft:lime_glazed_terracotta",               240, 0   }, // facing east 
+	{ "minecraft:lime_glazed_terracotta",               240, 1   }, // facing north
+	{ "minecraft:lime_glazed_terracotta",               240, 2   }, // facing south
+	{ "minecraft:lime_glazed_terracotta",               240, 3   }, // facing west 
+	{ "minecraft:pink_glazed_terracotta",               241, 0   }, // facing east 
+	{ "minecraft:pink_glazed_terracotta",               241, 1   }, // facing north
+	{ "minecraft:pink_glazed_terracotta",               241, 2   }, // facing south
+	{ "minecraft:pink_glazed_terracotta",               241, 3   }, // facing west 
+	{ "minecraft:gray_glazed_terracotta",               242, 0   }, // facing east 
+	{ "minecraft:gray_glazed_terracotta",               242, 1   }, // facing north
+	{ "minecraft:gray_glazed_terracotta",               242, 2   }, // facing south
+	{ "minecraft:gray_glazed_terracotta",               242, 3   }, // facing west 
+	{ "minecraft:light_gray_glazed_terracotta",         243, 0   }, // facing east 
+	{ "minecraft:light_gray_glazed_terracotta",         243, 1   }, // facing north
+	{ "minecraft:light_gray_glazed_terracotta",         243, 2   }, // facing south
+	{ "minecraft:light_gray_glazed_terracotta",         243, 3   }, // facing west 
+	{ "minecraft:cyan_glazed_terracotta",               244, 0   }, // facing east 
+	{ "minecraft:cyan_glazed_terracotta",               244, 1   }, // facing north
+	{ "minecraft:cyan_glazed_terracotta",               244, 2   }, // facing south
+	{ "minecraft:cyan_glazed_terracotta",               244, 3   }, // facing west 
+	{ "minecraft:purple_glazed_terracotta",             245, 0   }, // facing east 
+	{ "minecraft:purple_glazed_terracotta",             245, 1   }, // facing north
+	{ "minecraft:purple_glazed_terracotta",             245, 2   }, // facing south
+	{ "minecraft:purple_glazed_terracotta",             245, 3   }, // facing west 
+	{ "minecraft:blue_glazed_terracotta",               246, 0   }, // facing east 
+	{ "minecraft:blue_glazed_terracotta",               246, 1   }, // facing north
+	{ "minecraft:blue_glazed_terracotta",               246, 2   }, // facing south
+	{ "minecraft:blue_glazed_terracotta",               246, 3   }, // facing west 
+	{ "minecraft:brown_glazed_terracotta",              247, 0   }, // facing east 
+	{ "minecraft:brown_glazed_terracotta",              247, 1   }, // facing north
+	{ "minecraft:brown_glazed_terracotta",              247, 2   }, // facing south
+	{ "minecraft:brown_glazed_terracotta",              247, 3   }, // facing west 
+	{ "minecraft:green_glazed_terracotta",              248, 0   }, // facing east 
+	{ "minecraft:green_glazed_terracotta",              248, 1   }, // facing north
+	{ "minecraft:green_glazed_terracotta",              248, 2   }, // facing south
+	{ "minecraft:green_glazed_terracotta",              248, 3   }, // facing west 
+	{ "minecraft:red_glazed_terracotta",                249, 0   }, // facing east 
+	{ "minecraft:red_glazed_terracotta",                249, 1   }, // facing north
+	{ "minecraft:red_glazed_terracotta",                249, 2   }, // facing south
+	{ "minecraft:red_glazed_terracotta",                249, 3   }, // facing west 
+	{ "minecraft:black_glazed_terracotta",              250, 0   }, // facing east 
+	{ "minecraft:black_glazed_terracotta",              250, 1   }, // facing north
+	{ "minecraft:black_glazed_terracotta",              250, 2   }, // facing south
+	{ "minecraft:black_glazed_terracotta",              250, 3   }, // facing west 
 	{ "minecraft:white_concrete",                       251, 0   }, 
 	{ "minecraft:orange_concrete",                      251, 1   }, 
 	{ "minecraft:magenta_concrete",                     251, 2   }, 
@@ -913,13 +984,13 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:green_concrete",                       251, 13  }, 
 	{ "minecraft:red_concrete",                         251, 14  }, 
 	{ "minecraft:black_concrete",                       251, 15  },
-	{ "minecraft:white_concrete_powder",                252,  0  }, 
-	{ "minecraft:orange_concrete_powder",               252,  1  }, 
-	{ "minecraft:magenta_concrete_powder",              252,  2  }, 
-	{ "minecraft:light_blue_concrete_powder",           252,  3  }, 
-	{ "minecraft:yellow_concrete_powder",               252,  4  }, 
-	{ "minecraft:lime_concrete_powder",                 252,  5  }, 
-	{ "minecraft:pink_concrete_powder",                 252,  6  }, 
+	{ "minecraft:white_concrete_powder",                252, 0   }, 
+	{ "minecraft:orange_concrete_powder",               252, 1   }, 
+	{ "minecraft:magenta_concrete_powder",              252, 2   }, 
+	{ "minecraft:light_blue_concrete_powder",           252, 3   }, 
+	{ "minecraft:yellow_concrete_powder",               252, 4   }, 
+	{ "minecraft:lime_concrete_powder",                 252, 5   }, 
+	{ "minecraft:pink_concrete_powder",                 252, 6   }, 
 	{ "minecraft:gray_concrete_powder",                 252, 7   }, 
 	{ "minecraft:light_gray_concrete_powder",           252, 8   }, 
 	{ "minecraft:cyan_concrete_powder",                 252, 9   }, 

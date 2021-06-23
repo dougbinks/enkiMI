@@ -179,6 +179,21 @@ typedef struct enkiMINamespaceAndBlockID_s
 	uint8_t     dataValue;  // dataValue returned by enkiGetChunkSectionVoxelData
 } enkiMINamespaceAndBlockID;
 
+typedef struct enkiMIProperty_s {
+	char*         pName;
+	enkiNBTString value;
+} enkiMIProperty;
+
+// can be increased 
+#ifndef ENKI_MI_MAX_PROPERTIES
+	#define ENKI_MI_MAX_PROPERTIES 32
+#endif
+
+typedef struct enkiMIProperties_s {
+	uint32_t        size;      // capped to ENKI_MI_MAX_PROPERTIES
+	enkiMIProperty  properties[ ENKI_MI_MAX_PROPERTIES ];
+} enkiMIProperties;
+
 typedef struct enkiChunkSectionPalette_s
 {
 	uint32_t       size;
@@ -186,6 +201,7 @@ typedef struct enkiChunkSectionPalette_s
 	uint32_t       blockArraySize;
 	int32_t*       pDefaultBlockIndex;  // lookup index into the default enkiMINamespaceAndBlockIDTable - these values may change with versions of enkiMI, <0 means not found
 	enkiNBTString* pNamespaceIDStrings; // e.g. "minecraft:stone"
+	enkiMIProperties* pBlockStateProperties; // pointer to start of stream properties
 } enkiChunkSectionPalette;
 
 typedef struct enkiChunkBlockData_s
@@ -231,8 +247,8 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData( enkiChunkBlockData* pChunk_, int32
 
 typedef struct enkiMINamespaceAndBlockIDTable_s {
 	
-	enkiMINamespaceAndBlockID* namespaceAndBlockIDs;
 	uint32_t                   size;
+	enkiMINamespaceAndBlockID* namespaceAndBlockIDs;
 } enkiMINamespaceAndBlockIDTable;
 
 enkiMINamespaceAndBlockIDTable enkiGetNamespaceAndBlockIDTable();

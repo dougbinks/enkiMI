@@ -1184,6 +1184,7 @@ void enkiChunkInit( enkiChunkBlockData* pChunk_ )
 	memset( pChunk_, 0, sizeof( enkiChunkBlockData ) );
 }
 
+// see https://minecraft.fandom.com/wiki/Chunk_format
 enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 {
 	enkiChunkBlockData chunk;
@@ -1277,6 +1278,10 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 							enkiNBTAddAllocation( pStream_, sectionPalette.pDefaultBlockIndex );
 							sectionPalette.pNamespaceIDStrings = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.size);
 							enkiNBTAddAllocation( pStream_, sectionPalette.pNamespaceIDStrings );
+							sectionPalette.pBlockStateProperties = (enkiMIProperties*)malloc(sizeof(enkiMIProperties)*sectionPalette.size);
+							memset( sectionPalette.pBlockStateProperties, 0, sizeof(uint8_t*)*sectionPalette.size );
+							enkiNBTAddAllocation( pStream_, sectionPalette.pBlockStateProperties );
+
 							// read palettes
 							int levelPalette = pStream_->level;
    						    int32_t paletteNum = 0;
@@ -1285,7 +1290,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 							{
 								paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem - 1;
 								assert( paletteNum >= 0 );
-								assert( paletteNum < sectionPalette.size );
+								assert( paletteNum < (int32_t)sectionPalette.size );
 								if(   pStream_->currentTag.tagId == enkiNBTTAG_String
 									&& enkiAreStringsEqual( "Name", pStream_->currentTag.pName ) )
 								{
@@ -1302,6 +1307,25 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 										{
 											sectionPalette.pDefaultBlockIndex[ paletteNum ] = id;
 											break;
+										}
+									}
+								}
+								if( enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) )
+								{
+									int levelProperties = pStream_->level;
+									uint32_t numProperties = 0;
+									while( enkiNBTReadNextTag( pStream_ )
+										  && levelProperties < pStream_->level )
+									{
+										if( pStream_->currentTag.tagId == enkiNBTTAG_String )
+										{
+											if( numProperties < ENKI_MI_MAX_PROPERTIES )
+											{
+												sectionPalette.pBlockStateProperties[ paletteNum ].properties[ numProperties ].pName = pStream_->currentTag.pName;
+												sectionPalette.pBlockStateProperties[ paletteNum ].properties[ numProperties ].value = enkiNBTReadString( pStream_ );
+												++sectionPalette.pBlockStateProperties[ paletteNum ].size;
+											}
+											++numProperties;
 										}
 									}
 								}

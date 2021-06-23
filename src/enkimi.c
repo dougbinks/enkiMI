@@ -695,30 +695,36 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:removed1_leaves",                      161, 11  }, // persistent (12-15 same as 8-11)
 	{ "minecraft:acacia_log",                           162, 0   }, // up-down
 	{ "minecraft:dark_oak_log",                         162, 1   }, // up-down
-	{ "",                                               162, 2   }, // inaccessible
-	{ "",                                               162, 3   }, // inaccessible
+	{ "minecraft:crimson_stem",                         162, 2   }, // up-down
+	{ "minecraft:warped_stem",                          162, 3   }, // up-down
     { "minecraft:acacia_log",                           162, 4   }, // east-west
 	{ "minecraft:dark_oak_log",                         162, 5   }, // east-west
-	{ "",                                               162, 6   }, // inaccessible
-	{ "",                                               162, 7   }, // inaccessible
+	{ "minecraft:crimson_stem",                         162, 6   }, // east-west
+	{ "minecraft:warped_stem",                          162, 7   }, // east-west
     { "minecraft:acacia_log",                           162, 8   }, // north-south
 	{ "minecraft:dark_oak_log",                         162, 9   }, // north-south
-	{ "",                                               162, 10  }, // inaccessible
-	{ "",                                               162, 11  }, // inaccessible
+	{ "minecraft:crimson_stem",                         162, 10  }, // north-south
+	{ "minecraft:warped_stem",                          162, 11  }, // north-south
     { "minecraft:acacia_wood",                          162, 12  }, // up-down
 	{ "minecraft:dark_oak_wood",                        162, 13  }, // up-down
-	{ "",                                               162, 14  }, // inaccessible
-	{ "",                                               162, 15  }, // inaccessible 
-	{ "minecraft:crimson_hyphae",                       162, 16  }, 
-	{ "minecraft:warped_hyphae",                        162, 17  }, 
-	{ "minecraft:stripped_oak_wood",                    162, 18  }, 
-	{ "minecraft:stripped_spruce_wood",                 162, 19  }, 
-	{ "minecraft:stripped_birch_wood",                  162, 20  }, 
-	{ "minecraft:stripped_jungle_wood",                 162, 21  }, 
-	{ "minecraft:stripped_acacia_wood",                 162, 22  }, 
-	{ "minecraft:stripped_dark_oak_wood",               162, 23  }, 
-	{ "minecraft:stripped_crimson_hyphae",              162, 24  },
-	{ "minecraft:stripped_warped_hyphae",               162, 25  },
+	{ "minecraft:crimson_hyphae",                       162, 14  },
+	{ "minecraft:warped_hyphae",                        162, 15  },
+	{ "minecraft:stripped_oak_wood",                    162, 16  }, 
+	{ "minecraft:stripped_spruce_wood",                 162, 17  }, 
+	{ "minecraft:stripped_birch_wood",                  162, 18  }, 
+	{ "minecraft:stripped_jungle_wood",                 162, 19  }, 
+	{ "minecraft:stripped_acacia_wood",                 162, 20  }, 
+	{ "minecraft:stripped_dark_oak_wood",               162, 21  }, 
+	{ "minecraft:stripped_crimson_hyphae",              162, 22  },
+	{ "minecraft:stripped_warped_hyphae",               162, 23  },
+	{ "minecraft:stripped_oak_log",                     162, 24  },
+	{ "minecraft:stripped_spruce_log",                  162, 25  },
+	{ "minecraft:stripped_birch_log",                   162, 26  },
+	{ "minecraft:stripped_jungle_log",                  162, 27  },
+	{ "minecraft:stripped_acacia_log",                  162, 28  },
+	{ "minecraft:stripped_dark_oak_log",                162, 29  },
+	{ "minecraft:stripped_crimson_stem",                162, 30  },
+	{ "minecraft:stripped_warped_stem",                 162, 31  },
     { "minecraft:acacia_stairs",                        163, 0   }, // facing east 
 	{ "minecraft:acacia_stairs",                        163, 1   }, // facing north 
 	{ "minecraft:acacia_stairs",                        163, 2   }, // facing south 

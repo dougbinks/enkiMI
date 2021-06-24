@@ -86,7 +86,9 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:polished_diorite",                         1,   4   },
 	{ "minecraft:andesite",                                 1,   5   }, 
 	{ "minecraft:polished_andesite",                        1,   6   },
+	{ "minecraft:smooth_stone",                             1,   7   }, // Added, data value not correct
 	{ "minecraft:grass_block",                              2,   0   }, // https://minecraft.fandom.com/wiki/Grass_Block
+	{ "minecraft:grass_block",                              2,   1   }, // snowy
 	{ "minecraft:dirt",                                     3,   0   }, 
 	{ "minecraft:coarse_dirt",                              3,   1   }, 
 	{ "minecraft:cobblestone",                              4,   0   },
@@ -623,6 +625,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:polished_blackstone_button",               77,  1   }, // Added after flattening, data value not correct
 	{ "minecraft:snow",                                     78,  0   }, // layer
 	{ "minecraft:ice",                                      79,  0   }, 
+	{ "minecraft:blue_ice",                                 79,  1   }, // Added, data value not correct
 	{ "minecraft:snow_block",                               80,  0   }, 
 	{ "minecraft:cactus",                                   81,  0   }, 
 	{ "minecraft:clay",                                     82,  0   }, 
@@ -943,10 +946,11 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:hopper",                                   154, 0   }, 
 	{ "minecraft:quartz_block",                             155, 0   }, 
 	{ "minecraft:chiseled_quartz_block",                    155, 1   }, 
-	{ "minecraft:quartz_pillar",                            155, 2   }, // oriented east–west 
-	{ "minecraft:quartz_pillar",                            155, 3   }, // oriented vertically  
-	{ "minecraft:quartz_pillar",                            155, 4   }, // oriented north–south 
-	{ "minecraft:quartz_bricks",                            155, 5   }, 
+	{ "minecraft:smooth_quartz",                            155, 2   }, // Added, data value not correct
+	{ "minecraft:quartz_pillar",                            155, 3   }, // oriented east-west 
+	{ "minecraft:quartz_pillar",                            155, 4   }, // oriented vertically  
+	{ "minecraft:quartz_pillar",                            155, 5   }, // oriented north-south 
+	{ "minecraft:quartz_bricks",                            155, 6   }, 
 	{ "minecraft:quartz_stairs",                            156, 0   }, // facing east 
 	{ "minecraft:quartz_stairs",                            156, 1   }, // facing north
 	{ "minecraft:quartz_stairs",                            156, 2   }, // facing south
@@ -1056,9 +1060,11 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:prismarine_bricks",                        168, 1   }, 
 	{ "minecraft:dark_prismarine",                          168, 2   }, 
 	{ "minecraft:sea_lantern",                              169, 0   }, 
-	{ "minecraft:hay_block",                                170, 0   }, // oriented east–west
+	{ "minecraft:lantern",                                  169, 1   }, // Added, data value not correct
+	{ "minecraft:soul_lantern",                             169, 2   }, // Added, data value not correct
+	{ "minecraft:hay_block",                                170, 0   }, // oriented east-west
 	{ "minecraft:hay_block",                                170, 1   }, // oriented vertically 
-	{ "minecraft:hay_block",                                170, 2   }, // oriented north–south
+	{ "minecraft:hay_block",                                170, 2   }, // oriented north-south
 	{ "minecraft:white_carpet",                             171, 0   },
 	{ "minecraft:orange_carpet",                            171, 1   },
 	{ "minecraft:magenta_carpet",                           171, 2   },
@@ -1079,12 +1085,19 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:coal_block",                               173, 0   }, 
 	{ "minecraft:packed_ice",                               174, 0   }, 
 	{ "minecraft:sunflower",                                175, 0   }, // tall flowers, two-block lower - data values may not be correct
-	{ "minecraft:lilac",                                    175, 1   }, // tall flowers, two-block lower - data values may not be correct
-	{ "minecraft:tall_grass",                               175, 2   }, // tall plants, two-block lower - data values may not be correct
-	{ "minecraft:large_fern",                               175, 3   }, // tall plants, two-block lower - data values may not be correct
-	{ "minecraft:rose_bush",                                175, 4   }, // tall flowers, two-block lower - data values may not be correct
-	{ "minecraft:peony",                                    175, 5   }, // tall flowers, two-block lower - data values may not be correct
-	{ "minecraft:tall_seagrass",                            175, 6   }, // tall plants, two-block upper - Added after flattening, data value not correct
+	{ "minecraft:sunflower",                                175, 1   }, // tall flowers, two-block upper - data values may not be correct
+	{ "minecraft:lilac",                                    175, 2   }, // tall flowers, two-block lower - data values may not be correct
+	{ "minecraft:lilac",                                    175, 3   }, // tall flowers, two-block upper - data values may not be correct
+	{ "minecraft:tall_grass",                               175, 4   }, // tall plants, two-block lower - data values may not be correct
+	{ "minecraft:tall_grass",                               175, 5   }, // tall plants, two-block upper - data values may not be correct
+	{ "minecraft:large_fern",                               175, 6   }, // tall plants, two-block lower - data values may not be correct
+	{ "minecraft:large_fern",                               175, 7   }, // tall plants, two-block upper - data values may not be correct
+	{ "minecraft:rose_bush",                                175, 8   }, // tall flowers, two-block lower - data values may not be correct
+	{ "minecraft:rose_bush",                                175, 9   }, // tall flowers, two-block upper - data values may not be correct
+	{ "minecraft:peony",                                    175, 10  }, // tall flowers, two-block lower - data values may not be correct
+	{ "minecraft:peony",                                    175, 11  }, // tall flowers, two-block upper - data values may not be correct
+	{ "minecraft:tall_seagrass",                            175, 12  }, // tall plants, two-block lower - Added after flattening, data value not correct
+	{ "minecraft:tall_seagrass",                            175, 13  }, // tall plants, two-block upper - Added after flattening, data value not correct
     { "minecraft:white_banner",                             176, 0   },
     { "minecraft:orange_banner",                            176, 1   },
     { "minecraft:magenta_banner",                           176, 2   },
@@ -1128,10 +1141,22 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:red_sandstone_stairs",                     180, 3   }, // facing west
 	{ "minecraft:double_red_sandstone_slab",                181, 0   },
 	{ "minecraft:double_red_sandstone_slab",                181, 1   }, // waterlogged
+	{ "minecraft:double_cut_red_sandstone_slab",            181, 2   },
+	{ "minecraft:double_cut_red_sandstone_slab",            181, 3   }, // waterlogged
+	{ "minecraft:double_smooth_red_sandstone_slab",         181, 4   },
+	{ "minecraft:double_smooth_red_sandstone_slab",         181, 5   }, // waterlogged
 	{ "minecraft:red_sandstone_slab",                       182, 0   }, // bottom
 	{ "minecraft:red_sandstone_slab",                       182, 1   }, // top
 	{ "minecraft:red_sandstone_slab",                       182, 2   }, // bottom waterlogged
 	{ "minecraft:red_sandstone_slab",                       182, 3   }, // top waterlogged
+	{ "minecraft:cut_red_sandstone_slab",                   182, 4   }, // bottom
+	{ "minecraft:cut_red_sandstone_slab",                   182, 5   }, // top
+	{ "minecraft:cut_red_sandstone_slab",                   182, 6   }, // bottom waterlogged
+	{ "minecraft:cut_red_sandstone_slab",                   182, 7   }, // top waterlogged
+	{ "minecraft:smooth_red_sandstone_slab",                182, 8   }, // bottom
+	{ "minecraft:smooth_red_sandstone_slab",                182, 9   }, // top
+	{ "minecraft:smooth_red_sandstone_slab",                182, 10  }, // bottom waterlogged
+	{ "minecraft:smooth_red_sandstone_slab",                182, 11  }, // top waterlogged
 	{ "minecraft:spruce_fence_gate",                        183, 0   }, 
 	{ "minecraft:birch_fence_gate",                         184, 0   }, 
 	{ "minecraft:jungle_fence_gate",                        185, 0   }, 
@@ -1168,7 +1193,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:crimson_door",                             197, 7   }, // facing west	 - Added after flattening, data value not correct
     { "minecraft:warped_door",                              197, 8   }, // facing east	 - Added after flattening, data value not correct
 	{ "minecraft:warped_door",                              197, 9   }, // facing north	 - Added after flattening, data value not correct
-	{ "minecraft:warped_door",                              197, 10  }, // facing south - Added after flattening, data value not correct
+	{ "minecraft:warped_door",                              197, 10  }, // facing south  - Added after flattening, data value not correct
 	{ "minecraft:warped_door",                              197, 11  }, // facing west	 - Added after flattening, data value not correct
 	{ "minecraft:end_rod",                                  198, 0   }, // facing down
 	{ "minecraft:end_rod",                                  198, 1   }, // facing east
@@ -1179,9 +1204,9 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:chorus_plant",                             199, 0   }, 
 	{ "minecraft:chorus_flower",                            200, 0   }, 
 	{ "minecraft:purpur_block",                             201, 0   }, 
-	{ "minecraft:purpur_pillar",                            202, 0   }, // oriented east–west
+	{ "minecraft:purpur_pillar",                            202, 0   }, // oriented east-west
 	{ "minecraft:purpur_pillar",                            202, 1   }, // oriented vertically 
-	{ "minecraft:purpur_pillar",                            202, 2   }, // oriented north–south
+	{ "minecraft:purpur_pillar",                            202, 2   }, // oriented north-south
 	{ "minecraft:purpur_stairs",                            203, 0   }, // facing east 
 	{ "minecraft:purpur_stairs",                            203, 1   }, // facing north
 	{ "minecraft:purpur_stairs",                            203, 2   }, // facing south
@@ -1205,9 +1230,9 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:red_nether_bricks",                        215, 0   },
 	{ "minecraft:cracked_nether_bricks",                    215, 1   },
 	{ "minecraft:chiseled_nether_bricks",                   215, 2   },
-	{ "minecraft:bone_block",                               216, 0   }, // oriented east–west
+	{ "minecraft:bone_block",                               216, 0   }, // oriented east-west
 	{ "minecraft:bone_block",                               216, 1   }, // oriented vertically 
-	{ "minecraft:bone_block",                               216, 2   }, // oriented north–south
+	{ "minecraft:bone_block",                               216, 2   }, // oriented north-south
 	{ "minecraft:structure_void",                           217, 0   },
 	{ "minecraft:observer",                                 218, 0   }, // unpowered - facing down 
 	{ "minecraft:observer",                                 218, 1   }, // unpowered - facing east 

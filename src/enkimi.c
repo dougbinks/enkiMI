@@ -276,54 +276,54 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
     { "minecraft:double_nether_brick_slab",                 43,  29  }, // waterlogged
     { "minecraft:double_red_nether_brick_slab",             43,  30  },
     { "minecraft:double_red_nether_brick_slab",             43,  31  }, // waterlogged
-    { "minecraft:double_sandstone_slab",                    43,  40  },
-    { "minecraft:double_sandstone_slab",                    43,  41  }, // waterlogged
-    { "minecraft:double_cut_sandstone_slab",                43,  42  },
-    { "minecraft:double_cut_sandstone_slab",                43,  43  }, // waterlogged
-    { "minecraft:double_smooth_sandstone_slab",             43,  44  },
-    { "minecraft:double_smooth_sandstone_slab",             43,  45  }, // waterlogged
-    { "minecraft:double_quartz_slab",                       43,  46  },
-    { "minecraft:double_quartz_slab",                       43,  47  }, // waterlogged
-    { "minecraft:double_smooth_quartz_slab",                43,  48  },
-    { "minecraft:double_smooth_quartz_slab",                43,  49  }, // waterlogged
-    { "minecraft:double_prismarine_slab",                   43,  50  },
-    { "minecraft:double_prismarine_slab",                   43,  51  }, // waterlogged
-    { "minecraft:double_prismarine_brick_slab",             43,  52  },
-    { "minecraft:double_prismarine_brick_slab",             43,  53  }, // waterlogged
-    { "minecraft:double_dark_prismarine_slab",              43,  54  },
-    { "minecraft:double_dark_prismarine_slab",              43,  55  }, // waterlogged
-    { "minecraft:double_petrified_oak_slab",                43,  56  },
-    { "minecraft:double_petrified_oak_slab",                43,  57  }, // waterlogged
-    { "minecraft:double_blackstone_slab",                   43,  58  },
-    { "minecraft:double_blackstone_slab",                   43,  59  }, // waterlogged
-    { "minecraft:double_polished_blackstone_slab",          43,  60  },
-    { "minecraft:double_polished_blackstone_slab",          43,  61  }, // waterlogged
-    { "minecraft:double_polished_blackstone_brick_slab",    43,  62  },
-    { "minecraft:double_polished_blackstone_brick_slab",    43,  63  }, // waterlogged
-    { "minecraft:double_cut_copper_slab",                   43,  64  },
-    { "minecraft:double_cut_copper_slab",                   43,  65  }, // waterlogged
-    { "minecraft:double_exposed_cut_copper_slab",           43,  66  },
-    { "minecraft:double_exposed_cut_copper_slab",           43,  67  }, // waterlogged
-    { "minecraft:double_weathered_cut_copper_slab",         43,  68  },
-    { "minecraft:double_weathered_cut_copper_slab",         43,  69  }, // waterlogged
-    { "minecraft:double_oxidized_cut_copper_slab",          43,  70  },
-    { "minecraft:double_oxidized_cut_copper_slab",          43,  71  }, // waterlogged
-    { "minecraft:double_waxed_cut_copper_slab",             43,  72  },
-    { "minecraft:double_waxed_cut_copper_slab",             43,  73  }, // waterlogged
-    { "minecraft:double_waxed_exposed_cut_copper_slab",     43,  74  },
-    { "minecraft:double_waxed_exposed_cut_copper_slab",     43,  75  }, // waterlogged
-    { "minecraft:double_waxed_weathered_cut_copper_slab",   43,  76  },
-    { "minecraft:double_waxed_weathered_cut_copper_slab",   43,  77  }, // waterlogged
-    { "minecraft:double_waxed_oxidized_cut_copper_slab",    43,  78  },
-    { "minecraft:double_waxed_oxidized_cut_copper_slab",    43,  79  }, // waterlogged
-    { "minecraft:double_cobbled_deepslate_slab",            43,  80  },
-    { "minecraft:double_cobbled_deepslate_slab",            43,  81  }, // waterlogged
-    { "minecraft:double_polished_deepslate_slab",           43,  82  },
-    { "minecraft:double_polished_deepslate_slab",           43,  83  }, // waterlogged
-    { "minecraft:double_deepslate_brick_slab",              43,  84  },
-    { "minecraft:double_deepslate_brick_slab",              43,  85  }, // waterlogged
-    { "minecraft:double_deepslate_tile_slab",               43,  86  },
-    { "minecraft:double_deepslate_tile_slab",               43,  87  }, // waterlogged
+    { "minecraft:double_sandstone_slab",                    43,  32  },
+    { "minecraft:double_sandstone_slab",                    43,  33  }, // waterlogged
+    { "minecraft:double_cut_sandstone_slab",                43,  34  },
+    { "minecraft:double_cut_sandstone_slab",                43,  35  }, // waterlogged
+    { "minecraft:double_smooth_sandstone_slab",             43,  36  },
+    { "minecraft:double_smooth_sandstone_slab",             43,  37  }, // waterlogged
+    { "minecraft:double_quartz_slab",                       43,  38  },
+    { "minecraft:double_quartz_slab",                       43,  39  }, // waterlogged
+    { "minecraft:double_smooth_quartz_slab",                43,  40  },
+    { "minecraft:double_smooth_quartz_slab",                43,  41  }, // waterlogged
+    { "minecraft:double_prismarine_slab",                   43,  42  },
+    { "minecraft:double_prismarine_slab",                   43,  43  }, // waterlogged
+    { "minecraft:double_prismarine_brick_slab",             43,  44  },
+    { "minecraft:double_prismarine_brick_slab",             43,  45  }, // waterlogged
+    { "minecraft:double_dark_prismarine_slab",              43,  46  },
+    { "minecraft:double_dark_prismarine_slab",              43,  47  }, // waterlogged
+    { "minecraft:double_petrified_oak_slab",                43,  48  },
+    { "minecraft:double_petrified_oak_slab",                43,  49  }, // waterlogged
+    { "minecraft:double_blackstone_slab",                   43,  50  },
+    { "minecraft:double_blackstone_slab",                   43,  51  }, // waterlogged
+    { "minecraft:double_polished_blackstone_slab",          43,  52  },
+    { "minecraft:double_polished_blackstone_slab",          43,  53  }, // waterlogged
+    { "minecraft:double_polished_blackstone_brick_slab",    43,  54  },
+    { "minecraft:double_polished_blackstone_brick_slab",    43,  55  }, // waterlogged
+    { "minecraft:double_cut_copper_slab",                   43,  56  },
+    { "minecraft:double_cut_copper_slab",                   43,  57  }, // waterlogged
+    { "minecraft:double_exposed_cut_copper_slab",           43,  58  },
+    { "minecraft:double_exposed_cut_copper_slab",           43,  59  }, // waterlogged
+    { "minecraft:double_weathered_cut_copper_slab",         43,  60  },
+    { "minecraft:double_weathered_cut_copper_slab",         43,  61  }, // waterlogged
+    { "minecraft:double_oxidized_cut_copper_slab",          43,  62  },
+    { "minecraft:double_oxidized_cut_copper_slab",          43,  63  }, // waterlogged
+    { "minecraft:double_waxed_cut_copper_slab",             43,  64  },
+    { "minecraft:double_waxed_cut_copper_slab",             43,  65  }, // waterlogged
+    { "minecraft:double_waxed_exposed_cut_copper_slab",     43,  66  },
+    { "minecraft:double_waxed_exposed_cut_copper_slab",     43,  67  }, // waterlogged
+    { "minecraft:double_waxed_weathered_cut_copper_slab",   43,  68  },
+    { "minecraft:double_waxed_weathered_cut_copper_slab",   43,  69  }, // waterlogged
+    { "minecraft:double_waxed_oxidized_cut_copper_slab",    43,  70  },
+    { "minecraft:double_waxed_oxidized_cut_copper_slab",    43,  71  }, // waterlogged
+    { "minecraft:double_cobbled_deepslate_slab",            43,  72  },
+    { "minecraft:double_cobbled_deepslate_slab",            43,  73  }, // waterlogged
+    { "minecraft:double_polished_deepslate_slab",           43,  74  },
+    { "minecraft:double_polished_deepslate_slab",           43,  75  }, // waterlogged
+    { "minecraft:double_deepslate_brick_slab",              43,  76  },
+    { "minecraft:double_deepslate_brick_slab",              43,  77  }, // waterlogged
+    { "minecraft:double_deepslate_tile_slab",               43,  78  },
+    { "minecraft:double_deepslate_tile_slab",               43,  79  }, // waterlogged
 	{ "minecraft:stone_slab",                               44,  0   }, // bottom
 	{ "minecraft:stone_slab",                               44,  1   }, // top
 	{ "minecraft:stone_slab",                               44,  2   }, // bottom waterlogged
@@ -356,134 +356,134 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:polished_andesite_slab",                   44,  29  }, // top
 	{ "minecraft:polished_andesite_slab",                   44,  30  }, // bottom waterlogged
 	{ "minecraft:polished_andesite_slab",                   44,  31  }, // top waterlogged
-	{ "minecraft:cobblestone_slab",                         44,  40  }, // bottom
-	{ "minecraft:cobblestone_slab",                         44,  41  }, // top
-	{ "minecraft:cobblestone_slab",                         44,  42  }, // bottom waterlogged
-	{ "minecraft:cobblestone_slab",                         44,  43  }, // top waterlogged
-	{ "minecraft:mossy_cobblestone_slab",                   44,  44  }, // bottom
-	{ "minecraft:mossy_cobblestone_slab",                   44,  45  }, // top
-	{ "minecraft:mossy_cobblestone_slab",                   44,  46  }, // bottom waterlogged
-	{ "minecraft:mossy_cobblestone_slab",                   44,  47  }, // top waterlogged
-	{ "minecraft:stone_brick_slab",                         44,  48  }, // bottom
-	{ "minecraft:stone_brick_slab",                         44,  49  }, // top
-	{ "minecraft:stone_brick_slab",                         44,  50  }, // bottom waterlogged
-	{ "minecraft:stone_brick_slab",                         44,  51  }, // top waterlogged
-	{ "minecraft:mossy_stone_brick_slab",                   44,  52  }, // bottom
-	{ "minecraft:mossy_stone_brick_slab",                   44,  53  }, // top
-	{ "minecraft:mossy_stone_brick_slab",                   44,  54  }, // bottom waterlogged
-	{ "minecraft:mossy_stone_brick_slab",                   44,  55  }, // top waterlogged
-	{ "minecraft:brick_slab",                               44,  56  }, // bottom
-	{ "minecraft:brick_slab",                               44,  57  }, // top
-	{ "minecraft:brick_slab",                               44,  58  }, // bottom waterlogged
-	{ "minecraft:brick_slab",                               44,  59  }, // top waterlogged
-	{ "minecraft:end_stone_brick_slab",                     44,  60  }, // bottom
-	{ "minecraft:end_stone_brick_slab",                     44,  61  }, // top
-	{ "minecraft:end_stone_brick_slab",                     44,  62  }, // bottom waterlogged
-	{ "minecraft:end_stone_brick_slab",                     44,  63  }, // top waterlogged
-	{ "minecraft:nether_brick_slab",                        44,  64  }, // bottom
-	{ "minecraft:nether_brick_slab",                        44,  65  }, // top
-	{ "minecraft:nether_brick_slab",                        44,  66  }, // bottom waterlogged
-	{ "minecraft:nether_brick_slab",                        44,  67  }, // top waterlogged
-	{ "minecraft:red_nether_brick_slab",                    44,  68  }, // bottom
-	{ "minecraft:red_nether_brick_slab",                    44,  69  }, // top
-	{ "minecraft:red_nether_brick_slab",                    44,  70  }, // bottom waterlogged
-	{ "minecraft:red_nether_brick_slab",                    44,  71  }, // top waterlogged
-	{ "minecraft:sandstone_slab",                           44,  72  }, // bottom
-	{ "minecraft:sandstone_slab",                           44,  73  }, // top
-	{ "minecraft:sandstone_slab",                           44,  74  }, // bottom waterlogged
-	{ "minecraft:sandstone_slab",                           44,  75  }, // top waterlogged
-	{ "minecraft:cut_sandstone_slab",                       44,  76  }, // bottom
-	{ "minecraft:cut_sandstone_slab",                       44,  77  }, // top
-	{ "minecraft:cut_sandstone_slab",                       44,  78  }, // bottom waterlogged
-	{ "minecraft:cut_sandstone_slab",                       44,  79  }, // top waterlogged
-	{ "minecraft:smooth_sandstone_slab",                    44,  80  }, // bottom
-	{ "minecraft:smooth_sandstone_slab",                    44,  81  }, // top
-	{ "minecraft:smooth_sandstone_slab",                    44,  82  }, // bottom waterlogged
-	{ "minecraft:smooth_sandstone_slab",                    44,  83  }, // top waterlogged
-	{ "minecraft:quartz_slab",                              44,  84  }, // bottom
-	{ "minecraft:quartz_slab",                              44,  85  }, // top
-	{ "minecraft:quartz_slab",                              44,  86  }, // bottom waterlogged
-	{ "minecraft:quartz_slab",                              44,  87  }, // top waterlogged
-	{ "minecraft:smooth_quartz_slab",                       44,  88  }, // bottom
-	{ "minecraft:smooth_quartz_slab",                       44,  89  }, // top
-	{ "minecraft:smooth_quartz_slab",                       44,  90  }, // bottom waterlogged
-	{ "minecraft:smooth_quartz_slab",                       44,  91  }, // top waterlogged
-	{ "minecraft:prismarine_slab",                          44,  92  }, // bottom
-	{ "minecraft:prismarine_slab",                          44,  93  }, // top
-	{ "minecraft:prismarine_slab",                          44,  94  }, // bottom waterlogged
-	{ "minecraft:prismarine_slab",                          44,  95  }, // top waterlogged
-	{ "minecraft:prismarine_brick_slab",                    44,  96  }, // bottom
-	{ "minecraft:prismarine_brick_slab",                    44,  97  }, // top
-	{ "minecraft:prismarine_brick_slab",                    44,  98  }, // bottom waterlogged
-	{ "minecraft:prismarine_brick_slab",                    44,  99  }, // top waterlogged
-	{ "minecraft:dark_prismarine_slab",                     44,  10  }, // bottom
-	{ "minecraft:dark_prismarine_slab",                     44,  11  }, // top
-	{ "minecraft:dark_prismarine_slab",                     44,  12  }, // bottom waterlogged
-	{ "minecraft:dark_prismarine_slab",                     44,  13  }, // top waterlogged
-	{ "minecraft:petrified_oak_slab",                       44,  14  }, // bottom
-	{ "minecraft:petrified_oak_slab",                       44,  15  }, // top
-	{ "minecraft:petrified_oak_slab",                       44,  16  }, // bottom waterlogged
-	{ "minecraft:petrified_oak_slab",                       44,  17  }, // top waterlogged
-	{ "minecraft:blackstone_slab",                          44,  18  }, // bottom
-	{ "minecraft:blackstone_slab",                          44,  19  }, // top
-	{ "minecraft:blackstone_slab",                          44,  110 }, // bottom waterlogged
-	{ "minecraft:blackstone_slab",                          44,  111 }, // top waterlogged
-	{ "minecraft:polished_blackstone_slab",                 44,  112 }, // bottom
-	{ "minecraft:polished_blackstone_slab",                 44,  113 }, // top
-	{ "minecraft:polished_blackstone_slab",                 44,  114 }, // bottom waterlogged
-	{ "minecraft:polished_blackstone_slab",                 44,  115 }, // top waterlogged
-	{ "minecraft:polished_blackstone_brick_slab",           44,  116 }, // bottom
-	{ "minecraft:polished_blackstone_brick_slab",           44,  117 }, // top
-	{ "minecraft:polished_blackstone_brick_slab",           44,  118 }, // bottom waterlogged
-	{ "minecraft:polished_blackstone_brick_slab",           44,  119 }, // top waterlogged
-	{ "minecraft:cut_copper_slab",                          44,  120 }, // bottom
-	{ "minecraft:cut_copper_slab",                          44,  121 }, // top
-	{ "minecraft:cut_copper_slab",                          44,  122 }, // bottom waterlogged
-	{ "minecraft:cut_copper_slab",                          44,  123 }, // top waterlogged
-	{ "minecraft:exposed_cut_copper_slab",                  44,  124 }, // bottom
-	{ "minecraft:exposed_cut_copper_slab",                  44,  125 }, // top
-	{ "minecraft:exposed_cut_copper_slab",                  44,  126 }, // bottom waterlogged
-	{ "minecraft:exposed_cut_copper_slab",                  44,  127 }, // top waterlogged
-	{ "minecraft:weathered_cut_copper_slab",                44,  128 }, // bottom
-	{ "minecraft:weathered_cut_copper_slab",                44,  129 }, // top
-	{ "minecraft:weathered_cut_copper_slab",                44,  130 }, // bottom waterlogged
-	{ "minecraft:weathered_cut_copper_slab",                44,  131 }, // top waterlogged
-	{ "minecraft:oxidized_cut_copper_slab",                 44,  140 }, // bottom
-	{ "minecraft:oxidized_cut_copper_slab",                 44,  141 }, // top
-	{ "minecraft:oxidized_cut_copper_slab",                 44,  142 }, // bottom waterlogged
-	{ "minecraft:oxidized_cut_copper_slab",                 44,  143 }, // top waterlogged
-	{ "minecraft:waxed_cut_copper_slab",                    44,  144 }, // bottom
-	{ "minecraft:waxed_cut_copper_slab",                    44,  145 }, // top
-	{ "minecraft:waxed_cut_copper_slab",                    44,  146 }, // bottom waterlogged
-	{ "minecraft:waxed_cut_copper_slab",                    44,  147 }, // top waterlogged
-	{ "minecraft:waxed_exposed_cut_copper_slab",            44,  148 }, // bottom
-	{ "minecraft:waxed_exposed_cut_copper_slab",            44,  149 }, // top
-	{ "minecraft:waxed_exposed_cut_copper_slab",            44,  150 }, // bottom waterlogged
-	{ "minecraft:waxed_exposed_cut_copper_slab",            44,  151 }, // top waterlogged
-	{ "minecraft:waxed_weathered_cut_copper_slab",          44,  152 }, // bottom
-	{ "minecraft:waxed_weathered_cut_copper_slab",          44,  153 }, // top
-	{ "minecraft:waxed_weathered_cut_copper_slab",          44,  154 }, // bottom waterlogged
-	{ "minecraft:waxed_weathered_cut_copper_slab",          44,  155 }, // top waterlogged
-	{ "minecraft:waxed_oxidized_cut_copper_slab",           44,  156 }, // bottom
-	{ "minecraft:waxed_oxidized_cut_copper_slab",           44,  157 }, // top
-	{ "minecraft:waxed_oxidized_cut_copper_slab",           44,  158 }, // bottom waterlogged
-	{ "minecraft:waxed_oxidized_cut_copper_slab",           44,  159 }, // top waterlogged
-	{ "minecraft:cobbled_deepslate_slab",                   44,  160 }, // bottom
-	{ "minecraft:cobbled_deepslate_slab",                   44,  161 }, // top
-	{ "minecraft:cobbled_deepslate_slab",                   44,  162 }, // bottom waterlogged
-	{ "minecraft:cobbled_deepslate_slab",                   44,  163 }, // top waterlogged
-	{ "minecraft:polished_deepslate_slab",                  44,  164 }, // bottom
-	{ "minecraft:polished_deepslate_slab",                  44,  165 }, // top
-	{ "minecraft:polished_deepslate_slab",                  44,  166 }, // bottom waterlogged
-	{ "minecraft:polished_deepslate_slab",                  44,  167 }, // top waterlogged
-	{ "minecraft:deepslate_brick_slab",                     44,  168 }, // bottom
-	{ "minecraft:deepslate_brick_slab",                     44,  169 }, // top
-	{ "minecraft:deepslate_brick_slab",                     44,  170 }, // bottom waterlogged
-	{ "minecraft:deepslate_brick_slab",                     44,  171 }, // top waterlogged
-	{ "minecraft:deepslate_tile_slab",                      44,  172 }, // bottom
-	{ "minecraft:deepslate_tile_slab",                      44,  173 }, // top
-	{ "minecraft:deepslate_tile_slab",                      44,  174 }, // bottom waterlogged
-	{ "minecraft:deepslate_tile_slab",                      44,  175 }, // top waterlogged
+	{ "minecraft:cobblestone_slab",                         44,  32  }, // bottom
+	{ "minecraft:cobblestone_slab",                         44,  33  }, // top
+	{ "minecraft:cobblestone_slab",                         44,  34  }, // bottom waterlogged
+	{ "minecraft:cobblestone_slab",                         44,  35  }, // top waterlogged
+	{ "minecraft:mossy_cobblestone_slab",                   44,  36  }, // bottom
+	{ "minecraft:mossy_cobblestone_slab",                   44,  37  }, // top
+	{ "minecraft:mossy_cobblestone_slab",                   44,  38  }, // bottom waterlogged
+	{ "minecraft:mossy_cobblestone_slab",                   44,  39  }, // top waterlogged
+	{ "minecraft:stone_brick_slab",                         44,  40  }, // bottom
+	{ "minecraft:stone_brick_slab",                         44,  41  }, // top
+	{ "minecraft:stone_brick_slab",                         44,  42  }, // bottom waterlogged
+	{ "minecraft:stone_brick_slab",                         44,  43  }, // top waterlogged
+	{ "minecraft:mossy_stone_brick_slab",                   44,  44  }, // bottom
+	{ "minecraft:mossy_stone_brick_slab",                   44,  45  }, // top
+	{ "minecraft:mossy_stone_brick_slab",                   44,  46  }, // bottom waterlogged
+	{ "minecraft:mossy_stone_brick_slab",                   44,  47  }, // top waterlogged
+	{ "minecraft:brick_slab",                               44,  48  }, // bottom
+	{ "minecraft:brick_slab",                               44,  49  }, // top
+	{ "minecraft:brick_slab",                               44,  50  }, // bottom waterlogged
+	{ "minecraft:brick_slab",                               44,  51  }, // top waterlogged
+	{ "minecraft:end_stone_brick_slab",                     44,  52  }, // bottom
+	{ "minecraft:end_stone_brick_slab",                     44,  53  }, // top
+	{ "minecraft:end_stone_brick_slab",                     44,  54  }, // bottom waterlogged
+	{ "minecraft:end_stone_brick_slab",                     44,  55  }, // top waterlogged
+	{ "minecraft:nether_brick_slab",                        44,  56  }, // bottom
+	{ "minecraft:nether_brick_slab",                        44,  57  }, // top
+	{ "minecraft:nether_brick_slab",                        44,  58  }, // bottom waterlogged
+	{ "minecraft:nether_brick_slab",                        44,  59  }, // top waterlogged
+	{ "minecraft:red_nether_brick_slab",                    44,  60  }, // bottom
+	{ "minecraft:red_nether_brick_slab",                    44,  61  }, // top
+	{ "minecraft:red_nether_brick_slab",                    44,  62  }, // bottom waterlogged
+	{ "minecraft:red_nether_brick_slab",                    44,  63  }, // top waterlogged
+	{ "minecraft:sandstone_slab",                           44,  64  }, // bottom
+	{ "minecraft:sandstone_slab",                           44,  65  }, // top
+	{ "minecraft:sandstone_slab",                           44,  66  }, // bottom waterlogged
+	{ "minecraft:sandstone_slab",                           44,  67  }, // top waterlogged
+	{ "minecraft:cut_sandstone_slab",                       44,  68  }, // bottom
+	{ "minecraft:cut_sandstone_slab",                       44,  69  }, // top
+	{ "minecraft:cut_sandstone_slab",                       44,  70  }, // bottom waterlogged
+	{ "minecraft:cut_sandstone_slab",                       44,  71  }, // top waterlogged
+	{ "minecraft:smooth_sandstone_slab",                    44,  72  }, // bottom
+	{ "minecraft:smooth_sandstone_slab",                    44,  73  }, // top
+	{ "minecraft:smooth_sandstone_slab",                    44,  74  }, // bottom waterlogged
+	{ "minecraft:smooth_sandstone_slab",                    44,  75  }, // top waterlogged
+	{ "minecraft:quartz_slab",                              44,  76  }, // bottom
+	{ "minecraft:quartz_slab",                              44,  77  }, // top
+	{ "minecraft:quartz_slab",                              44,  78  }, // bottom waterlogged
+	{ "minecraft:quartz_slab",                              44,  79  }, // top waterlogged
+	{ "minecraft:smooth_quartz_slab",                       44,  80  }, // bottom
+	{ "minecraft:smooth_quartz_slab",                       44,  81  }, // top
+	{ "minecraft:smooth_quartz_slab",                       44,  82  }, // bottom waterlogged
+	{ "minecraft:smooth_quartz_slab",                       44,  83  }, // top waterlogged
+	{ "minecraft:prismarine_slab",                          44,  84  }, // bottom
+	{ "minecraft:prismarine_slab",                          44,  85  }, // top
+	{ "minecraft:prismarine_slab",                          44,  86  }, // bottom waterlogged
+	{ "minecraft:prismarine_slab",                          44,  87  }, // top waterlogged
+	{ "minecraft:prismarine_brick_slab",                    44,  88  }, // bottom
+	{ "minecraft:prismarine_brick_slab",                    44,  89  }, // top
+	{ "minecraft:prismarine_brick_slab",                    44,  90  }, // bottom waterlogged
+	{ "minecraft:prismarine_brick_slab",                    44,  91  }, // top waterlogged
+	{ "minecraft:dark_prismarine_slab",                     44,  92  }, // bottom
+	{ "minecraft:dark_prismarine_slab",                     44,  93  }, // top
+	{ "minecraft:dark_prismarine_slab",                     44,  94  }, // bottom waterlogged
+	{ "minecraft:dark_prismarine_slab",                     44,  95  }, // top waterlogged
+	{ "minecraft:petrified_oak_slab",                       44,  96  }, // bottom
+	{ "minecraft:petrified_oak_slab",                       44,  97  }, // top
+	{ "minecraft:petrified_oak_slab",                       44,  98  }, // bottom waterlogged
+	{ "minecraft:petrified_oak_slab",                       44,  99  }, // top waterlogged
+	{ "minecraft:blackstone_slab",                          44,  100 }, // bottom
+	{ "minecraft:blackstone_slab",                          44,  101 }, // top
+	{ "minecraft:blackstone_slab",                          44,  102 }, // bottom waterlogged
+	{ "minecraft:blackstone_slab",                          44,  103 }, // top waterlogged
+	{ "minecraft:polished_blackstone_slab",                 44,  104 }, // bottom
+	{ "minecraft:polished_blackstone_slab",                 44,  105 }, // top
+	{ "minecraft:polished_blackstone_slab",                 44,  106 }, // bottom waterlogged
+	{ "minecraft:polished_blackstone_slab",                 44,  107 }, // top waterlogged
+	{ "minecraft:polished_blackstone_brick_slab",           44,  108 }, // bottom
+	{ "minecraft:polished_blackstone_brick_slab",           44,  109 }, // top
+	{ "minecraft:polished_blackstone_brick_slab",           44,  110 }, // bottom waterlogged
+	{ "minecraft:polished_blackstone_brick_slab",           44,  111 }, // top waterlogged
+	{ "minecraft:cut_copper_slab",                          44,  112 }, // bottom
+	{ "minecraft:cut_copper_slab",                          44,  113 }, // top
+	{ "minecraft:cut_copper_slab",                          44,  114 }, // bottom waterlogged
+	{ "minecraft:cut_copper_slab",                          44,  115 }, // top waterlogged
+	{ "minecraft:exposed_cut_copper_slab",                  44,  116 }, // bottom
+	{ "minecraft:exposed_cut_copper_slab",                  44,  117 }, // top
+	{ "minecraft:exposed_cut_copper_slab",                  44,  118 }, // bottom waterlogged
+	{ "minecraft:exposed_cut_copper_slab",                  44,  119 }, // top waterlogged
+	{ "minecraft:weathered_cut_copper_slab",                44,  120 }, // bottom
+	{ "minecraft:weathered_cut_copper_slab",                44,  121 }, // top
+	{ "minecraft:weathered_cut_copper_slab",                44,  122 }, // bottom waterlogged
+	{ "minecraft:weathered_cut_copper_slab",                44,  123 }, // top waterlogged
+	{ "minecraft:oxidized_cut_copper_slab",                 44,  124 }, // bottom
+	{ "minecraft:oxidized_cut_copper_slab",                 44,  125 }, // top
+	{ "minecraft:oxidized_cut_copper_slab",                 44,  126 }, // bottom waterlogged
+	{ "minecraft:oxidized_cut_copper_slab",                 44,  127 }, // top waterlogged
+	{ "minecraft:waxed_cut_copper_slab",                    44,  128 }, // bottom
+	{ "minecraft:waxed_cut_copper_slab",                    44,  129 }, // top
+	{ "minecraft:waxed_cut_copper_slab",                    44,  130 }, // bottom waterlogged
+	{ "minecraft:waxed_cut_copper_slab",                    44,  131 }, // top waterlogged
+	{ "minecraft:waxed_exposed_cut_copper_slab",            44,  132 }, // bottom
+	{ "minecraft:waxed_exposed_cut_copper_slab",            44,  133 }, // top
+	{ "minecraft:waxed_exposed_cut_copper_slab",            44,  134 }, // bottom waterlogged
+	{ "minecraft:waxed_exposed_cut_copper_slab",            44,  135 }, // top waterlogged
+	{ "minecraft:waxed_weathered_cut_copper_slab",          44,  136 }, // bottom
+	{ "minecraft:waxed_weathered_cut_copper_slab",          44,  137 }, // top
+	{ "minecraft:waxed_weathered_cut_copper_slab",          44,  138 }, // bottom waterlogged
+	{ "minecraft:waxed_weathered_cut_copper_slab",          44,  139 }, // top waterlogged
+	{ "minecraft:waxed_oxidized_cut_copper_slab",           44,  140 }, // bottom
+	{ "minecraft:waxed_oxidized_cut_copper_slab",           44,  141 }, // top
+	{ "minecraft:waxed_oxidized_cut_copper_slab",           44,  142 }, // bottom waterlogged
+	{ "minecraft:waxed_oxidized_cut_copper_slab",           44,  143 }, // top waterlogged
+	{ "minecraft:cobbled_deepslate_slab",                   44,  144 }, // bottom
+	{ "minecraft:cobbled_deepslate_slab",                   44,  145 }, // top
+	{ "minecraft:cobbled_deepslate_slab",                   44,  146 }, // bottom waterlogged
+	{ "minecraft:cobbled_deepslate_slab",                   44,  147 }, // top waterlogged
+	{ "minecraft:polished_deepslate_slab",                  44,  148 }, // bottom
+	{ "minecraft:polished_deepslate_slab",                  44,  149 }, // top
+	{ "minecraft:polished_deepslate_slab",                  44,  150 }, // bottom waterlogged
+	{ "minecraft:polished_deepslate_slab",                  44,  151 }, // top waterlogged
+	{ "minecraft:deepslate_brick_slab",                     44,  152 }, // bottom
+	{ "minecraft:deepslate_brick_slab",                     44,  153 }, // top
+	{ "minecraft:deepslate_brick_slab",                     44,  154 }, // bottom waterlogged
+	{ "minecraft:deepslate_brick_slab",                     44,  155 }, // top waterlogged
+	{ "minecraft:deepslate_tile_slab",                      44,  156 }, // bottom
+	{ "minecraft:deepslate_tile_slab",                      44,  157 }, // top
+	{ "minecraft:deepslate_tile_slab",                      44,  158 }, // bottom waterlogged
+	{ "minecraft:deepslate_tile_slab",                      44,  159 }, // top waterlogged
 	{ "minecraft:bricks",                                   45,  0   },
 	{ "minecraft:tnt",                                      46,  0   },
 	{ "minecraft:bookshelf",                                47,  0   },

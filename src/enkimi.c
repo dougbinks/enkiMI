@@ -1182,6 +1182,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:sea_lantern",                              169, 0   }, 
 	{ "minecraft:lantern",                                  169, 1   }, // Added, data value not correct
 	{ "minecraft:soul_lantern",                             169, 2   }, // Added, data value not correct
+	{ "minecraft:campfire",                                 169, 3   }, // Added, data value not correct
 	{ "minecraft:hay_block",                                170, 0   }, // oriented east-west
 	{ "minecraft:hay_block",                                170, 1   }, // oriented vertically 
 	{ "minecraft:hay_block",                                170, 2   }, // oriented north-south

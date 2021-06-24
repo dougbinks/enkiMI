@@ -554,10 +554,114 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:ladder",                                   65,  3   }, // facing west
     { "minecraft:rail",                                     66,  0   }, // east-west
 	{ "minecraft:rail",                                     66,  1   }, // north-south
-	{ "minecraft:cobblestone_stairs",                       67,  0   }, // facing east 
-	{ "minecraft:cobblestone_stairs",                       67,  1   }, // facing north 
-	{ "minecraft:cobblestone_stairs",                       67,  2   }, // facing south 
-	{ "minecraft:cobblestone_stairs",                       67,  3   }, // facing west 
+    { "minecraft:stone_stairs",                             67,  0   }, // facing east	  - Added after flattening, data value not correct
+	{ "minecraft:stone_stairs",                             67,  1   }, // facing north	  - Added after flattening, data value not correct
+	{ "minecraft:stone_stairs",                             67,  2   }, // facing south	  - Added after flattening, data value not correct
+	{ "minecraft:stone_stairs",                             67,  3   }, // facing west	  - Added after flattening, data value not correct
+	{ "minecraft:granite_stairs",                           67,  4   }, // facing east  - added, data value not correct
+	{ "minecraft:granite_stairs",                           67,  5   }, // facing north - added, data value not correct
+	{ "minecraft:granite_stairs",                           67,  6   }, // facing south - added, data value not correct
+	{ "minecraft:granite_stairs",                           67,  7   }, // facing west  - added, data value not correct
+	{ "minecraft:polished_granite_stairs",                  67,  8   }, // facing east  - added, data value not correct
+	{ "minecraft:polished_granite_stairs",                  67,  9   }, // facing north - added, data value not correct
+	{ "minecraft:polished_granite_stairs",                  67,  10  }, // facing south - added, data value not correct
+	{ "minecraft:polished_granite_stairs",                  67,  11  }, // facing west  - added, data value not correct
+	{ "minecraft:diorite_stairs",                           67,  12  }, // facing east  - added, data value not correct
+	{ "minecraft:diorite_stairs",                           67,  13  }, // facing north - added, data value not correct
+	{ "minecraft:diorite_stairs",                           67,  14  }, // facing south - added, data value not correct
+	{ "minecraft:diorite_stairs",                           67,  15  }, // facing west  - added, data value not correct
+	{ "minecraft:polished_diorite_stairs",                  67,  16  }, // facing east  - added, data value not correct
+	{ "minecraft:polished_diorite_stairs",                  67,  17  }, // facing north - added, data value not correct
+	{ "minecraft:polished_diorite_stairs",                  67,  18  }, // facing south - added, data value not correct
+	{ "minecraft:polished_diorite_stairs",                  67,  19  }, // facing west  - added, data value not correct
+	{ "minecraft:andesite_stairs",                          67,  20  }, // facing east  - added, data value not correct
+	{ "minecraft:andesite_stairs",                          67,  21  }, // facing north - added, data value not correct
+	{ "minecraft:andesite_stairs",                          67,  22  }, // facing south - added, data value not correct
+	{ "minecraft:andesite_stairs",                          67,  23  }, // facing west  - added, data value not correct
+	{ "minecraft:polished_andesite_stairs",                 67,  24  }, // facing east  - added, data value not correct
+	{ "minecraft:polished_andesite_stairs",                 67,  25  }, // facing north - added, data value not correct
+	{ "minecraft:polished_andesite_stairs",                 67,  26  }, // facing south - added, data value not correct
+	{ "minecraft:polished_andesite_stairs",                 67,  27  }, // facing west  - added, data value not correct
+	{ "minecraft:cobblestone_stairs",                       67,  28  }, // facing east 
+	{ "minecraft:cobblestone_stairs",                       67,  29  }, // facing north 
+	{ "minecraft:cobblestone_stairs",                       67,  30  }, // facing south 
+	{ "minecraft:cobblestone_stairs",                       67,  31  }, // facing west     
+	{ "minecraft:mossy_cobblestone_stairs",                 67,  32  }, // facing east  - added, data value not correct
+	{ "minecraft:mossy_cobblestone_stairs",                 67,  33  }, // facing north - added, data value not correct
+	{ "minecraft:mossy_cobblestone_stairs",                 67,  34  }, // facing south - added, data value not correct
+	{ "minecraft:mossy_cobblestone_stairs",                 67,  35  }, // facing west  - added, data value not correct
+	{ "minecraft:prismarine_stairs",                        67,  36  }, // facing east  - added, data value not correct
+	{ "minecraft:prismarine_stairs",                        67,  37  }, // facing north - added, data value not correct
+	{ "minecraft:prismarine_stairs",                        67,  38  }, // facing south - added, data value not correct
+	{ "minecraft:prismarine_stairs",                        67,  39  }, // facing west  - added, data value not correct
+	{ "minecraft:prismarine_brick_stairs",                  67,  40  }, // facing east  - added, data value not correct
+	{ "minecraft:prismarine_brick_stairs",                  67,  41  }, // facing north - added, data value not correct
+	{ "minecraft:prismarine_brick_stairs",                  67,  42  }, // facing south - added, data value not correct
+	{ "minecraft:prismarine_brick_stairs",                  67,  43  }, // facing west  - added, data value not correct
+	{ "minecraft:dark_prismarine_stairs",                   67,  44  }, // facing east  - added, data value not correct
+	{ "minecraft:dark_prismarine_stairs",                   67,  45  }, // facing north - added, data value not correct
+	{ "minecraft:dark_prismarine_stairs",                   67,  46  }, // facing south - added, data value not correct
+	{ "minecraft:dark_prismarine_stairs",                   67,  47  }, // facing west  - added, data value not correct
+	{ "minecraft:blackstone_stairs",                        67,  48  }, // facing east  - added, data value not correct
+	{ "minecraft:blackstone_stairs",                        67,  49  }, // facing north - added, data value not correct
+	{ "minecraft:blackstone_stairs",                        67,  50  }, // facing south - added, data value not correct
+	{ "minecraft:blackstone_stairs",                        67,  51  }, // facing west  - added, data value not correct
+	{ "minecraft:polished_blackstone_stairs",               67,  52  }, // facing east  - added, data value not correct
+	{ "minecraft:polished_blackstone_stairs",               67,  53  }, // facing north - added, data value not correct
+	{ "minecraft:polished_blackstone_stairs",               67,  54  }, // facing south - added, data value not correct
+	{ "minecraft:polished_blackstone_stairs",               67,  55  }, // facing west  - added, data value not correct
+	{ "minecraft:polished_blackstone_brick_stairs",         67,  56  }, // facing east  - added, data value not correct
+	{ "minecraft:polished_blackstone_brick_stairs",         67,  57  }, // facing north - added, data value not correct
+	{ "minecraft:polished_blackstone_brick_stairs",         67,  58  }, // facing south - added, data value not correct
+	{ "minecraft:polished_blackstone_brick_stairs",         67,  59  }, // facing west  - added, data value not correct
+	{ "minecraft:cut_copper_stairs",                        67,  60  }, // facing east  - added, data value not correct
+	{ "minecraft:cut_copper_stairs",                        67,  61  }, // facing north - added, data value not correct
+	{ "minecraft:cut_copper_stairs",                        67,  62  }, // facing south - added, data value not correct
+	{ "minecraft:cut_copper_stairs",                        67,  63  }, // facing west  - added, data value not correct
+	{ "minecraft:exposed_cut_copper_stairs",                67,  64  }, // facing east  - added, data value not correct
+	{ "minecraft:exposed_cut_copper_stairs",                67,  65  }, // facing north - added, data value not correct
+	{ "minecraft:exposed_cut_copper_stairs",                67,  66  }, // facing south - added, data value not correct
+	{ "minecraft:exposed_cut_copper_stairs",                67,  67  }, // facing west  - added, data value not correct
+	{ "minecraft:weathered_cut_copper_stairs",              67,  68  }, // facing east  - added, data value not correct
+	{ "minecraft:weathered_cut_copper_stairs",              67,  69  }, // facing north - added, data value not correct
+	{ "minecraft:weathered_cut_copper_stairs",              67,  70  }, // facing south - added, data value not correct
+	{ "minecraft:weathered_cut_copper_stairs",              67,  71  }, // facing west  - added, data value not correct
+	{ "minecraft:oxidized_cut_copper_stairs",               67,  72  }, // facing east  - added, data value not correct
+	{ "minecraft:oxidized_cut_copper_stairs",               67,  73  }, // facing north - added, data value not correct
+	{ "minecraft:oxidized_cut_copper_stairs",               67,  74  }, // facing south - added, data value not correct
+	{ "minecraft:oxidized_cut_copper_stairs",               67,  75  }, // facing west  - added, data value not correct
+	{ "minecraft:waxed_cut_copper_stairs",                  67,  76  }, // facing east  - added, data value not correct
+	{ "minecraft:waxed_cut_copper_stairs",                  67,  77  }, // facing north - added, data value not correct
+	{ "minecraft:waxed_cut_copper_stairs",                  67,  78  }, // facing south - added, data value not correct
+	{ "minecraft:waxed_cut_copper_stairs",                  67,  79  }, // facing west  - added, data value not correct
+	{ "minecraft:waxed_exposed_cut_copper_stairs",          67,  80  }, // facing east  - added, data value not correct
+	{ "minecraft:waxed_exposed_cut_copper_stairs",          67,  81  }, // facing north - added, data value not correct
+	{ "minecraft:waxed_exposed_cut_copper_stairs",          67,  82  }, // facing south - added, data value not correct
+	{ "minecraft:waxed_exposed_cut_copper_stairs",          67,  83  }, // facing west  - added, data value not correct
+	{ "minecraft:waxed_weathered_cut_copper_stairs",        67,  84  }, // facing east  - added, data value not correct
+	{ "minecraft:waxed_weathered_cut_copper_stairs",        67,  85  }, // facing north - added, data value not correct
+	{ "minecraft:waxed_weathered_cut_copper_stairs",        67,  86  }, // facing south - added, data value not correct
+	{ "minecraft:waxed_weathered_cut_copper_stairs",        67,  87  }, // facing west  - added, data value not correct
+	{ "minecraft:waxed_oxidized_cut_copper_stairs",         67,  88  }, // facing east  - added, data value not correct
+	{ "minecraft:waxed_oxidized_cut_copper_stairs",         67,  89  }, // facing north - added, data value not correct
+	{ "minecraft:waxed_oxidized_cut_copper_stairs",         67,  90  }, // facing south - added, data value not correct
+	{ "minecraft:waxed_oxidized_cut_copper_stairs",         67,  91  }, // facing west  - added, data value not correct
+	{ "minecraft:cobbled_deepslate_stairs",                 67,  92  }, // facing east  - added, data value not correct
+	{ "minecraft:cobbled_deepslate_stairs",                 67,  93  }, // facing north - added, data value not correct
+	{ "minecraft:cobbled_deepslate_stairs",                 67,  94  }, // facing south - added, data value not correct
+	{ "minecraft:cobbled_deepslate_stairs",                 67,  95  }, // facing west  - added, data value not correct
+	{ "minecraft:polished_deepslate_stairs",                67,  96  }, // facing east  - added, data value not correct
+	{ "minecraft:polished_deepslate_stairs",                67,  97  }, // facing north - added, data value not correct
+	{ "minecraft:polished_deepslate_stairs",                67,  98  }, // facing south - added, data value not correct
+	{ "minecraft:polished_deepslate_stairs",                67,  99  }, // facing west  - added, data value not correct
+	{ "minecraft:deepslate_brick_stairs",                   67,  100 }, // facing east  - added, data value not correct
+	{ "minecraft:deepslate_brick_stairs",                   67,  101 }, // facing north - added, data value not correct
+	{ "minecraft:deepslate_brick_stairs",                   67,  102 }, // facing south - added, data value not correct
+	{ "minecraft:deepslate_brick_stairs",                   67,  103 }, // facing west  - added, data value not correct
+	{ "minecraft:deepslate_tile_stairs",                    67,  104 }, // facing east  - added, data value not correct
+	{ "minecraft:deepslate_tile_stairs",                    67,  105 }, // facing north - added, data value not correct
+	{ "minecraft:deepslate_tile_stairs",                    67,  106 }, // facing south - added, data value not correct
+	{ "minecraft:deepslate_tile_stairs",                    67,  107 }, // facing west  - added, data value not correct
 	{ "minecraft:oak_wall_sign",                            68,  0   }, // facing east
 	{ "minecraft:oak_wall_sign",                            68,  1   }, // facing north
 	{ "minecraft:oak_wall_sign",                            68,  2   }, // facing south
@@ -716,11 +820,19 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:brick_stairs",                             108, 0   }, // facing east 
 	{ "minecraft:brick_stairs",                             108, 1   }, // facing north
 	{ "minecraft:brick_stairs",                             108, 2   }, // facing south
-	{ "minecraft:brick_stairs",                             108, 3   }, // facing west 
+	{ "minecraft:brick_stairs",                             108, 3   }, // facing west
+	{ "minecraft:end_stone_brick_stairs",                   108, 4   }, // facing east  - added, data value not correct
+	{ "minecraft:end_stone_brick_stairs",                   108, 5   }, // facing north - added, data value not correct
+	{ "minecraft:end_stone_brick_stairs",                   108, 6   }, // facing south - added, data value not correct
+	{ "minecraft:end_stone_brick_stairs",                   108, 7   }, // facing west  - added, data value not correct
 	{ "minecraft:stone_brick_stairs",                       109, 0   }, // facing east 
 	{ "minecraft:stone_brick_stairs",                       109, 1   }, // facing north
 	{ "minecraft:stone_brick_stairs",                       109, 2   }, // facing south
-	{ "minecraft:stone_brick_stairs",                       109, 3   }, // facing west 
+	{ "minecraft:stone_brick_stairs",                       109, 3   }, // facing west
+	{ "minecraft:mossy_stone_brick_stairs",                 109, 4   }, // facing east  - added, data value not correct
+	{ "minecraft:mossy_stone_brick_stairs",                 109, 5   }, // facing north - added, data value not correct
+	{ "minecraft:mossy_stone_brick_stairs",                 109, 6   }, // facing south - added, data value not correct
+	{ "minecraft:mossy_stone_brick_stairs",                 109, 7   }, // facing west  - added, data value not correct
 	{ "minecraft:mycelium",                                 110, 0   }, 
 	{ "minecraft:lily_pad",                                 111, 0   },
 	{ "minecraft:nether_bricks",                            112, 0   },
@@ -729,6 +841,10 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:nether_brick_stairs",                      114, 1   }, // facing north
 	{ "minecraft:nether_brick_stairs",                      114, 2   }, // facing south
 	{ "minecraft:nether_brick_stairs",                      114, 3   }, // facing west 
+	{ "minecraft:red_nether_brick_stairs",                  114, 4   }, // facing east  - added, data value not correct
+	{ "minecraft:red_nether_brick_stairs",                  114, 5   }, // facing north - added, data value not correct
+	{ "minecraft:red_nether_brick_stairs",                  114, 6   }, // facing south - added, data value not correct
+	{ "minecraft:red_nether_brick_stairs",                  114, 7   }, // facing west  - added, data value not correct
 	{ "minecraft:nether_wart",                              115, 0   }, 
 	{ "minecraft:enchanting_table",                         116, 0   }, 
 	{ "minecraft:brewing_stand",                            117, 0   }, 
@@ -797,7 +913,11 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:sandstone_stairs",                         128, 0   }, // facing east 
 	{ "minecraft:sandstone_stairs",                         128, 1   }, // facing north
 	{ "minecraft:sandstone_stairs",                         128, 2   }, // facing south
-	{ "minecraft:sandstone_stairs",                         128, 3   }, // facing west 
+	{ "minecraft:sandstone_stairs",                         128, 3   }, // facing west
+    { "minecraft:smooth_sandstone_stairs",                  128, 4   }, // facing east  - added, data value not correct
+	{ "minecraft:smooth_sandstone_stairs",                  128, 5   }, // facing north - added, data value not correct
+	{ "minecraft:smooth_sandstone_stairs",                  128, 6   }, // facing south - added, data value not correct
+	{ "minecraft:smooth_sandstone_stairs",                  128, 7   }, // facing west  - added, data value not correct
 	{ "minecraft:emerald_ore",                              129, 0   },
 	{ "minecraft:deepslate_emerald_ore",                    129, 0   },
 	{ "minecraft:ender_chest",                              130, 0   }, // facing east 
@@ -955,6 +1075,10 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:quartz_stairs",                            156, 1   }, // facing north
 	{ "minecraft:quartz_stairs",                            156, 2   }, // facing south
 	{ "minecraft:quartz_stairs",                            156, 3   }, // facing west 
+    { "minecraft:smooth_quartz_stairs",                     156, 4   }, // facing east  - added, data value not correct
+	{ "minecraft:smooth_quartz_stairs",                     156, 5   }, // facing north - added, data value not correct
+	{ "minecraft:smooth_quartz_stairs",                     156, 6   }, // facing south - added, data value not correct
+	{ "minecraft:smooth_quartz_stairs",                     156, 7   }, // facing west  - added, data value not correct
 	{ "minecraft:activator_rail",                           157, 0   },
 	{ "minecraft:dropper",                                  158, 0   }, 
 	{ "minecraft:white_terracotta",                         159, 0   }, 
@@ -1049,10 +1173,6 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:warped_stairs",                            164, 9   }, // facing north	  - Added after flattening, data value not correct
 	{ "minecraft:warped_stairs",                            164, 10  }, // facing south	  - Added after flattening, data value not correct
 	{ "minecraft:warped_stairs",                            164, 11  }, // facing west	  - Added after flattening, data value not correct
-    { "minecraft:stone_stairs",                             164, 12  }, // facing east	  - Added after flattening, data value not correct
-	{ "minecraft:stone_stairs",                             164, 13  }, // facing north	  - Added after flattening, data value not correct
-	{ "minecraft:stone_stairs",                             164, 14  }, // facing south	  - Added after flattening, data value not correct
-	{ "minecraft:stone_stairs",                             164, 15  }, // facing west	  - Added after flattening, data value not correct
 	{ "minecraft:slime_block",                              165, 0   }, 
 	{ "minecraft:barrier",                                  166, 0   }, 
 	{ "minecraft:iron_trapdoor",                            167, 0   }, 
@@ -1088,16 +1208,16 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:sunflower",                                175, 1   }, // tall flowers, two-block upper - data values may not be correct
 	{ "minecraft:lilac",                                    175, 2   }, // tall flowers, two-block lower - data values may not be correct
 	{ "minecraft:lilac",                                    175, 3   }, // tall flowers, two-block upper - data values may not be correct
-	{ "minecraft:tall_grass",                               175, 4   }, // tall plants, two-block lower - data values may not be correct
-	{ "minecraft:tall_grass",                               175, 5   }, // tall plants, two-block upper - data values may not be correct
-	{ "minecraft:large_fern",                               175, 6   }, // tall plants, two-block lower - data values may not be correct
-	{ "minecraft:large_fern",                               175, 7   }, // tall plants, two-block upper - data values may not be correct
+	{ "minecraft:tall_grass",                               175, 4   }, // tall plants, two-block lower  - data values may not be correct
+	{ "minecraft:tall_grass",                               175, 5   }, // tall plants, two-block upper  - data values may not be correct
+	{ "minecraft:large_fern",                               175, 6   }, // tall plants, two-block lower  - data values may not be correct
+	{ "minecraft:large_fern",                               175, 7   }, // tall plants, two-block upper  - data values may not be correct
 	{ "minecraft:rose_bush",                                175, 8   }, // tall flowers, two-block lower - data values may not be correct
 	{ "minecraft:rose_bush",                                175, 9   }, // tall flowers, two-block upper - data values may not be correct
 	{ "minecraft:peony",                                    175, 10  }, // tall flowers, two-block lower - data values may not be correct
 	{ "minecraft:peony",                                    175, 11  }, // tall flowers, two-block upper - data values may not be correct
-	{ "minecraft:tall_seagrass",                            175, 12  }, // tall plants, two-block lower - Added after flattening, data value not correct
-	{ "minecraft:tall_seagrass",                            175, 13  }, // tall plants, two-block upper - Added after flattening, data value not correct
+	{ "minecraft:tall_seagrass",                            175, 12  }, // tall plants, two-block lower  - Added after flattening, data value not correct
+	{ "minecraft:tall_seagrass",                            175, 13  }, // tall plants, two-block upper  - Added after flattening, data value not correct
     { "minecraft:white_banner",                             176, 0   },
     { "minecraft:orange_banner",                            176, 1   },
     { "minecraft:magenta_banner",                           176, 2   },
@@ -1139,6 +1259,10 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:red_sandstone_stairs",                     180, 1   }, // facing north
 	{ "minecraft:red_sandstone_stairs",                     180, 2   }, // facing south
 	{ "minecraft:red_sandstone_stairs",                     180, 3   }, // facing west
+    { "minecraft:smooth_red_sandstone_stairs",              180, 4   }, // facing east  - added, data value not correct
+	{ "minecraft:smooth_red_sandstone_stairs",              180, 5   }, // facing north - added, data value not correct
+	{ "minecraft:smooth_red_sandstone_stairs",              180, 6   }, // facing south - added, data value not correct
+	{ "minecraft:smooth_red_sandstone_stairs",              180, 7   }, // facing west  - added, data value not correct
 	{ "minecraft:double_red_sandstone_slab",                181, 0   },
 	{ "minecraft:double_red_sandstone_slab",                181, 1   }, // waterlogged
 	{ "minecraft:double_cut_red_sandstone_slab",            181, 2   },

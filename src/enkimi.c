@@ -1115,16 +1115,16 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:black_stained_glass_pane",                 160,  15 },
 	{ "minecraft:acacia_leaves",                            161, 0   }, // check for decay (if no log within 4 blocks decay)
 	{ "minecraft:dark_oak_leaves",                          161, 1   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:removed0_leaves",                          161, 2   }, // check for decay (if no log within 4 blocks decay)
-	{ "minecraft:removed1_leaves",                          161, 3   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:azalea_leaves",                            161, 2   }, // check for decay (if no log within 4 blocks decay)
+	{ "minecraft:flowering_azalea_leaves",                  161, 3   }, // check for decay (if no log within 4 blocks decay)
 	{ "minecraft:acacia_leaves",                            161, 4   }, // persistent
 	{ "minecraft:dark_oak_leaves",                          161, 5   }, // persistent
-	{ "minecraft:removed0_leaves",                          161, 6   }, // persistent
-	{ "minecraft:removed1_leaves",                          161, 7   }, // persistent
+	{ "minecraft:azalea_leaves",                            161, 6   }, // persistent
+	{ "minecraft:flowering_azalea_leaves",                  161, 7   }, // persistent
 	{ "minecraft:acacia_leaves",                            161, 8   }, // persistent (12-15 same as 8-11)
 	{ "minecraft:dark_oak_leaves",                          161, 9   }, // persistent (12-15 same as 8-11)
-	{ "minecraft:removed0_leaves",                          161, 10  }, // persistent (12-15 same as 8-11)
-	{ "minecraft:removed1_leaves",                          161, 11  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:azalea_leaves",                            161, 10  }, // persistent (12-15 same as 8-11)
+	{ "minecraft:flowering_azalea_leaves",                  161, 11  }, // persistent (12-15 same as 8-11)
 	{ "minecraft:acacia_log",                               162, 0   }, // up-down
 	{ "minecraft:dark_oak_log",                             162, 1   }, // up-down
 	{ "minecraft:crimson_stem",                             162, 2   }, // up-down

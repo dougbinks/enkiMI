@@ -216,11 +216,11 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:light_gray_wool",                          35,  8   }, 
 	{ "minecraft:cyan_wool",                                35,  9   }, 
 	{ "minecraft:purple_wool",                              35,  10  }, 
-	{ "minecraft:black_wool",                               35,  15  }, 
 	{ "minecraft:blue_wool",                                35,  11  }, 
 	{ "minecraft:brown_wool",                               35,  12  }, 
 	{ "minecraft:green_wool",                               35,  13  }, 
 	{ "minecraft:red_wool",                                 35,  14  },
+	{ "minecraft:black_wool",                               35,  15  }, 
 	{ "minecraft:moving_piston",                            36,  0   }, // facing down
 	{ "minecraft:moving_piston",                            36,  1   }, // facing east
 	{ "minecraft:moving_piston",                            36,  2   }, // facing north

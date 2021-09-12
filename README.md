@@ -45,6 +45,7 @@ fclose( fp );
 * [ephtracy for the Minecraft palette colours](http://ephtracy.github.io/)  
 * Thanks to [WesterosCraft](http://www.westeroscraft.com/guide), [MrBatou](https://www.planetminecraft.com/project/cuirass-dsd-401-by-mrbatou-download-cinematic/), and [Greenfield City](http://www.greenfieldmc.net) for letting us use their Minecraft constructions to test the importer with our game [Avoyd](https://www.avoyd.com)  
 * Breno Machado for reporting a chunk loading issue and assisting with testing
+* [Nicolas Bissig](https://github.com/NicolasBissig) for reporting an extended height (Minecraft v1.17+) chunk loading issue and assisting with testing
 
 [![Two Minecraft constructions imported into Avoyd: Greenfield City and MrBatou Cuirassé DSD-401 with link to Youtube showcase video](https://raw.githubusercontent.com/dougbinks/images/master/Avoyd_2021-01-18_YoutubeThumbnailForGithub.jpg)](https://www.youtube.com/watch?v=n8oiVRhzwxE)
 

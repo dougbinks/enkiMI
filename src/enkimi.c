@@ -2141,26 +2141,30 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						}
 						if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelParent + 1 )
 						{
-							if( pBlocks )
+							int32_t sectionIndex = (int32_t)sectionY + ENKI_MI_SECTIONS_Y_OFFSET;
+							if( sectionIndex >= 0 && sectionIndex < ENKI_MI_NUM_SECTIONS_PER_CHUNK )
 							{
-								chunk.countOfSections++;
-								assert( sectionPalette.size == 0 ); // a given chunk should use the same format
-								chunk.sections[ sectionY ]   = pBlocks;
-								chunk.dataValues[ sectionY ] = pData;
-								pBlocks = NULL;
-								pData   = NULL;
-								pBlockStates = NULL;
-							}
-							if( pBlockStates  && sectionPalette.size )
-							{
-								chunk.countOfSections++;
-								assert( pBlocks == NULL ); // a given chunk should use the same format
-								chunk.palette[ sectionY ]  = sectionPalette;
-								chunk.sections[ sectionY ] = pBlockStates;
-								pBlocks = NULL;
-								pData   = NULL;
-								pBlockStates = NULL;
-								memset( &sectionPalette, 0, sizeof(sectionPalette) );
+								if( pBlocks )
+								{
+									chunk.countOfSections++;
+									assert( sectionPalette.size == 0 ); // a given chunk should use the same format
+									chunk.sections[ sectionIndex ]   = pBlocks;
+									chunk.dataValues[ sectionIndex ] = pData;
+									pBlocks = NULL;
+									pData   = NULL;
+									pBlockStates = NULL;
+								}
+								if( pBlockStates  && sectionPalette.size )
+								{
+									chunk.countOfSections++;
+									assert( pBlocks == NULL ); // a given chunk should use the same format
+									chunk.palette[ sectionIndex ]  = sectionPalette;
+									chunk.sections[ sectionIndex ] = pBlockStates;
+									pBlocks = NULL;
+									pData   = NULL;
+									pBlockStates = NULL;
+									memset( &sectionPalette, 0, sizeof(sectionPalette) );
+								}
 							}
 							++sectionY;
 						}
@@ -2204,7 +2208,7 @@ enkiMICoordinate enkiGetChunkSectionOrigin(enkiChunkBlockData * pChunk_, int32_t
 {
 	enkiMICoordinate retVal;
 	retVal.x = pChunk_->xPos * ENKI_MI_SIZE_SECTIONS;
-	retVal.y = section_ * ENKI_MI_SIZE_SECTIONS;
+	retVal.y = ( section_ - ENKI_MI_SECTIONS_Y_OFFSET ) * ENKI_MI_SIZE_SECTIONS;
 	retVal.z = pChunk_->zPos * ENKI_MI_SIZE_SECTIONS;
 	return retVal;
 }

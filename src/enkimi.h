@@ -162,7 +162,9 @@ void enkiRegionFileFreeAllocations( enkiRegionFile* pRegionFile_ );
 // Note that both NULL gives 0.
 int enkiAreStringsEqual( const char* lhs_, const char* rhs_ );
 
-#define ENKI_MI_NUM_SECTIONS_PER_CHUNK 16
+// World height changes (1.17 21w06a) increase num sections to a potential 256 (-128 to 127 as Y uses signed byte)
+#define ENKI_MI_NUM_SECTIONS_PER_CHUNK 256
+#define ENKI_MI_SECTIONS_Y_OFFSET 128
 #define ENKI_MI_SIZE_SECTIONS 16
 
 typedef struct enkiMICoordinate_s

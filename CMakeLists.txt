@@ -2,14 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 project( enkiMI )
 
-include_directories ("${PROJECT_SOURCE_DIR}/src")
-
-set( ENKIMI_SRC
-     example/example.c
-     src/miniz.h
-	 src/miniz.c
-	 src/enkimi.h
-	 src/enkimi.c
-	 )
-	 
-add_executable( example ${ENKIMI_SRC} )
+#now our enkiMI target is available to everything below
+add_subdirectory(src)
+option(ENKIMI_ENABLE_EXAMPLE "Enable the enkiMI project example executable target" OFF)
+if(ENKIMI_ENABLE_EXAMPLE)
+	add_subdirectory(example)
+endif()

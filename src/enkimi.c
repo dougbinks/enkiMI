@@ -2190,7 +2190,10 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 	{
 		// reset to empty as did not find required information
 		// memory allocation will be freed when stream freed
+		// we keep data version around to enable this to be read out
+		int32_t dataVersion = chunk.dataVersion;
 		enkiChunkInit( &chunk );
+		chunk.dataVersion = dataVersion;
 	}
 	return chunk;
 }

@@ -2004,8 +2004,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 		{
 			chunk.dataVersion = enkiNBTReadInt(pStream_ );
 		}
-
-		if( enkiAreStringsEqual( "Level", pStream_->currentTag.pName ) )
+		else if( enkiAreStringsEqual( "Level", pStream_->currentTag.pName ) )
 		{
 			int foundXPos = 0;
 			int foundZPos = 0;
@@ -2013,17 +2012,17 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 			int level = pStream_->level;
 			while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > level )
 			{
-				if( enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
+				if( 0 == foundXPos && enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
 				{
 					foundXPos = 1;
 					chunk.xPos = enkiNBTReadInt32( pStream_ );
 				}
-				else if( enkiAreStringsEqual( "zPos", pStream_->currentTag.pName ) )
+				else if( 0 == foundZPos && enkiAreStringsEqual( "zPos", pStream_->currentTag.pName ) )
 				{
 					foundZPos = 1;
 					chunk.zPos = enkiNBTReadInt32( pStream_ );
 				}
-				else if( enkiAreStringsEqual( "Sections", pStream_->currentTag.pName ) )
+				else if( 0 == foundSection && enkiAreStringsEqual( "Sections", pStream_->currentTag.pName ) )
 				{
 					foundSection = 1;
 					int32_t levelParent = pStream_->level;
@@ -2038,39 +2037,38 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						{
 							break;
 						}
-
-						if( enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
+						else if( NULL == pBlocks && enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
 						{
 							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pBlocks = pStream_->pCurrPos;
 						}
-						// TODO: process Data and Add sections
+						// TODO: process Add section
 						 // https://minecraft.fandom.com/el/wiki/Chunk_format
 						// Add: May not exist. 2048 bytes of additional block ID data. The value to add to (combine with) the above block ID to form the true block ID in the range 0 to 4095. 4 bits per block. Combining is done by shifting this value to the left 8 bits and then adding it to the block ID from above.
-                        // Data: 2048 bytes of block data additionally defining parts of the terrain. 4 bits per block.
-						if( enkiAreStringsEqual( "Add", pStream_->currentTag.pName ) )
+						else if( enkiAreStringsEqual( "Add", pStream_->currentTag.pName ) )
 						{
 							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							// NOT YET HANDLED
 						}
-						if( enkiAreStringsEqual( "Data", pStream_->currentTag.pName ) )
+                        // Data: 2048 bytes of block data additionally defining parts of the terrain. 4 bits per block.
+						else if( NULL == pData && enkiAreStringsEqual( "Data", pStream_->currentTag.pName ) )
 						{
 							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pData = pStream_->pCurrPos;
 						}
-						if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
+						else if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
 						{
 							// sectionY is not always present, and may indicate a start point.
 							// For example, can find sectionY = -1 as first section, then next
 							// section has data but no sectionY.
 							sectionY = enkiNBTReadInt8( pStream_ );
 						}
-						if( enkiAreStringsEqual( "BlockStates", pStream_->currentTag.pName ) )
+						else if( NULL == pBlockStates && enkiAreStringsEqual( "BlockStates", pStream_->currentTag.pName ) )
 						{
 							sectionPalette.blockArraySize = enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pBlockStates = pStream_->pCurrPos;
 						}
-						if( enkiAreStringsEqual( "Palette", pStream_->currentTag.pName ) )
+						else if( 0 == sectionPalette.size && enkiAreStringsEqual( "Palette", pStream_->currentTag.pName ) )
 						{
 							sectionPalette.size = (uint32_t)pStream_->currentTag.listNumItems;
 							uint32_t numBits = 4;
@@ -2139,7 +2137,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 								}
 							}
 						}
-						if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelParent + 1 )
+						else if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelParent + 1 )
 						{
 							int32_t sectionIndex = (int32_t)sectionY + ENKI_MI_SECTIONS_Y_OFFSET;
 							if( sectionIndex >= 0 && sectionIndex < ENKI_MI_NUM_SECTIONS_PER_CHUNK )

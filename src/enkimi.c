@@ -1998,19 +1998,160 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 	enkiChunkBlockData chunk;
 	enkiChunkInit( &chunk );
 	int foundSectionData = 0;
+	int foundXPos = 0;
+	int foundZPos = 0;
+	int foundSections = 0;
+	int yPos = 0;
 	while( enkiNBTReadNextTag( pStream_ ) )
 	{
+		// Note that NBT data is stored in a somewhat random order so DataVersion might be at end
+		// thus we cannot use it to decide parsing route without a multi-pass solution
 		if( enkiAreStringsEqual( "DataVersion", pStream_->currentTag.pName ) )
 		{
 			chunk.dataVersion = enkiNBTReadInt(pStream_ );
 		}
+		else if( 0 == foundXPos && enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
+		{
+			// In data version 2844+ xPos is at level 0
+			foundXPos = 1;
+			chunk.xPos = enkiNBTReadInt32( pStream_ );
+		}
+		else if( 0 == foundZPos && enkiAreStringsEqual( "zPos", pStream_->currentTag.pName ) )
+		{
+			// In data version 2844+ yPos is at level 0
+			foundZPos = 1;
+			chunk.zPos = enkiNBTReadInt32( pStream_ );
+		}
+		else if( enkiAreStringsEqual( "yPos", pStream_->currentTag.pName ) )
+		{
+			// yPos appears to indicate smallest y index, currently do not use
+			yPos = enkiNBTReadInt32( pStream_ );
+		}
+		else if(  0 == foundSections && enkiAreStringsEqual( "sections", pStream_->currentTag.pName ) )
+		{
+			// In data version 2844+ the block data is stored under just a sections
+			foundSections = 1;
+			int8_t sectionY = 0;
+			uint8_t* pBlockStates = NULL;
+			enkiChunkSectionPalette sectionPalette = {0};
+			int32_t levelSections = pStream_->level;
+			while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelSections )
+			{
+				if( enkiAreStringsEqual( "block_states", pStream_->currentTag.pName ) )
+				{
+					// In data version 2844+ each section is under block_states
+					int32_t levelBlock_states = pStream_->level;
+					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelBlock_states )
+					{
+						if( NULL == pBlockStates && enkiAreStringsEqual( "data", pStream_->currentTag.pName ) )
+						{
+							sectionPalette.blockArraySize = enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
+							pBlockStates = pStream_->pCurrPos;
+						}
+						else if( 0 == sectionPalette.size && enkiAreStringsEqual( "palette", pStream_->currentTag.pName ) )
+						{
+							sectionPalette.size = (uint32_t)pStream_->currentTag.listNumItems;
+							uint32_t numBits = 4;
+							uint32_t test = (sectionPalette.size-1) >> 4;
+							while( test )
+							{
+								test = test >> 1;
+								++numBits;
+							}
+							sectionPalette.numBitsPerBlock = numBits;
+
+							sectionPalette.pDefaultBlockIndex = (int32_t*)malloc(sizeof(int32_t)*sectionPalette.size);
+							enkiNBTAddAllocation( pStream_, sectionPalette.pDefaultBlockIndex );
+							sectionPalette.pNamespaceIDStrings = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.size);
+							enkiNBTAddAllocation( pStream_, sectionPalette.pNamespaceIDStrings );
+							sectionPalette.pBlockStateProperties = (enkiMIProperties*)malloc(sizeof(enkiMIProperties)*sectionPalette.size);
+							memset( sectionPalette.pBlockStateProperties, 0, sizeof(enkiMIProperties)*sectionPalette.size );
+							enkiNBTAddAllocation( pStream_, sectionPalette.pBlockStateProperties );
+
+							// read palettes
+							int levelPalette = pStream_->level;
+   						    int32_t paletteNum = 0;
+							while(     enkiNBTReadNextTag( pStream_ )
+									&& levelPalette < pStream_->level )
+							{
+								paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem - 1;
+								assert( paletteNum >= 0 );
+								assert( paletteNum < (int32_t)sectionPalette.size );
+								if(   pStream_->currentTag.tagId == enkiNBTTAG_String
+									&& enkiAreStringsEqual( "Name", pStream_->currentTag.pName ) )
+								{
+									enkiNBTString paletteEntry = enkiNBTReadString( pStream_ );
+									// find in palette
+									// enkiMIBlockID defaultBlockIDs[]
+									sectionPalette.pDefaultBlockIndex[ paletteNum ] = -1;
+									sectionPalette.pNamespaceIDStrings[ paletteNum ] = paletteEntry;
+									for( uint32_t id=0; id <numDefaultNamespaceAndBlockIDs; ++id )
+									{
+										size_t len = strlen( defaultNamespaceAndBlockIDs[id].pNamespaceID );
+										if(    len == paletteEntry.size
+											&& 0 == memcmp( defaultNamespaceAndBlockIDs[id].pNamespaceID, paletteEntry.pStrNotNullTerminated, len ) )
+										{
+											sectionPalette.pDefaultBlockIndex[ paletteNum ] = id;
+											break;
+										}
+									}
+								}
+								if( enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) )
+								{
+									int levelProperties = pStream_->level;
+									uint32_t numProperties = 0;
+									while( enkiNBTReadNextTag( pStream_ )
+										  && levelProperties < pStream_->level )
+									{
+										if( pStream_->currentTag.tagId == enkiNBTTAG_String )
+										{
+											if( numProperties < ENKI_MI_MAX_PROPERTIES )
+											{
+												sectionPalette.pBlockStateProperties[ paletteNum ].properties[ numProperties ].pName = pStream_->currentTag.pName;
+												sectionPalette.pBlockStateProperties[ paletteNum ].properties[ numProperties ].value = enkiNBTReadString( pStream_ );
+												++sectionPalette.pBlockStateProperties[ paletteNum ].size;
+											}
+											++numProperties;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				else if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
+				{
+					// sectionY is not always present, and may indicate a start point.
+					// For example, can find sectionY = -1 as first section, then next
+					// section has data but no sectionY.
+					sectionY = enkiNBTReadInt8( pStream_ );
+				}
+				else if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelSections + 1 )
+				{
+					// Section data is stored in compound tags under sections
+					// So TAG_End found at levelSections+1 is the end of one section
+					int32_t sectionIndex = (int32_t)sectionY + ENKI_MI_SECTIONS_Y_OFFSET;
+					if( sectionIndex >= 0 && sectionIndex < ENKI_MI_NUM_SECTIONS_PER_CHUNK )
+					{
+						// if( pBlockStates && sectionPalette.size )
+						{
+							chunk.countOfSections++;
+							chunk.palette[ sectionIndex ]  = sectionPalette;
+							chunk.sections[ sectionIndex ] = pBlockStates;
+							pBlockStates = NULL;
+							memset( &sectionPalette, 0, sizeof(sectionPalette) );
+						}
+					}
+					++sectionY;
+				}
+			}
+
+		}
 		else if( enkiAreStringsEqual( "Level", pStream_->currentTag.pName ) )
 		{
-			int foundXPos = 0;
-			int foundZPos = 0;
-			int foundSection = 0;
-			int level = pStream_->level;
-			while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > level )
+			// Pre data version 2844 the block data is stored under a Level tag
+			int levelLevel = pStream_->level;
+			while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelLevel ) // Last tag is TAG_End which is safe to read and skip
 			{
 				if( 0 == foundXPos && enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
 				{
@@ -2022,22 +2163,18 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 					foundZPos = 1;
 					chunk.zPos = enkiNBTReadInt32( pStream_ );
 				}
-				else if( 0 == foundSection && enkiAreStringsEqual( "Sections", pStream_->currentTag.pName ) )
+				else if( 0 == foundSections && enkiAreStringsEqual( "Sections", pStream_->currentTag.pName ) )
 				{
-					foundSection = 1;
-					int32_t levelParent = pStream_->level;
+					foundSections = 1;
 					int8_t sectionY = 0;
 					uint8_t* pBlocks = NULL;
 					uint8_t* pData = NULL;
 					uint8_t* pBlockStates = NULL;
 					enkiChunkSectionPalette sectionPalette = {0};
-					do
+					int32_t levelSections = pStream_->level;
+					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelSections ) // Last tag is TAG_End which is safe to read and skip
 					{
-						if( 0 == enkiNBTReadNextTag( pStream_ ) )
-						{
-							break;
-						}
-						else if( NULL == pBlocks && enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
+						if( NULL == pBlocks && enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
 						{
 							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pBlocks = pStream_->pCurrPos;
@@ -2047,7 +2184,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						// Add: May not exist. 2048 bytes of additional block ID data. The value to add to (combine with) the above block ID to form the true block ID in the range 0 to 4095. 4 bits per block. Combining is done by shifting this value to the left 8 bits and then adding it to the block ID from above.
 						else if( enkiAreStringsEqual( "Add", pStream_->currentTag.pName ) )
 						{
-							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
+							// enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							// NOT YET HANDLED
 						}
                         // Data: 2048 bytes of block data additionally defining parts of the terrain. 4 bits per block.
@@ -2137,8 +2274,10 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 								}
 							}
 						}
-						else if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelParent + 1 )
+						else if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelSections + 1 )
 						{
+						    // Section data is stored in compound tags under sections
+							// So TAG_End found at levelSections+1 is the end of one section
 							int32_t sectionIndex = (int32_t)sectionY + ENKI_MI_SECTIONS_Y_OFFSET;
 							if( sectionIndex >= 0 && sectionIndex < ENKI_MI_NUM_SECTIONS_PER_CHUNK )
 							{
@@ -2166,21 +2305,20 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 							}
 							++sectionY;
 						}
-					} while(  pStream_->level > levelParent );
-				}
-
-				if( foundXPos && foundZPos && foundSection )
-				{
-					foundSectionData = 1;
-					break;
+					}
 				}
 			}
+		}
+		if( foundXPos && foundZPos && foundSections )
+		{
+			// have all required data
+			foundSectionData = 1;
 		}
 
 		if( foundSectionData && chunk.dataVersion )
 		{
-			// chunk complete
-			return chunk;
+			// chunk complete with all data we use
+			break;
 		}
 	}
 
@@ -2233,7 +2371,7 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 		// Versions prior to 1.16 (DataVersion 2556) have block elements containing values stretching over multiple 64-bit fields.
 		// 1.16 and above do not.
 		uint32_t blockArrayValue = 0;
-		if( pChunk_->dataVersion >= 2556 )
+		if( pChunk_->dataVersion >= 2556 && pSection ) // pSection can be NULL if palette only has one entry
 		{
 			// do not need to handle bits spread across two uint64_t values
 			uint32_t numPer64 = 64 / numBits;

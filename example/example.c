@@ -107,11 +107,11 @@ int main( int argc, const char * argv[])
 			        fprintf( fpOutput, "    Non empty section at xyz{ %d, %d, %d } \n", sectionOrigin.x, sectionOrigin.y, sectionOrigin.z );
 					enkiMICoordinate sPos;
 					// note order x then z then y iteration for cache efficiency
-					for( sPos.y = 0; sPos.y < ENKI_MI_NUM_SECTIONS_PER_CHUNK; ++sPos.y )
+					for( sPos.y = 0; sPos.y < ENKI_MI_SIZE_SECTIONS; ++sPos.y )
 					{
-						for( sPos.z = 0; sPos.z < ENKI_MI_NUM_SECTIONS_PER_CHUNK; ++sPos.z )
+						for( sPos.z = 0; sPos.z < ENKI_MI_SIZE_SECTIONS; ++sPos.z )
 						{
-							for( sPos.x = 0; sPos.x < ENKI_MI_NUM_SECTIONS_PER_CHUNK; ++sPos.x )
+							for( sPos.x = 0; sPos.x < ENKI_MI_SIZE_SECTIONS; ++sPos.x )
 							{
 								uint8_t voxel = enkiGetChunkSectionVoxel( &aChunk, section, sPos  );
 								if( voxel )

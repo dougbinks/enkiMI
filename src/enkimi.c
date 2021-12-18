@@ -21,6 +21,8 @@
 
 #include "enkimi.h"
 
+#include <math.h>
+
 // Add allocation pAllocation_ to stream, which will be freed using enkiNBTFreeAllocations
 void enkiNBTAddAllocation( enkiNBTDataStream* pStream_, void* pAllocation_ );
 
@@ -1992,6 +1994,72 @@ void enkiChunkInit( enkiChunkBlockData* pChunk_ )
 	memset( pChunk_, 0, sizeof( enkiChunkBlockData ) );
 }
 
+
+static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalette* pSectionPalette_ )
+{
+	pSectionPalette_->size = (uint32_t)pStream_->currentTag.listNumItems;
+	float numBitsFloat = floorf( 1.0f + log2f( fmaxf( (float)( pSectionPalette_->size - 1 ), 15.0f) ) ); // 15.0f == 0x1111 so takes 4bits. log2f(15.0f) == 3.9f, add one and take floor gives numbits
+	uint32_t numBits = (uint32_t)numBitsFloat;
+	pSectionPalette_->numBitsPerBlock = numBits;
+
+	pSectionPalette_->pDefaultBlockIndex = (int32_t*)malloc(sizeof(int32_t)*pSectionPalette_->size);
+	enkiNBTAddAllocation( pStream_, pSectionPalette_->pDefaultBlockIndex );
+	pSectionPalette_->pNamespaceIDStrings = (enkiNBTString*)malloc(sizeof(enkiNBTString)*pSectionPalette_->size);
+	enkiNBTAddAllocation( pStream_, pSectionPalette_->pNamespaceIDStrings );
+	pSectionPalette_->pBlockStateProperties = (enkiMIProperties*)malloc(sizeof(enkiMIProperties)*pSectionPalette_->size);
+	memset( pSectionPalette_->pBlockStateProperties, 0, sizeof(enkiMIProperties)*pSectionPalette_->size );
+	enkiNBTAddAllocation( pStream_, pSectionPalette_->pBlockStateProperties );
+
+	// read palettes
+	int levelPalette = pStream_->level;
+	int32_t paletteNum = 0;
+	while(     enkiNBTReadNextTag( pStream_ )
+			&& levelPalette < pStream_->level )
+	{
+		paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem - 1;
+		assert( paletteNum >= 0 );
+		assert( paletteNum < (int32_t)pSectionPalette_->size );
+		if(   pStream_->currentTag.tagId == enkiNBTTAG_String
+			&& enkiAreStringsEqual( "Name", pStream_->currentTag.pName ) )
+		{
+			enkiNBTString paletteEntry = enkiNBTReadString( pStream_ );
+			// find in palette
+			// enkiMIBlockID defaultBlockIDs[]
+			pSectionPalette_->pDefaultBlockIndex[ paletteNum ] = -1;
+			pSectionPalette_->pNamespaceIDStrings[ paletteNum ] = paletteEntry;
+			for( uint32_t id=0; id <numDefaultNamespaceAndBlockIDs; ++id )
+			{
+				size_t len = strlen( defaultNamespaceAndBlockIDs[id].pNamespaceID );
+				if(    len == paletteEntry.size
+					&& 0 == memcmp( defaultNamespaceAndBlockIDs[id].pNamespaceID, paletteEntry.pStrNotNullTerminated, len ) )
+				{
+					pSectionPalette_->pDefaultBlockIndex[ paletteNum ] = id;
+					break;
+				}
+			}
+		}
+		if( enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) )
+		{
+			int levelProperties = pStream_->level;
+			uint32_t numProperties = 0;
+			while( enkiNBTReadNextTag( pStream_ )
+					&& levelProperties < pStream_->level )
+			{
+				if( pStream_->currentTag.tagId == enkiNBTTAG_String )
+				{
+					if( numProperties < ENKI_MI_MAX_PROPERTIES )
+					{
+						pSectionPalette_->pBlockStateProperties[ paletteNum ].properties[ numProperties ].pName = pStream_->currentTag.pName;
+						pSectionPalette_->pBlockStateProperties[ paletteNum ].properties[ numProperties ].value = enkiNBTReadString( pStream_ );
+						++pSectionPalette_->pBlockStateProperties[ paletteNum ].size;
+					}
+					++numProperties;
+				}
+			}
+		}
+	}
+}
+
 // see https://minecraft.fandom.com/wiki/Chunk_format
 enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 {
@@ -2050,72 +2118,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						}
 						else if( 0 == sectionPalette.size && enkiAreStringsEqual( "palette", pStream_->currentTag.pName ) )
 						{
-							sectionPalette.size = (uint32_t)pStream_->currentTag.listNumItems;
-							uint32_t numBits = 4;
-							uint32_t test = (sectionPalette.size-1) >> 4;
-							while( test )
-							{
-								test = test >> 1;
-								++numBits;
-							}
-							sectionPalette.numBitsPerBlock = numBits;
-
-							sectionPalette.pDefaultBlockIndex = (int32_t*)malloc(sizeof(int32_t)*sectionPalette.size);
-							enkiNBTAddAllocation( pStream_, sectionPalette.pDefaultBlockIndex );
-							sectionPalette.pNamespaceIDStrings = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.size);
-							enkiNBTAddAllocation( pStream_, sectionPalette.pNamespaceIDStrings );
-							sectionPalette.pBlockStateProperties = (enkiMIProperties*)malloc(sizeof(enkiMIProperties)*sectionPalette.size);
-							memset( sectionPalette.pBlockStateProperties, 0, sizeof(enkiMIProperties)*sectionPalette.size );
-							enkiNBTAddAllocation( pStream_, sectionPalette.pBlockStateProperties );
-
-							// read palettes
-							int levelPalette = pStream_->level;
-   						    int32_t paletteNum = 0;
-							while(     enkiNBTReadNextTag( pStream_ )
-									&& levelPalette < pStream_->level )
-							{
-								paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem - 1;
-								assert( paletteNum >= 0 );
-								assert( paletteNum < (int32_t)sectionPalette.size );
-								if(   pStream_->currentTag.tagId == enkiNBTTAG_String
-									&& enkiAreStringsEqual( "Name", pStream_->currentTag.pName ) )
-								{
-									enkiNBTString paletteEntry = enkiNBTReadString( pStream_ );
-									// find in palette
-									// enkiMIBlockID defaultBlockIDs[]
-									sectionPalette.pDefaultBlockIndex[ paletteNum ] = -1;
-									sectionPalette.pNamespaceIDStrings[ paletteNum ] = paletteEntry;
-									for( uint32_t id=0; id <numDefaultNamespaceAndBlockIDs; ++id )
-									{
-										size_t len = strlen( defaultNamespaceAndBlockIDs[id].pNamespaceID );
-										if(    len == paletteEntry.size
-											&& 0 == memcmp( defaultNamespaceAndBlockIDs[id].pNamespaceID, paletteEntry.pStrNotNullTerminated, len ) )
-										{
-											sectionPalette.pDefaultBlockIndex[ paletteNum ] = id;
-											break;
-										}
-									}
-								}
-								if( enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) )
-								{
-									int levelProperties = pStream_->level;
-									uint32_t numProperties = 0;
-									while( enkiNBTReadNextTag( pStream_ )
-										  && levelProperties < pStream_->level )
-									{
-										if( pStream_->currentTag.tagId == enkiNBTTAG_String )
-										{
-											if( numProperties < ENKI_MI_MAX_PROPERTIES )
-											{
-												sectionPalette.pBlockStateProperties[ paletteNum ].properties[ numProperties ].pName = pStream_->currentTag.pName;
-												sectionPalette.pBlockStateProperties[ paletteNum ].properties[ numProperties ].value = enkiNBTReadString( pStream_ );
-												++sectionPalette.pBlockStateProperties[ paletteNum ].size;
-											}
-											++numProperties;
-										}
-									}
-								}
-							}
+							LoadChunkPalette( pStream_, &sectionPalette );
 						}
 					}
 				}
@@ -2207,72 +2210,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						}
 						else if( 0 == sectionPalette.size && enkiAreStringsEqual( "Palette", pStream_->currentTag.pName ) )
 						{
-							sectionPalette.size = (uint32_t)pStream_->currentTag.listNumItems;
-							uint32_t numBits = 4;
-							uint32_t test = (sectionPalette.size-1) >> 4;
-							while( test )
-							{
-								test = test >> 1;
-								++numBits;
-							}
-							sectionPalette.numBitsPerBlock = numBits;
-
-							sectionPalette.pDefaultBlockIndex = (int32_t*)malloc(sizeof(int32_t)*sectionPalette.size);
-							enkiNBTAddAllocation( pStream_, sectionPalette.pDefaultBlockIndex );
-							sectionPalette.pNamespaceIDStrings = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.size);
-							enkiNBTAddAllocation( pStream_, sectionPalette.pNamespaceIDStrings );
-							sectionPalette.pBlockStateProperties = (enkiMIProperties*)malloc(sizeof(enkiMIProperties)*sectionPalette.size);
-							memset( sectionPalette.pBlockStateProperties, 0, sizeof(enkiMIProperties)*sectionPalette.size );
-							enkiNBTAddAllocation( pStream_, sectionPalette.pBlockStateProperties );
-
-							// read palettes
-							int levelPalette = pStream_->level;
-   						    int32_t paletteNum = 0;
-							while(     enkiNBTReadNextTag( pStream_ )
-									&& levelPalette < pStream_->level )
-							{
-								paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem - 1;
-								assert( paletteNum >= 0 );
-								assert( paletteNum < (int32_t)sectionPalette.size );
-								if(   pStream_->currentTag.tagId == enkiNBTTAG_String
-									&& enkiAreStringsEqual( "Name", pStream_->currentTag.pName ) )
-								{
-									enkiNBTString paletteEntry = enkiNBTReadString( pStream_ );
-									// find in palette
-									// enkiMIBlockID defaultBlockIDs[]
-									sectionPalette.pDefaultBlockIndex[ paletteNum ] = -1;
-									sectionPalette.pNamespaceIDStrings[ paletteNum ] = paletteEntry;
-									for( uint32_t id=0; id <numDefaultNamespaceAndBlockIDs; ++id )
-									{
-										size_t len = strlen( defaultNamespaceAndBlockIDs[id].pNamespaceID );
-										if(    len == paletteEntry.size
-											&& 0 == memcmp( defaultNamespaceAndBlockIDs[id].pNamespaceID, paletteEntry.pStrNotNullTerminated, len ) )
-										{
-											sectionPalette.pDefaultBlockIndex[ paletteNum ] = id;
-											break;
-										}
-									}
-								}
-								if( enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) )
-								{
-									int levelProperties = pStream_->level;
-									uint32_t numProperties = 0;
-									while( enkiNBTReadNextTag( pStream_ )
-										  && levelProperties < pStream_->level )
-									{
-										if( pStream_->currentTag.tagId == enkiNBTTAG_String )
-										{
-											if( numProperties < ENKI_MI_MAX_PROPERTIES )
-											{
-												sectionPalette.pBlockStateProperties[ paletteNum ].properties[ numProperties ].pName = pStream_->currentTag.pName;
-												sectionPalette.pBlockStateProperties[ paletteNum ].properties[ numProperties ].value = enkiNBTReadString( pStream_ );
-												++sectionPalette.pBlockStateProperties[ paletteNum ].size;
-											}
-											++numProperties;
-										}
-									}
-								}
-							}
+							LoadChunkPalette( pStream_, &sectionPalette );
 						}
 						else if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelSections + 1 )
 						{

@@ -2225,9 +2225,6 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 									assert( sectionPalette.size == 0 ); // a given chunk should use the same format
 									chunk.sections[ sectionIndex ]   = pBlocks;
 									chunk.dataValues[ sectionIndex ] = pData;
-									pBlocks = NULL;
-									pData   = NULL;
-									pBlockStates = NULL;
 								}
 								if( pBlockStates  && sectionPalette.size )
 								{
@@ -2235,12 +2232,13 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 									assert( pBlocks == NULL ); // a given chunk should use the same format
 									chunk.palette[ sectionIndex ]  = sectionPalette;
 									chunk.sections[ sectionIndex ] = pBlockStates;
-									pBlocks = NULL;
-									pData   = NULL;
-									pBlockStates = NULL;
-									memset( &sectionPalette, 0, sizeof(sectionPalette) );
 								}
 							}
+							pBlocks = NULL;
+							pData   = NULL;
+							pBlockStates = NULL;
+							memset( &sectionPalette, 0, sizeof(sectionPalette) ); // allocations are added to the stream so do not need to free here
+
 							++sectionY;
 						}
 					}

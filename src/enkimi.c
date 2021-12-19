@@ -2368,7 +2368,7 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 				uint64_t val_2       = val64_2;
 				uint32_t valmasked_2 = (uint32_t)( val_2 & mask_2 );
 
-				valmasked |= valmasked_2;
+				valmasked |= ( valmasked_2 << numBitsIn64 );
 			}
 			blockArrayValue = valmasked;
 			assert( (uint32_t)pChunk_->palette[ section_ ].size > blockArrayValue );

@@ -2377,12 +2377,13 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 		if( (uint32_t)pChunk_->palette[ section_ ].size > blockArrayValue )
 		{
 			int32_t index = pChunk_->palette[ section_ ].pDefaultBlockIndex[ blockArrayValue ];
-			uint32_t paletteValue = 1; // default to 1, stone
+			retVal.blockID = 1; // default to 1, stone
 			if( index >= 0 )
 			{
-				paletteValue = defaultNamespaceAndBlockIDs[index].blockID;
+				enkiMINamespaceAndBlockID* pNamespaceAndBlockID = &defaultNamespaceAndBlockIDs[index];
+				retVal.blockID   = pNamespaceAndBlockID->blockID;
+				retVal.dataValue = pNamespaceAndBlockID->dataValue;
 			}
-			retVal.blockID = (uint8_t)paletteValue;
 			retVal.paletteIndex = (int32_t)blockArrayValue;
 		}
 

@@ -22,6 +22,7 @@
 #include "enkimi.h"
 
 #include <math.h>
+#include <assert.h>
 
 // Add allocation pAllocation_ to stream, which will be freed using enkiNBTFreeAllocations
 void enkiNBTAddAllocation( enkiNBTDataStream* pStream_, void* pAllocation_ );
@@ -2294,6 +2295,11 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 	retVal.blockID     = 0;
 	retVal.dataValue   = 0;
 	retVal.paletteIndex = -1;
+
+	assert( section_ < ENKI_MI_NUM_SECTIONS_PER_CHUNK );
+	assert( 0 <= sectionOffset_.x && sectionOffset_.x < ENKI_MI_SIZE_SECTIONS );
+	assert( 0 <= sectionOffset_.y && sectionOffset_.y < ENKI_MI_SIZE_SECTIONS );
+	assert( 0 <= sectionOffset_.z && sectionOffset_.z < ENKI_MI_SIZE_SECTIONS );
 
 	uint8_t* pSection    = pChunk_->sections[ section_ ];
 	uint32_t paletteSize = pChunk_->palette[ section_ ].size;

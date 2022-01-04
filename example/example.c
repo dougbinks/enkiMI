@@ -23,7 +23,22 @@
 #endif
 
 #include <stdio.h>
+#include <stdarg.h>
 #include "enkimi.h"
+
+
+void stdout_f_printf( FILE* fpOutput_, const char *format, ... )
+{
+	va_list args1, args2;
+    va_start(args1, format);
+    va_copy(args2, args1);
+
+	vfprintf( fpOutput_, format, args1 );
+	va_end(args1);
+
+	vprintf( format, args2 );
+	va_end(args2);
+}
 
 
 void PrintStreamStructureToFile( enkiNBTDataStream* pStream_, FILE* fpOutput_ )
@@ -34,30 +49,30 @@ void PrintStreamStructureToFile( enkiNBTDataStream* pStream_, FILE* fpOutput_ )
 		{
 			for( int i = 0; i <= pStream_->level; i++ )
 			{
-				fprintf( fpOutput_, "\t" );
+				stdout_f_printf( fpOutput_, "\t" );
 			}
 
-			fprintf( fpOutput_, "%s ", enkiGetNBTTagHeaderIDAsString( pStream_->currentTag ) );
+			stdout_f_printf( fpOutput_, "%s ", enkiGetNBTTagHeaderIDAsString( pStream_->currentTag ) );
 			if( pStream_->currentTag.pName != NULL )
 			{
-				fprintf( fpOutput_, "%s", pStream_->currentTag.pName );
+				stdout_f_printf( fpOutput_, "%s", pStream_->currentTag.pName );
 			}
 			if( pStream_->level >= 0 )	// if there is a parent
 			{
-				fprintf( fpOutput_, " Parent = " );
+				stdout_f_printf( fpOutput_, " Parent = " );
 				for( int i = 0; i <= pStream_->level; i++ )
 				{
 					if( i )
 					{
-						fprintf( fpOutput_, "." );
+						stdout_f_printf( fpOutput_, "." );
 					}
 					if( pStream_->parentTags[ i ].pName != NULL )
 					{
-						fprintf( fpOutput_, "%s", pStream_->parentTags[ i ].pName );
+						stdout_f_printf( fpOutput_, "%s", pStream_->parentTags[ i ].pName );
 					}
 				}
 			}
-			fprintf( fpOutput_, "\n" );
+			stdout_f_printf( fpOutput_, "\n" );
 		}
 	}
 }
@@ -95,7 +110,7 @@ int main( int argc, const char * argv[])
 		{
 			enkiChunkBlockData aChunk = enkiNBTReadChunk( &stream );
 			enkiMICoordinate chunkOriginPos = enkiGetChunkOrigin( &aChunk ); // y always 0
-			fprintf( fpOutput, "Chunk at xyz{ %d, %d, %d }  Number of sections: %d \n", chunkOriginPos.x, chunkOriginPos.y, chunkOriginPos.z, aChunk.countOfSections );
+			stdout_f_printf( fpOutput, "Chunk at xyz{ %d, %d, %d }  Number of sections: %d \n", chunkOriginPos.x, chunkOriginPos.y, chunkOriginPos.z, aChunk.countOfSections );
 
 			// iterate through chunk and count non 0 voxels as a demo
 			int64_t numVoxels = 0;
@@ -104,7 +119,7 @@ int main( int argc, const char * argv[])
 				if( aChunk.sections[ section ] )
 				{
 					enkiMICoordinate sectionOrigin = enkiGetChunkSectionOrigin( &aChunk, section );
-			        fprintf( fpOutput, "    Non empty section at xyz{ %d, %d, %d } \n", sectionOrigin.x, sectionOrigin.y, sectionOrigin.z );
+			        stdout_f_printf( fpOutput, "    Non empty section at xyz{ %d, %d, %d } \n", sectionOrigin.x, sectionOrigin.y, sectionOrigin.z );
 					enkiMICoordinate sPos;
 					// note order x then z then y iteration for cache efficiency
 					for( sPos.y = 0; sPos.y < ENKI_MI_SIZE_SECTIONS; ++sPos.y )
@@ -123,7 +138,7 @@ int main( int argc, const char * argv[])
 					}
 				}
 			}
-			fprintf( fpOutput, "   Chunk has %g non zero voxels\n", (float)numVoxels );
+			stdout_f_printf( fpOutput, "   Chunk has %g non zero voxels\n", (float)numVoxels );
 
 			enkiNBTRewind( &stream );
 			PrintStreamStructureToFile( &stream, fpOutput );

@@ -180,8 +180,8 @@ typedef struct enkiMICoordinate_s
 typedef struct enkiMINamespaceAndBlockID_s
 {
 	const char* pNamespaceID; // e.g. "minecraft:stone"
-	uint8_t     blockID;    // block ID returned by enkiGetChunkSectionVoxel and enkiGetChunkSectionVoxelData
-	uint8_t     dataValue;  // dataValue returned by enkiGetChunkSectionVoxelData
+	uint8_t     blockID;      // block ID returned by enkiGetChunkSectionVoxel and enkiGetChunkSectionVoxelData
+	uint8_t     dataValue;    // dataValue returned by enkiGetChunkSectionVoxelData
 } enkiMINamespaceAndBlockID;
 
 typedef struct enkiMIProperty_s {
@@ -236,7 +236,7 @@ enkiMICoordinate enkiGetChunkSectionOrigin( enkiChunkBlockData* pChunk_, int32_t
 // sectionOffset_ is the position from enkiGetChunkSectionOrigin
 // Performs no safety checks.
 // check pChunk_->sections[ section_ ] for NULL first in your code.
-// and ensure sectionOffset_ coords with 0 to ENKI_MI_NUM_SECTIONS_PER_CHUNK
+// and ensure sectionOffset_ coords with 0 to ENKI_MI_SIZE_SECTIONS
 uint8_t enkiGetChunkSectionVoxel( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ );
 
 uint32_t* enkiGetMineCraftPalette(); //returns a 256 array of uint32_t's in uint8_t rgba order.

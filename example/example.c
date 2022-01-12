@@ -24,6 +24,7 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <inttypes.h>
 #include "enkimi.h"
 
 
@@ -55,11 +56,43 @@ void PrintStreamStructureToFile( enkiNBTDataStream* pStream_, FILE* fpOutput_ )
 			stdout_f_printf( fpOutput_, "%s ", enkiGetNBTTagHeaderIDAsString( pStream_->currentTag ) );
 			if( pStream_->currentTag.pName != NULL )
 			{
-				stdout_f_printf( fpOutput_, "%s", pStream_->currentTag.pName );
+				stdout_f_printf( fpOutput_, " name=%s", pStream_->currentTag.pName );
+			}
+			switch( pStream_->currentTag.tagId )
+			{
+			case enkiNBTTAG_Byte:
+				stdout_f_printf( fpOutput_, " val=%d ", (int)enkiNBTReadByte( pStream_ ) );
+				break;
+			case enkiNBTTAG_Short:
+				stdout_f_printf( fpOutput_, " val=%d ", (int)enkiNBTReadShort( pStream_ ) );
+				break;
+			case enkiNBTTAG_Int:
+				stdout_f_printf( fpOutput_, " val=%d ", enkiNBTReadInt( pStream_ ) );
+				break;
+			case enkiNBTTAG_Long:
+				stdout_f_printf( fpOutput_, " val=%" PRId64 " ", enkiNBTReadlong( pStream_ ) );
+				break;
+			case enkiNBTTAG_Float:
+				stdout_f_printf( fpOutput_, " val=%f ", enkiNBTReadFloat( pStream_ ) );
+				break;
+			case enkiNBTTAG_Double:
+				stdout_f_printf( fpOutput_, " val=%F ", enkiNBTReadDouble( pStream_ ) );
+				break;
+			case enkiNBTTAG_String:
+			{
+				enkiNBTString nbtString = enkiNBTReadString( pStream_ );
+				stdout_f_printf( fpOutput_, " val=%.*s ", (int)nbtString.size, nbtString.pStrNotNullTerminated );
+				break;
+			}
+			case enkiNBTTAG_List:
+				stdout_f_printf( fpOutput_, " items=%d ", pStream_->currentTag.listNumItems );
+				break;
+			default:
+				break;
 			}
 			if( pStream_->level >= 0 )	// if there is a parent
 			{
-				stdout_f_printf( fpOutput_, " Parent = " );
+				stdout_f_printf( fpOutput_, " Parent=" );
 				for( int i = 0; i <= pStream_->level; i++ )
 				{
 					if( i )

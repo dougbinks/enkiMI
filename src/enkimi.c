@@ -1818,7 +1818,7 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 	}
 	while( ( pStream_->level >= 0 ) && ( enkiNBTTAG_List == pStream_->parentTags[ pStream_->level ].tagId ) )
 	{
-		if( pStream_->parentTags[ pStream_->level ].listCurrItem == pStream_->parentTags[ pStream_->level ].listNumItems )
+		if( pStream_->parentTags[ pStream_->level ].listCurrItem + 1 == pStream_->parentTags[ pStream_->level ].listNumItems )
 		{
 			pStream_->level--;
 		}
@@ -1826,15 +1826,15 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 		{
 			pStream_->currentTag.tagId = pStream_->parentTags[ pStream_->level ].listItemTagId;
 			pStream_->currentTag.pName = NULL;
+			pStream_->pCurrPos = pStream_->pNextTag; // init current position with nexttag
 			if( enkiNBTTAG_List == pStream_->currentTag.tagId )
 			{
 				pStream_->currentTag.listItemTagId = *(pStream_->pCurrPos++);
 				pStream_->currentTag.listNumItems = enkiNBTReadInt32( pStream_ );
-				pStream_->currentTag.listCurrItem = 0;
+				pStream_->currentTag.listCurrItem = -1;
 				pStream_->pNextTag = pStream_->pCurrPos;
 			}
 			SkipDataToNextTag( pStream_ );
-			pStream_->pCurrPos = pStream_->pNextTag;
 			pStream_->parentTags[ pStream_->level ].listCurrItem++;
 			return 1;
 		}
@@ -1880,7 +1880,7 @@ int enkiNBTReadNextTag( enkiNBTDataStream* pStream_ )
 	{
 		pStream_->currentTag.listItemTagId = *(pStream_->pCurrPos++);
 		pStream_->currentTag.listNumItems = enkiNBTReadInt32( pStream_ );
-		pStream_->currentTag.listCurrItem = 0;
+		pStream_->currentTag.listCurrItem = -1;
 	}
 	pStream_->pNextTag = pStream_->pCurrPos;
 
@@ -2017,7 +2017,7 @@ static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalet
 	while(     enkiNBTReadNextTag( pStream_ )
 			&& levelPalette < pStream_->level )
 	{
-		paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem - 1;
+		paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem;
 		assert( paletteNum >= 0 );
 		assert( paletteNum < (int32_t)pSectionPalette_->size );
 		if(   pStream_->currentTag.tagId == enkiNBTTAG_String
@@ -2110,7 +2110,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 				{
 					// In data version 2844+ each section is under block_states
 					int32_t levelBlock_states = pStream_->level;
-					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelBlock_states )
+					while( enkiNBTReadNextTag( pStream_ ) )
 					{
 						if( NULL == pBlockStates && enkiAreStringsEqual( "data", pStream_->currentTag.pName ) )
 						{
@@ -2121,6 +2121,13 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						{
 							LoadChunkPalette( pStream_, &sectionPalette );
 						}
+
+						// LoadChunkPalette reads gets next tag so check is not else..if
+						if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelBlock_states )
+						{
+							break;
+						}
+
 					}
 				}
 				else if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )

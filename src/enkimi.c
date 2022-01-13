@@ -1998,6 +1998,10 @@ void enkiChunkInit( enkiChunkBlockData* pChunk_ )
 
 static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalette* pSectionPalette_ )
 {
+	if( 0 == pStream_->currentTag.listNumItems )
+	{
+		return;
+	}
 	pSectionPalette_->size = (uint32_t)pStream_->currentTag.listNumItems;
 	float numBitsFloat = floorf( 1.0f + log2f( fmaxf( (float)( pSectionPalette_->size - 1 ), 15.0f) ) ); // 15.0f == 0x1111 so takes 4bits. log2f(15.0f) == 3.9f, add one and take floor gives numbits
 	uint32_t numBits = (uint32_t)numBitsFloat;
@@ -2112,6 +2116,10 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 			uint8_t* pBlockStates = NULL;
 			enkiChunkSectionPalette sectionPalette = {0};
 			int32_t levelSections = pStream_->level;
+			if( 0 == pStream_->currentTag.listNumItems )
+			{
+				continue;
+			}
 			while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelSections )
 			{
 				if( enkiAreStringsEqual( "block_states", pStream_->currentTag.pName ) )
@@ -2190,7 +2198,11 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 					uint8_t* pBlockStates = NULL;
 					enkiChunkSectionPalette sectionPalette = {0};
 					int32_t levelSections = pStream_->level;
-					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelSections ) // Last tag is TAG_End which is safe to read and skip
+					if( 0 == pStream_->currentTag.listNumItems )
+					{
+						continue;
+					}
+					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelSections )
 					{
 
 						if( NULL == pBlocks && enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )

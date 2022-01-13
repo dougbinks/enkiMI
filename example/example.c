@@ -48,9 +48,10 @@ void PrintStreamStructureToFile( enkiNBTDataStream* pStream_, FILE* fpOutput_ )
 	{
 		while( enkiNBTReadNextTag( pStream_ ) )
 		{
+			stdout_f_printf( fpOutput_, "Level=%d ",  pStream_->level );
 			for( int i = 0; i <= pStream_->level; i++ )
 			{
-				stdout_f_printf( fpOutput_, "\t" );
+				stdout_f_printf( fpOutput_, " " );
 			}
 
 			stdout_f_printf( fpOutput_, "%s ", enkiGetNBTTagHeaderIDAsString( pStream_->currentTag ) );

@@ -2017,6 +2017,13 @@ static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalet
 	while(     enkiNBTReadNextTag( pStream_ )
 			&& levelPalette < pStream_->level )
 	{
+		// This is a list of compound tags, ends with enkiNBTTAG_End at levelPalette+1 
+		if( pStream_->currentTag.tagId == enkiNBTTAG_End && pStream_->level == levelPalette + 1 
+			&& pStream_->parentTags[ pStream_->level ].listCurrItem + 1 >=  pStream_->parentTags[ pStream_->level ].listNumItems )
+		{
+			break;
+		}
+
 		paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem;
 		assert( paletteNum >= 0 );
 		assert( paletteNum < (int32_t)pSectionPalette_->size );
@@ -2043,6 +2050,7 @@ static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalet
 		{
 			int levelProperties = pStream_->level;
 			uint32_t numProperties = 0;
+			 // Compound tag, ends with enkiNBTTAG_End at levelProperties
 			while( enkiNBTReadNextTag( pStream_ )
 					&& levelProperties < pStream_->level )
 			{

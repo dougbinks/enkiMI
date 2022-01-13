@@ -2118,7 +2118,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 				{
 					// In data version 2844+ each section is under block_states
 					int32_t levelBlock_states = pStream_->level;
-					while( enkiNBTReadNextTag( pStream_ ) )
+					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelBlock_states )
 					{
 						if( NULL == pBlockStates && enkiAreStringsEqual( "data", pStream_->currentTag.pName ) )
 						{
@@ -2129,13 +2129,6 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						{
 							LoadChunkPalette( pStream_, &sectionPalette );
 						}
-
-						// LoadChunkPalette reads gets next tag so check is not else..if
-						if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelBlock_states )
-						{
-							break;
-						}
-
 					}
 				}
 				else if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
@@ -2162,6 +2155,12 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						}
 					}
 					++sectionY;
+
+					// This is a list of compound tags, ends with enkiNBTTAG_End at levelSections+1 
+					if( pStream_->parentTags[ pStream_->level ].listCurrItem + 1 >=  pStream_->parentTags[ pStream_->level ].listNumItems )
+					{
+						break;
+					}
 				}
 			}
 
@@ -2193,6 +2192,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 					int32_t levelSections = pStream_->level;
 					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelSections ) // Last tag is TAG_End which is safe to read and skip
 					{
+
 						if( NULL == pBlocks && enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
 						{
 							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
@@ -2256,6 +2256,12 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 							memset( &sectionPalette, 0, sizeof(sectionPalette) ); // allocations are added to the stream so do not need to free here
 
 							++sectionY;
+
+							// This is a list of compound tags, ends with enkiNBTTAG_End at levelSections+1 
+							if(  pStream_->parentTags[ pStream_->level ].listCurrItem + 1 >=  pStream_->parentTags[ pStream_->level ].listNumItems )
+							{
+								break;
+							}
 						}
 					}
 				}

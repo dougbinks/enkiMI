@@ -64,8 +64,10 @@ typedef struct enkiNBTTagHeader_s
 	uint8_t tagId;
 } enkiNBTTagHeader;
 
-
+// Get enkiNBTTAG_ID as string
 const char* enkiGetNBTTagIDAsString( uint8_t tagID_ );
+
+// Shorthand for enkiGetNBTTagIDAsString( tagID_.tagId );
 const char* enkiGetNBTTagHeaderIDAsString( enkiNBTTagHeader tagID_ );
 
 typedef struct enkiNBTAllocation_s
@@ -86,7 +88,6 @@ typedef struct enkiNBTDataStream_s
 	uint32_t dataLength;
 	int32_t  level;
 } enkiNBTDataStream;
-
 
 // Initialize stream from memory pointer.
 // pData_ and it's contents should remain valid until 

@@ -2050,7 +2050,8 @@ static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalet
 				}
 			}
 		}
-		if( enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) )
+		if(  enkiNBTTAG_Compound == pStream_->currentTag.tagId 
+			&& enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) )
 		{
 			int levelProperties = pStream_->level;
 			uint32_t numProperties = 0;
@@ -2087,28 +2088,28 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 	{
 		// Note that NBT data is stored in a somewhat random order so DataVersion might be at end
 		// thus we cannot use it to decide parsing route without a multi-pass solution
-		if( enkiAreStringsEqual( "DataVersion", pStream_->currentTag.pName ) )
+		if( enkiNBTTAG_Int == pStream_->currentTag.tagId && enkiAreStringsEqual( "DataVersion", pStream_->currentTag.pName ) )
 		{
 			chunk.dataVersion = enkiNBTReadInt(pStream_ );
 		}
-		else if( 0 == foundXPos && enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
+		else if( enkiNBTTAG_Int == pStream_->currentTag.tagId &&  0 == foundXPos && enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
 		{
 			// In data version 2844+ xPos is at level 0
 			foundXPos = 1;
 			chunk.xPos = enkiNBTReadInt32( pStream_ );
 		}
-		else if( 0 == foundZPos && enkiAreStringsEqual( "zPos", pStream_->currentTag.pName ) )
+		else if( enkiNBTTAG_Int == pStream_->currentTag.tagId && 0 == foundZPos && enkiAreStringsEqual( "zPos", pStream_->currentTag.pName ) )
 		{
 			// In data version 2844+ yPos is at level 0
 			foundZPos = 1;
 			chunk.zPos = enkiNBTReadInt32( pStream_ );
 		}
-		else if( enkiAreStringsEqual( "yPos", pStream_->currentTag.pName ) )
+		else if( enkiNBTTAG_Int == pStream_->currentTag.tagId && enkiAreStringsEqual( "yPos", pStream_->currentTag.pName ) )
 		{
 			// yPos appears to indicate smallest y index, currently do not use
 			yPos = enkiNBTReadInt32( pStream_ );
 		}
-		else if(  0 == foundSections && enkiAreStringsEqual( "sections", pStream_->currentTag.pName ) )
+		else if( enkiNBTTAG_List == pStream_->currentTag.tagId && 0 == foundSections && enkiAreStringsEqual( "sections", pStream_->currentTag.pName ) )
 		{
 			// In data version 2844+ the block data is stored under just a sections
 			foundSections = 1;
@@ -2122,24 +2123,24 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 			}
 			while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelSections )
 			{
-				if( enkiAreStringsEqual( "block_states", pStream_->currentTag.pName ) )
+				if( enkiNBTTAG_Compound == pStream_->currentTag.tagId && enkiAreStringsEqual( "block_states", pStream_->currentTag.pName ) )
 				{
 					// In data version 2844+ each section is under block_states
 					int32_t levelBlock_states = pStream_->level;
 					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelBlock_states )
 					{
-						if( NULL == pBlockStates && enkiAreStringsEqual( "data", pStream_->currentTag.pName ) )
+						if( enkiNBTTAG_Long_Array == pStream_->currentTag.tagId && NULL == pBlockStates && enkiAreStringsEqual( "data", pStream_->currentTag.pName ) )
 						{
 							sectionPalette.blockArraySize = enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pBlockStates = pStream_->pCurrPos;
 						}
-						else if( 0 == sectionPalette.size && enkiAreStringsEqual( "palette", pStream_->currentTag.pName ) )
+						else if( enkiNBTTAG_List == pStream_->currentTag.tagId && 0 == sectionPalette.size && enkiAreStringsEqual( "palette", pStream_->currentTag.pName ) )
 						{
 							LoadChunkPalette( pStream_, &sectionPalette );
 						}
 					}
 				}
-				else if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
+				else if( enkiNBTTAG_Byte == pStream_->currentTag.tagId && enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
 				{
 					// sectionY is not always present, and may indicate a start point.
 					// For example, can find sectionY = -1 as first section, then next
@@ -2173,23 +2174,23 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 			}
 
 		}
-		else if( enkiAreStringsEqual( "Level", pStream_->currentTag.pName ) )
+		else if( enkiNBTTAG_Compound == pStream_->currentTag.tagId && enkiAreStringsEqual( "Level", pStream_->currentTag.pName ) )
 		{
 			// Pre data version 2844 the block data is stored under a Level tag
 			int levelLevel = pStream_->level;
 			while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelLevel ) // Last tag is TAG_End which is safe to read and skip
 			{
-				if( 0 == foundXPos && enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
+				if( enkiNBTTAG_Int == pStream_->currentTag.tagId && 0 == foundXPos && enkiAreStringsEqual( "xPos", pStream_->currentTag.pName ) )
 				{
 					foundXPos = 1;
 					chunk.xPos = enkiNBTReadInt32( pStream_ );
 				}
-				else if( 0 == foundZPos && enkiAreStringsEqual( "zPos", pStream_->currentTag.pName ) )
+				else if( enkiNBTTAG_Int == pStream_->currentTag.tagId && 0 == foundZPos && enkiAreStringsEqual( "zPos", pStream_->currentTag.pName ) )
 				{
 					foundZPos = 1;
 					chunk.zPos = enkiNBTReadInt32( pStream_ );
 				}
-				else if( 0 == foundSections && enkiAreStringsEqual( "Sections", pStream_->currentTag.pName ) )
+				else if( enkiNBTTAG_List == pStream_->currentTag.tagId && 0 == foundSections && enkiAreStringsEqual( "Sections", pStream_->currentTag.pName ) )
 				{
 					foundSections = 1;
 					int8_t sectionY = 0;
@@ -2205,7 +2206,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelSections )
 					{
 
-						if( NULL == pBlocks && enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
+						if( enkiNBTTAG_Byte_Array == pStream_->currentTag.tagId && NULL == pBlocks && enkiAreStringsEqual( "Blocks", pStream_->currentTag.pName ) )
 						{
 							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pBlocks = pStream_->pCurrPos;
@@ -2213,30 +2214,30 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						// TODO: process Add section
 						 // https://minecraft.fandom.com/el/wiki/Chunk_format
 						// Add: May not exist. 2048 bytes of additional block ID data. The value to add to (combine with) the above block ID to form the true block ID in the range 0 to 4095. 4 bits per block. Combining is done by shifting this value to the left 8 bits and then adding it to the block ID from above.
-						else if( enkiAreStringsEqual( "Add", pStream_->currentTag.pName ) )
+						else if( enkiNBTTAG_Byte_Array == pStream_->currentTag.tagId && enkiAreStringsEqual( "Add", pStream_->currentTag.pName ) )
 						{
 							// enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							// NOT YET HANDLED
 						}
                         // Data: 2048 bytes of block data additionally defining parts of the terrain. 4 bits per block.
-						else if( NULL == pData && enkiAreStringsEqual( "Data", pStream_->currentTag.pName ) )
+						else if( enkiNBTTAG_Byte_Array == pStream_->currentTag.tagId && NULL == pData && enkiAreStringsEqual( "Data", pStream_->currentTag.pName ) )
 						{
 							enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pData = pStream_->pCurrPos;
 						}
-						else if( enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
+						else if( enkiNBTTAG_Byte == pStream_->currentTag.tagId && enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
 						{
 							// sectionY is not always present, and may indicate a start point.
 							// For example, can find sectionY = -1 as first section, then next
 							// section has data but no sectionY.
 							sectionY = enkiNBTReadInt8( pStream_ );
 						}
-						else if( NULL == pBlockStates && enkiAreStringsEqual( "BlockStates", pStream_->currentTag.pName ) )
+						else if( enkiNBTTAG_Long_Array == pStream_->currentTag.tagId && NULL == pBlockStates && enkiAreStringsEqual( "BlockStates", pStream_->currentTag.pName ) )
 						{
 							sectionPalette.blockArraySize = enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
 							pBlockStates = pStream_->pCurrPos;
 						}
-						else if( 0 == sectionPalette.size && enkiAreStringsEqual( "Palette", pStream_->currentTag.pName ) )
+						else if( enkiNBTTAG_List == pStream_->currentTag.tagId && 0 == sectionPalette.size && enkiAreStringsEqual( "Palette", pStream_->currentTag.pName ) )
 						{
 							LoadChunkPalette( pStream_, &sectionPalette );
 						}

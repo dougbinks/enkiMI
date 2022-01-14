@@ -1995,8 +1995,7 @@ void enkiChunkInit( enkiChunkBlockData* pChunk_ )
 	memset( pChunk_, 0, sizeof( enkiChunkBlockData ) );
 }
 
-
-static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalette* pSectionPalette_ )
+static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalette* pSectionPalette_, enkiNBTReadChunkExParams params_ )
 {
 	if( 0 == pStream_->currentTag.listNumItems )
 	{
@@ -2039,14 +2038,17 @@ static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalet
 			// enkiMIBlockID defaultBlockIDs[]
 			pSectionPalette_->pDefaultBlockIndex[ paletteNum ] = -1;
 			pSectionPalette_->pNamespaceIDStrings[ paletteNum ] = paletteEntry;
-			for( uint32_t id=0; id <numDefaultNamespaceAndBlockIDs; ++id )
+			if( !( params_.flags & enkiNBTReadChunkExFlags_NoPaletteTranslation ) )
 			{
-				size_t len = strlen( defaultNamespaceAndBlockIDs[id].pNamespaceID );
-				if(    len == paletteEntry.size
-					&& 0 == memcmp( defaultNamespaceAndBlockIDs[id].pNamespaceID, paletteEntry.pStrNotNullTerminated, len ) )
+				for( uint32_t id=0; id <numDefaultNamespaceAndBlockIDs; ++id )
 				{
-					pSectionPalette_->pDefaultBlockIndex[ paletteNum ] = id;
-					break;
+					size_t len = strlen( defaultNamespaceAndBlockIDs[id].pNamespaceID );
+					if(    len == paletteEntry.size
+						&& 0 == memcmp( defaultNamespaceAndBlockIDs[id].pNamespaceID, paletteEntry.pStrNotNullTerminated, len ) )
+					{
+						pSectionPalette_->pDefaultBlockIndex[ paletteNum ] = id;
+						break;
+					}
 				}
 			}
 		}
@@ -2074,8 +2076,20 @@ static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalet
 	}
 }
 
-// see https://minecraft.fandom.com/wiki/Chunk_format
+enkiNBTReadChunkExParams enkiGetDefaultNBTReadChunkExParams()
+{
+	enkiNBTReadChunkExParams params;
+	params.flags = enkiNBTReadChunkExFlags_None;
+	return params;
+}
+
 enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
+{
+	return enkiNBTReadChunkEx( pStream_, enkiGetDefaultNBTReadChunkExParams() );
+}
+
+// see https://minecraft.fandom.com/wiki/Chunk_format
+enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream * pStream_, enkiNBTReadChunkExParams params_ )
 {
 	enkiChunkBlockData chunk;
 	enkiChunkInit( &chunk );
@@ -2136,7 +2150,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						}
 						else if( enkiNBTTAG_List == pStream_->currentTag.tagId && 0 == sectionPalette.size && enkiAreStringsEqual( "palette", pStream_->currentTag.pName ) )
 						{
-							LoadChunkPalette( pStream_, &sectionPalette );
+							LoadChunkPalette( pStream_, &sectionPalette, params_ );
 						}
 					}
 				}
@@ -2239,7 +2253,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 						}
 						else if( enkiNBTTAG_List == pStream_->currentTag.tagId && 0 == sectionPalette.size && enkiAreStringsEqual( "Palette", pStream_->currentTag.pName ) )
 						{
-							LoadChunkPalette( pStream_, &sectionPalette );
+							LoadChunkPalette( pStream_, &sectionPalette, params_ );
 						}
 						else if( enkiNBTTAG_End == pStream_->currentTag.tagId && pStream_->level == levelSections + 1 )
 						{

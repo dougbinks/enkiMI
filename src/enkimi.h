@@ -228,6 +228,24 @@ void enkiChunkInit( enkiChunkBlockData* pChunk_ );
 // pStream_ mush be kept valid whilst chunk is in use.
 enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream* pStream_ );
 
+// Extended parameters for enkiNBTReadChunkEx:
+typedef enum
+{
+	enkiNBTReadChunkExFlags_None = 0,
+	enkiNBTReadChunkExFlags_NoPaletteTranslation = 1 << 0, // when loading palette do not translate namespace strings to blockID & dataValue - faster if you want to do your own translation / conversion to internal data
+} enkiNBTReadChunkExFlags;
+
+typedef struct enkiNBTReadChunkExParams_s
+{
+	int32_t flags; // enkiNBTReadChunkExFlags defaults to enkiNBTReadChunkExFlags_None
+} enkiNBTReadChunkExParams;
+
+// call enkiGetDefaultNBTReadChunkExParams to set up default parameters - essential to maintain forwards compatibilty if new members are added to enkiNBTReadChunkExParams
+enkiNBTReadChunkExParams enkiGetDefaultNBTReadChunkExParams();
+
+// enkiNBTReadChunkEx is as enkiNBTReadChunk but with extended parameters.
+enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream* pStream_, enkiNBTReadChunkExParams params_ );
+
 
 enkiMICoordinate enkiGetChunkOrigin( enkiChunkBlockData* pChunk_ );
 

@@ -1659,6 +1659,38 @@ void enkiNBTFreeAllocations( enkiNBTDataStream* pStream_ )
 	memset( pStream_, 0, sizeof(enkiNBTDataStream) );
 }
 
+void ByteOrderSwap16( void* source_, void* dest_ )
+{
+	uint16_t orderIn = *(uint16_t*)source_;
+	uint16_t orderOut = ( ( orderIn & 0xFF00 ) >> (1*8) ) | 
+	                    ( ( orderIn & 0x00FF ) << (1*8) );
+	memcpy( dest_, &orderOut, sizeof(orderOut) );
+}
+
+void ByteOrderSwap32( void* source_, void* dest_ )
+{
+	uint32_t orderIn = *(uint32_t*)source_;
+	uint32_t orderOut = ( ( orderIn & 0xFF000000 ) >> (3*8) ) | 
+	                    ( ( orderIn & 0x00FF0000 ) >> (1*8) ) | 
+	                    ( ( orderIn & 0x0000FF00 ) << (1*8) ) | 
+	                    ( ( orderIn & 0x000000FF ) << (3*8) );
+	memcpy( dest_, &orderOut, sizeof(orderOut) );
+}
+
+void ByteOrderSwap64( void* source_, void* dest_ )
+{
+	uint64_t orderIn = *(uint64_t*)source_;
+	uint64_t orderOut = ( ( orderIn & 0xFF00000000000000 ) >> (7*8) ) | 
+	                    ( ( orderIn & 0x00FF000000000000 ) >> (5*8) ) | 
+	                    ( ( orderIn & 0x0000FF0000000000 ) >> (3*8) ) | 
+	                    ( ( orderIn & 0x000000FF00000000 ) >> (1*8) ) | 
+	                    ( ( orderIn & 0x00000000FF000000 ) << (1*8) ) | 
+	                    ( ( orderIn & 0x0000000000FF0000 ) << (3*8) ) | 
+	                    ( ( orderIn & 0x000000000000FF00 ) << (5*8) ) | 
+	                    ( ( orderIn & 0x00000000000000FF ) << (7*8) );
+	memcpy( dest_, &orderOut, sizeof(orderOut) );
+}
+
 int8_t  enkiNBTReadInt8( enkiNBTDataStream* pStream_ )
 {
 	int8_t retVal = pStream_->pCurrPos[ 0 ];
@@ -1673,7 +1705,8 @@ int8_t  enkiNBTReadByte( enkiNBTDataStream* pStream_ )
 
 int16_t enkiNBTReadInt16( enkiNBTDataStream* pStream_ )
 {
-	int16_t retVal = ( pStream_->pCurrPos[ 0 ] << 8 ) + pStream_->pCurrPos[ 1 ];
+	int16_t retVal;
+	ByteOrderSwap16( pStream_->pCurrPos, &retVal );
 	pStream_->pCurrPos += 2;
 	return retVal;
 }
@@ -1685,7 +1718,8 @@ int16_t enkiNBTReadShort( enkiNBTDataStream* pStream_ )
 
 int32_t enkiNBTReadInt32( enkiNBTDataStream* pStream_ )
 {
-	int32_t retVal = ( pStream_->pCurrPos[ 0 ] << 24 ) + ( pStream_->pCurrPos[ 1 ] << 16 ) + ( pStream_->pCurrPos[ 2 ] << 8 ) + pStream_->pCurrPos[ 3 ];
+	int32_t retVal;
+	ByteOrderSwap32( pStream_->pCurrPos, &retVal );
 	pStream_->pCurrPos += 4;
 	return retVal;
 }
@@ -1697,16 +1731,16 @@ int32_t enkiNBTReadInt( enkiNBTDataStream* pStream_ )
 
 float   enkiNBTReadFloat( enkiNBTDataStream* pStream_ )
 {
-	int32_t iVal = ( pStream_->pCurrPos[ 0 ] << 24 ) + ( pStream_->pCurrPos[ 1 ] << 16 ) + ( pStream_->pCurrPos[ 2 ] << 8 ) + pStream_->pCurrPos[ 3 ];
-	float retVal = *( float* )&iVal;
+	float retVal;
+	ByteOrderSwap32( pStream_->pCurrPos, &retVal );
 	pStream_->pCurrPos += 4;
 	return retVal;
 }
 
 int64_t enkiNBTReadInt64( enkiNBTDataStream* pStream_ )
 {
-	int64_t retVal = ( ( int64_t )pStream_->pCurrPos[ 0 ] << 54 ) + ( ( int64_t )pStream_->pCurrPos[ 1 ] << 48 ) + ( ( int64_t )pStream_->pCurrPos[ 2 ] << 40 ) + ( ( int64_t )pStream_->pCurrPos[ 5 ] << 32 ) + 
-		             ( pStream_->pCurrPos[ 4 ] << 24 ) + ( pStream_->pCurrPos[ 5 ] << 16 ) + ( pStream_->pCurrPos[ 6 ] << 8 ) + pStream_->pCurrPos[ 7 ];
+	int64_t retVal;
+	ByteOrderSwap64( pStream_->pCurrPos, &retVal );
 	pStream_->pCurrPos += 8;
 	return retVal;
 }
@@ -1718,9 +1752,8 @@ int64_t enkiNBTReadlong( enkiNBTDataStream* pStream_ )
 
 double  enkiNBTReadDouble( enkiNBTDataStream* pStream_ )
 {
-	int64_t iVal = ( ( int64_t )pStream_->pCurrPos[ 0 ] << 54 ) + ( ( int64_t )pStream_->pCurrPos[ 1 ] << 48 ) + ( ( int64_t )pStream_->pCurrPos[ 2 ] << 40 ) + ( ( int64_t )pStream_->pCurrPos[ 5 ] << 32 ) + 
-		           ( pStream_->pCurrPos[ 4 ] << 24 ) + ( pStream_->pCurrPos[ 5 ] << 16 ) + ( pStream_->pCurrPos[ 6 ] << 8 ) + pStream_->pCurrPos[ 7 ];
-	double retVal = *( double* )&iVal;
+	double retVal;
+	ByteOrderSwap64( pStream_->pCurrPos, &retVal );
 	pStream_->pCurrPos += 8;
 	return retVal;
 }
@@ -1728,7 +1761,8 @@ double  enkiNBTReadDouble( enkiNBTDataStream* pStream_ )
 // Internal only uint16_t type
 uint16_t enkiNBTReadUint16( enkiNBTDataStream* pStream_ )
 {
-	uint16_t retVal = ( pStream_->pCurrPos[ 0 ] << 8 ) + pStream_->pCurrPos[ 1 ];
+	uint16_t retVal;
+	ByteOrderSwap16( pStream_->pCurrPos, &retVal );
 	pStream_->pCurrPos += 2;
 	return retVal;
 }
@@ -2371,11 +2405,8 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 			assert( pChunk_->palette[ section_ ].blockArraySize > pos64 );
 
 			uint8_t* pVal64BigEndian = pSection + (8*(size_t)pos64);
-
-			uint64_t val64 =   ( (uint64_t)pVal64BigEndian[0] << 56 ) + ( (uint64_t)pVal64BigEndian[1] << 48 )
-							 + ( (uint64_t)pVal64BigEndian[2] << 40 ) + ( (uint64_t)pVal64BigEndian[3] << 32 )
-							 + ( (uint64_t)pVal64BigEndian[4] << 24 ) + ( (uint64_t)pVal64BigEndian[5] << 16 )
-							 + ( (uint64_t)pVal64BigEndian[6] <<  8 ) + ( (uint64_t)pVal64BigEndian[7]       );
+			uint64_t val64;
+			ByteOrderSwap64( pVal64BigEndian, &val64 );
 
 			uint64_t val = val64 >> posIn64;
 
@@ -2394,11 +2425,8 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 			assert( pChunk_->palette[ section_ ].blockArraySize > pos64 );
 
 			uint8_t* pVal64BigEndian = pSection + (8*(size_t)pos64);
-
-			uint64_t val64 =   ( (uint64_t)pVal64BigEndian[0] << 56 ) + ( (uint64_t)pVal64BigEndian[1] << 48 )
-							 + ( (uint64_t)pVal64BigEndian[2] << 40 ) + ( (uint64_t)pVal64BigEndian[3] << 32 )
-							 + ( (uint64_t)pVal64BigEndian[4] << 24 ) + ( (uint64_t)pVal64BigEndian[5] << 16 )
-							 + ( (uint64_t)pVal64BigEndian[6] <<  8 ) + ( (uint64_t)pVal64BigEndian[7]       );
+			uint64_t val64;
+			ByteOrderSwap64( pVal64BigEndian, &val64 );
 
 			uint64_t val = val64 >> posIn64;
 
@@ -2413,11 +2441,9 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 			if( overhangInNext64 )
 			{
 				uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;;
+				uint64_t val64_2;
+				ByteOrderSwap64( pVal64BigEndianPlus1, &val64_2 );
 
-				uint64_t val64_2 =  ( (uint64_t)pVal64BigEndianPlus1[0] << 56 ) + ( (uint64_t)pVal64BigEndianPlus1[1] << 48 )
-								  + ( (uint64_t)pVal64BigEndianPlus1[2] << 40 ) + ( (uint64_t)pVal64BigEndianPlus1[3] << 32 )
-								  + ( (uint64_t)pVal64BigEndianPlus1[4] << 24 ) + ( (uint64_t)pVal64BigEndianPlus1[5] << 16 )
-								  + ( (uint64_t)pVal64BigEndianPlus1[6] <<  8 ) + ( (uint64_t)pVal64BigEndianPlus1[7]       );
 				uint64_t mask_2      =(~(uint64_t)0) >> (64-overhangInNext64);
 				uint64_t val_2       = val64_2;
 				uint32_t valmasked_2 = (uint32_t)( val_2 & mask_2 );

@@ -79,6 +79,9 @@ void PrintStreamStructureToFile( enkiNBTDataStream* pStream_, FILE* fpOutput_ )
 			case enkiNBTTAG_Double:
 				stdout_f_printf( fpOutput_, " val=%F ", enkiNBTReadDouble( pStream_ ) );
 				break;
+            case enkiNBTTAG_Byte_Array:
+                stdout_f_printf( fpOutput_, " items=%d ", enkiNBTReadInt32( pStream_ ) );
+                break;
 			case enkiNBTTAG_String:
 			{
 				enkiNBTString nbtString = enkiNBTReadString( pStream_ );
@@ -88,6 +91,12 @@ void PrintStreamStructureToFile( enkiNBTDataStream* pStream_, FILE* fpOutput_ )
 			case enkiNBTTAG_List:
 				stdout_f_printf( fpOutput_, " items=%d ", pStream_->currentTag.listNumItems );
 				break;
+            case enkiNBTTAG_Int_Array:
+                stdout_f_printf( fpOutput_, " items=%d ", enkiNBTReadInt32( pStream_ ) );
+                break;
+            case enkiNBTTAG_Long_Array:
+                stdout_f_printf( fpOutput_, " items=%d ", enkiNBTReadInt32( pStream_ ) );
+                break;
 			default:
 				break;
 			}

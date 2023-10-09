@@ -75,8 +75,8 @@ static uint32_t minecraftPalette[] =
 	0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 
 	0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xfff0f0f0, 0xff242132 };
 
-// BlockIds from: https://minecraft.fandom.com/wiki/Java_Edition_data_values/Pre-flattening/Block_IDs
-// Then get dataValue from each material's page: https://minecraft.fandom.com/wiki/Stone#Data_values
+// BlockIds from: https://minecraft.wiki/w/Java_Edition_data_values/Pre-flattening/Block_IDs
+// Then get dataValue from each material's page: https://minecraft.wiki/w/Stone#Data_values
 static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] = 
 {
 	{ "minecraft:air",                                      0,   0   }, 
@@ -90,7 +90,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:andesite",                                 1,   5   }, 
 	{ "minecraft:polished_andesite",                        1,   6   },
 	{ "minecraft:smooth_stone",                             1,   7   }, // Added, data value not correct
-	{ "minecraft:grass_block",                              2,   0   }, // https://minecraft.fandom.com/wiki/Grass_Block
+	{ "minecraft:grass_block",                              2,   0   }, // https://minecraft.wiki/w/Grass_Block
 	{ "minecraft:grass_block",                              2,   1   }, // snowy
 	{ "minecraft:dirt",                                     3,   0   }, 
 	{ "minecraft:coarse_dirt",                              3,   1   }, 
@@ -192,7 +192,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:sticky_piston",                            29,  4   }, // facing up
 	{ "minecraft:sticky_piston",                            29,  5   }, // facing west
 	{ "minecraft:cobweb",                                   30,  0   },
-	{ "minecraft:grass",                                    31,  0   }, // short plants, https://minecraft.fandom.com/wiki/Grass
+	{ "minecraft:grass",                                    31,  0   }, // short plants, https://minecraft.wiki/w/Grass
 	{ "minecraft:fern",                                     31,  1   }, // short plants, 
 	{ "minecraft:seagrass",                                 31,  2   }, // short plants, - Added after flattening, data value not correct
 	{ "minecraft:dead_bush",                                32,  0   }, 
@@ -522,7 +522,7 @@ static enkiMINamespaceAndBlockID defaultNamespaceAndBlockIDs[] =
 	{ "minecraft:deepslate_diamond_ore",                    56,  1   }, 
 	{ "minecraft:diamond_block",                            57,  0   }, 
 	{ "minecraft:crafting_table",                           58,  0   },      
-	{ "minecraft:wheat",                                    59,  0   }, // https://minecraft.fandom.com/wiki/Wheat_Seeds
+	{ "minecraft:wheat",                                    59,  0   }, // https://minecraft.wiki/w/Wheat_Seeds
 	{ "minecraft:wheat",                                    59,  1   }, // growth
 	{ "minecraft:wheat",                                    59,  2   }, // growth 
 	{ "minecraft:wheat",                                    59,  3   }, // growth 
@@ -2122,7 +2122,7 @@ enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream * pStream_ )
 	return enkiNBTReadChunkEx( pStream_, enkiGetDefaultNBTReadChunkExParams() );
 }
 
-// see https://minecraft.fandom.com/wiki/Chunk_format
+// see https://minecraft.wiki/w/Chunk_format
 enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream * pStream_, enkiNBTReadChunkExParams params_ )
 {
 	enkiChunkBlockData chunk;

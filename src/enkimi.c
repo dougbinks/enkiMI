@@ -2488,7 +2488,7 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 
 			    if( overhangInNext64 )
 			    {
-				    uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;;
+				    uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;
 				    uint64_t val64_2;
 				    ByteOrderSwap64( pVal64BigEndianPlus1, &val64_2 );
 
@@ -2595,7 +2595,7 @@ const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int3
 
 			if( overhangInNext64 )
 			{
-				uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;;
+				uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;
 				uint64_t val64_2;
 				ByteOrderSwap64( pVal64BigEndianPlus1, &val64_2 );
 

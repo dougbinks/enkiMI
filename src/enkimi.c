@@ -2208,7 +2208,7 @@ enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream * pStream_, enkiNBTRead
                             sectionPalette.numBiomes = pStream_->currentTag.listNumItems;
                             if( sectionPalette.numBiomes )
                             {
-                                float numBitsFloat = floorf( 1.0f + log2f( fmaxf( (float)( sectionPalette.numBiomes - 1 ), 15.0f) ) ); // 15.0f == 0x1111 so takes 4bits. log2f(15.0f) == 3.9f, add one and take floor gives numbits
+                                float numBitsFloat = floorf( 1.0f + log2f( (float)( sectionPalette.numBiomes - 1 ) ) );
 	                            sectionPalette.numBitsPerBiome = (uint32_t)numBitsFloat;
 
                                 sectionPalette.pBiomes = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.numBiomes);

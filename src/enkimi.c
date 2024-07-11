@@ -2573,41 +2573,63 @@ const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int3
 		    // size depends on number of biomes
 		    uint32_t numBits = pChunk_->palette[ section_ ].numBitsPerBiome;
 
-            uint32_t posBits = numBits * posArray;
-			uint32_t pos64   = posBits / 64;
-			uint32_t posIn64 = posBits - (pos64 * 64);
+            if( pChunk_->dataVersion >= 2556 )
+		    {
+			    // do not need to handle bits spread across two uint64_t values
+			    uint32_t numPer64 = 64 / numBits;
+			    uint32_t pos64   = posArray / numPer64;
+			    uint32_t posIn64 = numBits * ( posArray - (pos64 * numPer64) );
 
-			assert( pChunk_->palette[ section_ ].biomesArraySize > pos64 );
+			    assert( pChunk_->palette[ section_ ].biomesArraySize > pos64 );
 
-			uint8_t* pVal64BigEndian = pChunk_->biomes[ section_ ] + (8*(size_t)pos64);
-			uint64_t val64;
-			ByteOrderSwap64( pVal64BigEndian, &val64 );
+			    uint8_t* pVal64BigEndian = pChunk_->biomes[ section_ ] + (8*(size_t)pos64);
+			    uint64_t val64;
+			    ByteOrderSwap64( pVal64BigEndian, &val64 );
 
-			uint64_t val = val64 >> posIn64;
+			    uint64_t val = val64 >> posIn64;
 
-			// handle 'overhang'
-			uint32_t maxBitsPossibleIn64Bits = 64 - posIn64;
-			uint32_t numBitsIn64      = maxBitsPossibleIn64Bits < numBits ? maxBitsPossibleIn64Bits : numBits;
-			uint32_t overhangInNext64 = numBitsIn64 < numBits ? numBits-numBitsIn64 : 0;
+			    uint64_t mask = (~(uint64_t)0) >> (64-numBits);
+			    uint32_t valmasked = (uint32_t)( val & mask );
+			    biomesIndex = valmasked;
+			    assert( (uint32_t)pChunk_->palette[ section_ ].numBiomes > biomesIndex ); // assert in {} to get debug data from locals
+		    }
+		    else
+            {
+                uint32_t posBits = numBits * posArray;
+			    uint32_t pos64   = posBits / 64;
+			    uint32_t posIn64 = posBits - (pos64 * 64);
+
+			    assert( pChunk_->palette[ section_ ].biomesArraySize > pos64 );
+
+			    uint8_t* pVal64BigEndian = pChunk_->biomes[ section_ ] + (8*(size_t)pos64);
+			    uint64_t val64;
+			    ByteOrderSwap64( pVal64BigEndian, &val64 );
+
+			    uint64_t val = val64 >> posIn64;
+
+			    // handle 'overhang'
+			    uint32_t maxBitsPossibleIn64Bits = 64 - posIn64;
+			    uint32_t numBitsIn64      = maxBitsPossibleIn64Bits < numBits ? maxBitsPossibleIn64Bits : numBits;
+			    uint32_t overhangInNext64 = numBitsIn64 < numBits ? numBits-numBitsIn64 : 0;
 				
-			uint64_t mask = (~(uint64_t)0) >> (64-numBitsIn64);
-			uint32_t valmasked = (uint32_t)( val & mask );
+			    uint64_t mask = (~(uint64_t)0) >> (64-numBitsIn64);
+			    uint32_t valmasked = (uint32_t)( val & mask );
 
-			if( overhangInNext64 )
-			{
-				uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;
-				uint64_t val64_2;
-				ByteOrderSwap64( pVal64BigEndianPlus1, &val64_2 );
+			    if( overhangInNext64 )
+			    {
+				    uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;
+				    uint64_t val64_2;
+				    ByteOrderSwap64( pVal64BigEndianPlus1, &val64_2 );
 
-				uint64_t mask_2      =(~(uint64_t)0) >> (64-overhangInNext64);
-				uint64_t val_2       = val64_2;
-				uint32_t valmasked_2 = (uint32_t)( val_2 & mask_2 );
+				    uint64_t mask_2      =(~(uint64_t)0) >> (64-overhangInNext64);
+				    uint64_t val_2       = val64_2;
+				    uint32_t valmasked_2 = (uint32_t)( val_2 & mask_2 );
 
-				valmasked |= ( valmasked_2 << numBitsIn64 );
-			}
-			biomesIndex = valmasked;
-			assert( (uint32_t)pChunk_->palette[ section_ ].numBiomes > biomesIndex );
-
+				    valmasked |= ( valmasked_2 << numBitsIn64 );
+			    }
+			    biomesIndex = valmasked;
+			    assert( (uint32_t)pChunk_->palette[ section_ ].numBiomes > biomesIndex ); // assert in {} to get debug data from locals
+            }
             pRetBiomeName = &( pChunk_->palette[ section_ ].pBiomes[ biomesIndex ] ); 
         }
     }

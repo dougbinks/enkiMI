@@ -202,9 +202,9 @@ typedef struct enkiMIProperties_s {
 
 typedef struct enkiChunkSectionPalette_s
 {
-	uint32_t       size;
-	uint32_t       numBitsPerBlock;
-	uint32_t       blockArraySize;
+	uint32_t       size;                // Array size of pNamespaceIDStrings and pBlockStateProperties
+	uint32_t       numBitsPerBlock;     // Number of bits per block in enkiChunkBlockData sections[section]
+	uint32_t       blockArraySize;      // Array size of enkiChunkBlockData.sections[section]
 	int32_t*       pDefaultBlockIndex;  // lookup index into the default enkiMINamespaceAndBlockIDTable - these values may change with versions of enkiMI, <0 means not found
 	enkiNBTString* pNamespaceIDStrings; // e.g. "minecraft:stone"
 	enkiMIProperties* pBlockStateProperties; // pointer to start of stream properties

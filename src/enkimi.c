@@ -2208,9 +2208,12 @@ enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream * pStream_, enkiNBTRead
                             sectionPalette.numBiomes = pStream_->currentTag.listNumItems;
                             if( sectionPalette.numBiomes )
                             {
+                                float numBitsFloat = floorf( 1.0f + log2f( fmaxf( (float)( sectionPalette.numBiomes - 1 ), 15.0f) ) ); // 15.0f == 0x1111 so takes 4bits. log2f(15.0f) == 3.9f, add one and take floor gives numbits
+	                            sectionPalette.numBitsPerBiome = (uint32_t)numBitsFloat;
+
                                 sectionPalette.pBiomes = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.numBiomes);
 	                            enkiNBTAddAllocation( pStream_, sectionPalette.pBiomes );
-                                for( int32_t listItem = 0; listItem < sectionPalette.numBiomes; ++listItem )
+                                for( uint32_t listItem = 0; listItem < sectionPalette.numBiomes; ++listItem )
                                 {
                                     // assert( pStream_->currentTag.listCurrItem > 0 );
                                     enkiNBTReadNextTag( pStream_ );
@@ -2536,6 +2539,82 @@ uint8_t enkiGetChunkSectionVoxel( enkiChunkBlockData* pChunk_, int32_t section_,
 	enkiMIVoxelData voxelData = enkiGetChunkSectionVoxelData( pChunk_, section_, sectionOffset_ );
 	return voxelData.blockID;
 }
+
+const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ )
+{
+	assert( section_ < ENKI_MI_NUM_SECTIONS_PER_CHUNK );
+	assert( 0 <= sectionOffset_.x && sectionOffset_.x < ENKI_MI_SIZE_SECTIONS );
+	assert( 0 <= sectionOffset_.y && sectionOffset_.y < ENKI_MI_SIZE_SECTIONS );
+	assert( 0 <= sectionOffset_.z && sectionOffset_.z < ENKI_MI_SIZE_SECTIONS );
+
+    enkiNBTString* pRetBiomeName = NULL;
+
+    if( NULL != pChunk_->palette[ section_ ].pBiomes )
+    {
+        if( NULL == pChunk_->biomes[ section_ ] || 1 == pChunk_->palette[ section_ ].numBiomes )
+        {
+            // only one biome, return that
+            pRetBiomeName = &( pChunk_->palette[ section_ ].pBiomes[0] );
+        }
+        else
+        {
+            uint32_t biomesArraySize = pChunk_->palette[ section_ ].biomesArraySize;
+            assert( biomesArraySize> 0 );
+
+            enkiMICoordinate biomeCoord = sectionOffset_;
+            biomeCoord.x /= ENKI_MI_BLOCKS_PER_BIOME;
+            biomeCoord.y /= ENKI_MI_BLOCKS_PER_BIOME;
+            biomeCoord.z /= ENKI_MI_BLOCKS_PER_BIOME;
+            const SIZE_BIOME = ENKI_MI_SIZE_SECTIONS / ENKI_MI_BLOCKS_PER_BIOME;
+	        uint32_t posArray = biomeCoord.y*SIZE_BIOME*SIZE_BIOME
+                              + biomeCoord.z*SIZE_BIOME + biomeCoord.x;
+            uint32_t biomesIndex = 0;
+
+		    // size depends on number of biomes
+		    uint32_t numBits = pChunk_->palette[ section_ ].numBitsPerBiome;
+
+            uint32_t posBits = numBits * posArray;
+			uint32_t pos64   = posBits / 64;
+			uint32_t posIn64 = posBits - (pos64 * 64);
+
+			assert( pChunk_->palette[ section_ ].biomesArraySize > pos64 );
+
+			uint8_t* pVal64BigEndian = pChunk_->biomes[ section_ ] + (8*(size_t)pos64);
+			uint64_t val64;
+			ByteOrderSwap64( pVal64BigEndian, &val64 );
+
+			uint64_t val = val64 >> posIn64;
+
+			// handle 'overhang'
+			uint32_t maxBitsPossibleIn64Bits = 64 - posIn64;
+			uint32_t numBitsIn64      = maxBitsPossibleIn64Bits < numBits ? maxBitsPossibleIn64Bits : numBits;
+			uint32_t overhangInNext64 = numBitsIn64 < numBits ? numBits-numBitsIn64 : 0;
+				
+			uint64_t mask = (~(uint64_t)0) >> (64-numBitsIn64);
+			uint32_t valmasked = (uint32_t)( val & mask );
+
+			if( overhangInNext64 )
+			{
+				uint8_t* pVal64BigEndianPlus1 = pVal64BigEndian + 8;;
+				uint64_t val64_2;
+				ByteOrderSwap64( pVal64BigEndianPlus1, &val64_2 );
+
+				uint64_t mask_2      =(~(uint64_t)0) >> (64-overhangInNext64);
+				uint64_t val_2       = val64_2;
+				uint32_t valmasked_2 = (uint32_t)( val_2 & mask_2 );
+
+				valmasked |= ( valmasked_2 << numBitsIn64 );
+			}
+			biomesIndex = valmasked;
+			assert( (uint32_t)pChunk_->palette[ section_ ].numBiomes > biomesIndex );
+
+            pRetBiomeName = &( pChunk_->palette[ section_ ].pBiomes[ biomesIndex ] ); 
+        }
+    }
+
+    return pRetBiomeName;
+}
+
 
 uint32_t* enkiGetMineCraftPalette()
 {

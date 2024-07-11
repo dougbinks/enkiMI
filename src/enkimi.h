@@ -170,6 +170,7 @@ int enkiAreStringsEqual( const char* lhs_, const char* rhs_ );
 #define ENKI_MI_NUM_SECTIONS_PER_CHUNK 256
 #define ENKI_MI_SECTIONS_Y_OFFSET 128
 #define ENKI_MI_SIZE_SECTIONS 16
+#define ENKI_MI_BLOCKS_PER_BIOME 4
 
 typedef struct enkiMICoordinate_s
 {
@@ -226,7 +227,7 @@ typedef struct enkiChunkSectionPalette_s
     enkiNBTString* pBiomes;                  // Array of biome strings    
     uint32_t       numBiomes;                // size of array pBiomes
     uint32_t       biomesArraySize;          // Array size of enkiChunkBlockData.biomes[section]
-    uint32_t       numBitsPerPalleteEntry;   // Number of bits per biome entry
+    uint32_t       numBitsPerBiome;          // Number of bits per biome in enkiChunkBlockData.biomes[section]
 } enkiChunkSectionPalette;
 
 typedef struct enkiChunkBlockData_s
@@ -274,6 +275,12 @@ typedef struct enkiMIVoxelData_s {
 } enkiMIVoxelData;
 
 enkiMIVoxelData enkiGetChunkSectionVoxelData( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ );
+
+// enkiGetChunkSectionBiome gets the namespaced string biome name.
+// Biomes are on a grid 4x smaller than the voxel data, however the sectionOffset_ here is at full voxel resolution.
+// Returns NULL if there were no biomes loaded (potentially due to enkiMI not supporting the version for biomes)
+// Make sure to load chunk with enkiNBTReadChunkExFlags_LoadBiomes set
+const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ );
 
 typedef struct enkiMINamespaceAndBlockIDTable_s {
 	

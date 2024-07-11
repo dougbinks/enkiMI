@@ -190,6 +190,7 @@ typedef enum
 {
 	enkiNBTReadChunkExFlags_None = 0,
 	enkiNBTReadChunkExFlags_NoPaletteTranslation = 1 << 0, // when loading palette do not translate namespace strings to blockID & dataValue - faster if you want to do your own translation / conversion to internal data
+	enkiNBTReadChunkExFlags_LoadBiomes           = 1 << 1,
 } enkiNBTReadChunkExFlags;
 
 typedef struct enkiNBTReadChunkExParams_s
@@ -222,12 +223,17 @@ typedef struct enkiChunkSectionPalette_s
 	int32_t*       pDefaultBlockIndex;  // lookup index into the default enkiMINamespaceAndBlockIDTable - these values may change with versions of enkiMI, <0 means not found
 	enkiNBTString* pNamespaceIDStrings; // e.g. "minecraft:stone"
 	enkiMIProperties* pBlockStateProperties; // pointer to start of stream properties
+    enkiNBTString* pBiomes;                  // Array of biome strings    
+    uint32_t       numBiomes;                // size of array pBiomes
+    uint32_t       biomesArraySize;          // Array size of enkiChunkBlockData.biomes[section]
+    uint32_t       numBitsPerPalleteEntry;   // Number of bits per biome entry
 } enkiChunkSectionPalette;
 
 typedef struct enkiChunkBlockData_s
 {
 	uint8_t* sections[ ENKI_MI_NUM_SECTIONS_PER_CHUNK ];
 	uint8_t* dataValues[ ENKI_MI_NUM_SECTIONS_PER_CHUNK ];
+	uint8_t* biomes[ ENKI_MI_NUM_SECTIONS_PER_CHUNK ];
 	enkiChunkSectionPalette palette[ ENKI_MI_NUM_SECTIONS_PER_CHUNK ]; // if there is a palette[k].size, then sections[k] represents BlockStates
 	int32_t xPos; // section coordinates
 	int32_t zPos; // section coordinates

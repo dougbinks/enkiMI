@@ -2165,6 +2165,7 @@ enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream * pStream_, enkiNBTRead
 			foundSections = 1;
 			int8_t sectionY = 0;
 			uint8_t* pBlockStates = NULL;
+            uint8_t* pBiome = NULL;
 			enkiChunkSectionPalette sectionPalette = {0};
 			int32_t levelSections = pStream_->level;
 			if( 0 == pStream_->currentTag.listNumItems )
@@ -2190,6 +2191,36 @@ enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream * pStream_, enkiNBTRead
 						}
 					}
 				}
+                if( params_.flags & enkiNBTReadChunkExFlags_LoadBiomes &&
+                    enkiNBTTAG_Compound == pStream_->currentTag.tagId && enkiAreStringsEqual( "biomes", pStream_->currentTag.pName ) )
+				{
+					int32_t levelBiomes = pStream_->level;
+					while( enkiNBTReadNextTag( pStream_ ) && pStream_->level > levelBiomes )
+					{
+						if( enkiNBTTAG_Long_Array == pStream_->currentTag.tagId && NULL == pBiome && enkiAreStringsEqual( "data", pStream_->currentTag.pName ) )
+						{
+							sectionPalette.biomesArraySize = enkiNBTReadInt32( pStream_ ); // read number of items to advance pCurrPos to start of array
+							pBiome = pStream_->pCurrPos;
+						}
+						else if( enkiNBTTAG_List == pStream_->currentTag.tagId && 0 == sectionPalette.numBiomes && enkiAreStringsEqual( "palette", pStream_->currentTag.pName ) )
+						{
+                            // Biome palette is a list of string names
+                            sectionPalette.numBiomes = pStream_->currentTag.listNumItems;
+                            if( sectionPalette.numBiomes )
+                            {
+                                sectionPalette.pBiomes = (enkiNBTString*)malloc(sizeof(enkiNBTString)*sectionPalette.numBiomes);
+	                            enkiNBTAddAllocation( pStream_, sectionPalette.pBiomes );
+                                for( int32_t listItem = 0; listItem < sectionPalette.numBiomes; ++listItem )
+                                {
+                                    // assert( pStream_->currentTag.listCurrItem > 0 );
+                                    enkiNBTReadNextTag( pStream_ );
+                                    enkiNBTString biome = enkiNBTReadString( pStream_ );
+                                    sectionPalette.pBiomes[ listItem ] = biome;
+                                }
+                            }
+						}
+					}
+				}
 				else if( enkiNBTTAG_Byte == pStream_->currentTag.tagId && enkiAreStringsEqual( "Y", pStream_->currentTag.pName ) )
 				{
 					// sectionY is not always present, and may indicate a start point.
@@ -2209,7 +2240,9 @@ enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream * pStream_, enkiNBTRead
 							chunk.countOfSections++;
 							chunk.palette[ sectionIndex ]  = sectionPalette;
 							chunk.sections[ sectionIndex ] = pBlockStates;
+                            chunk.biomes[ sectionIndex ] = pBiome;
 							pBlockStates = NULL;
+                            pBiome = NULL;
 							memset( &sectionPalette, 0, sizeof(sectionPalette) );
 						}
 					}

@@ -2542,6 +2542,7 @@ uint8_t enkiGetChunkSectionVoxel( enkiChunkBlockData* pChunk_, int32_t section_,
 
 const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ )
 {
+    assert( pChunk_->params & enkiNBTReadChunkExFlags_LoadBiomes ); // need to call enkiNBTReadChunkEx with enkiNBTReadChunkExFlags_LoadBiomes flag set
 	assert( section_ < ENKI_MI_NUM_SECTIONS_PER_CHUNK );
 	assert( 0 <= sectionOffset_.x && sectionOffset_.x < ENKI_MI_SIZE_SECTIONS );
 	assert( 0 <= sectionOffset_.y && sectionOffset_.y < ENKI_MI_SIZE_SECTIONS );

@@ -185,6 +185,20 @@ typedef struct enkiMINamespaceAndBlockID_s
 	uint8_t     dataValue;    // dataValue returned by enkiGetChunkSectionVoxelData
 } enkiMINamespaceAndBlockID;
 
+// Extended parameters for enkiNBTReadChunkEx:
+typedef enum
+{
+	enkiNBTReadChunkExFlags_None = 0,
+	enkiNBTReadChunkExFlags_NoPaletteTranslation = 1 << 0, // when loading palette do not translate namespace strings to blockID & dataValue - faster if you want to do your own translation / conversion to internal data
+} enkiNBTReadChunkExFlags;
+
+typedef struct enkiNBTReadChunkExParams_s
+{
+	int32_t flags; // enkiNBTReadChunkExFlags defaults to enkiNBTReadChunkExFlags_None
+} enkiNBTReadChunkExParams;
+
+// call enkiGetDefaultNBTReadChunkExParams to set up default parameters - essential to maintain forwards compatibilty if new members are added to enkiNBTReadChunkExParams
+enkiNBTReadChunkExParams enkiGetDefaultNBTReadChunkExParams();
 typedef struct enkiMIProperty_s {
 	char*         pName;
 	enkiNBTString value;
@@ -219,6 +233,7 @@ typedef struct enkiChunkBlockData_s
 	int32_t zPos; // section coordinates
 	int32_t countOfSections;
 	int32_t dataVersion;
+    enkiNBTReadChunkExParams params;
 } enkiChunkBlockData;
 
 // enkiChunkInit simply zeros data
@@ -227,21 +242,6 @@ void enkiChunkInit( enkiChunkBlockData* pChunk_ );
 // enkiNBTReadChunk gets a chunk from an enkiNBTDataStream
 // pStream_ mush be kept valid whilst chunk is in use.
 enkiChunkBlockData enkiNBTReadChunk( enkiNBTDataStream* pStream_ );
-
-// Extended parameters for enkiNBTReadChunkEx:
-typedef enum
-{
-	enkiNBTReadChunkExFlags_None = 0,
-	enkiNBTReadChunkExFlags_NoPaletteTranslation = 1 << 0, // when loading palette do not translate namespace strings to blockID & dataValue - faster if you want to do your own translation / conversion to internal data
-} enkiNBTReadChunkExFlags;
-
-typedef struct enkiNBTReadChunkExParams_s
-{
-	int32_t flags; // enkiNBTReadChunkExFlags defaults to enkiNBTReadChunkExFlags_None
-} enkiNBTReadChunkExParams;
-
-// call enkiGetDefaultNBTReadChunkExParams to set up default parameters - essential to maintain forwards compatibilty if new members are added to enkiNBTReadChunkExParams
-enkiNBTReadChunkExParams enkiGetDefaultNBTReadChunkExParams();
 
 // enkiNBTReadChunkEx is as enkiNBTReadChunk but with extended parameters.
 enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream* pStream_, enkiNBTReadChunkExParams params_ );

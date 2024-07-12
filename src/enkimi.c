@@ -2127,6 +2127,8 @@ enkiChunkBlockData enkiNBTReadChunkEx( enkiNBTDataStream * pStream_, enkiNBTRead
 {
 	enkiChunkBlockData chunk;
 	enkiChunkInit( &chunk );
+    chunk.params = params_;
+
 	int foundSectionData = 0;
 	int foundXPos = 0;
 	int foundZPos = 0;
@@ -2469,7 +2471,7 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData(enkiChunkBlockData * pChunk_, int32
 		{
 			int32_t index = pChunk_->palette[ section_ ].pDefaultBlockIndex[ blockArrayValue ];
 			retVal.blockID = 1; // default to 1, stone
-			if( index >= 0 )
+			if( !( pChunk_->params.flags & enkiNBTReadChunkExFlags_NoPaletteTranslation ) && index >= 0 && index < (int32_t)numDefaultNamespaceAndBlockIDs )
 			{
 				enkiMINamespaceAndBlockID* pNamespaceAndBlockID = &defaultNamespaceAndBlockIDs[index];
 				retVal.blockID   = pNamespaceAndBlockID->blockID;

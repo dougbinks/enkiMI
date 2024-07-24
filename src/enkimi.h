@@ -282,6 +282,12 @@ enkiMIVoxelData enkiGetChunkSectionVoxelData( enkiChunkBlockData* pChunk_, int32
 // Make sure to load chunk with enkiNBTReadChunkExFlags_LoadBiomes set
 const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ );
 
+// enkiGetChunkSectionBiome gets the index into the biomes palette pBiomes
+// Biomes are on a grid 4x smaller than the voxel data, however the sectionOffset_ here is at full voxel resolution.
+// Returns -1 if there were no biomes loaded (potentially due to enkiMI not supporting the version for biomes)
+// Make sure to load chunk with enkiNBTReadChunkExFlags_LoadBiomes set
+int32_t enkiGetChunkSectionBiomesIndex( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ );
+
 typedef struct enkiMINamespaceAndBlockIDTable_s {
 	
 	uint32_t                   size;

@@ -2542,20 +2542,32 @@ uint8_t enkiGetChunkSectionVoxel( enkiChunkBlockData* pChunk_, int32_t section_,
 
 const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ )
 {
-    assert( pChunk_->params & enkiNBTReadChunkExFlags_LoadBiomes ); // need to call enkiNBTReadChunkEx with enkiNBTReadChunkExFlags_LoadBiomes flag set
+    enkiNBTString* pRetBiomeName = NULL;
+    int32_t biomesIndex = enkiGetChunkSectionBiomesIndex( pChunk_, section_, sectionOffset_ );
+    if( biomesIndex >= 0 && biomesIndex < (int32_t)pChunk_->palette[ section_ ].numBiomes )
+    {
+        pRetBiomeName = &( pChunk_->palette[ section_ ].pBiomes[ biomesIndex ] );
+    }
+
+    return pRetBiomeName;
+}
+
+int32_t enkiGetChunkSectionBiomesIndex( enkiChunkBlockData* pChunk_, int32_t section_, enkiMICoordinate sectionOffset_ )
+{
+    assert( pChunk_->params.flags & enkiNBTReadChunkExFlags_LoadBiomes ); // need to call enkiNBTReadChunkEx with enkiNBTReadChunkExFlags_LoadBiomes flag set
 	assert( section_ < ENKI_MI_NUM_SECTIONS_PER_CHUNK );
 	assert( 0 <= sectionOffset_.x && sectionOffset_.x < ENKI_MI_SIZE_SECTIONS );
 	assert( 0 <= sectionOffset_.y && sectionOffset_.y < ENKI_MI_SIZE_SECTIONS );
 	assert( 0 <= sectionOffset_.z && sectionOffset_.z < ENKI_MI_SIZE_SECTIONS );
 
-    enkiNBTString* pRetBiomeName = NULL;
+    int32_t biomesIndex = -1;
 
     if( NULL != pChunk_->palette[ section_ ].pBiomes )
     {
         if( NULL == pChunk_->biomes[ section_ ] || 1 == pChunk_->palette[ section_ ].numBiomes )
         {
             // only one biome, return that
-            pRetBiomeName = &( pChunk_->palette[ section_ ].pBiomes[0] );
+            biomesIndex = 0;
         }
         else
         {
@@ -2569,7 +2581,6 @@ const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int3
             const SIZE_BIOME = ENKI_MI_SIZE_SECTIONS / ENKI_MI_BLOCKS_PER_BIOME;
 	        uint32_t posArray = biomeCoord.y*SIZE_BIOME*SIZE_BIOME
                               + biomeCoord.z*SIZE_BIOME + biomeCoord.x;
-            uint32_t biomesIndex = 0;
 
 		    // size depends on number of biomes
 		    uint32_t numBits = pChunk_->palette[ section_ ].numBitsPerBiome;
@@ -2592,7 +2603,7 @@ const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int3
 			    uint64_t mask = (~(uint64_t)0) >> (64-numBits);
 			    uint32_t valmasked = (uint32_t)( val & mask );
 			    biomesIndex = valmasked;
-			    assert( (uint32_t)pChunk_->palette[ section_ ].numBiomes > biomesIndex ); // assert in {} to get debug data from locals
+			    assert( (int32_t)pChunk_->palette[ section_ ].numBiomes > biomesIndex ); // assert in {} to get debug data from locals
 		    }
 		    else
             {
@@ -2629,15 +2640,14 @@ const enkiNBTString* enkiGetChunkSectionBiome( enkiChunkBlockData* pChunk_, int3
 				    valmasked |= ( valmasked_2 << numBitsIn64 );
 			    }
 			    biomesIndex = valmasked;
-			    assert( (uint32_t)pChunk_->palette[ section_ ].numBiomes > biomesIndex ); // assert in {} to get debug data from locals
+			    assert( (int32_t)pChunk_->palette[ section_ ].numBiomes > biomesIndex ); // assert in {} to get debug data from locals
             }
-            pRetBiomeName = &( pChunk_->palette[ section_ ].pBiomes[ biomesIndex ] ); 
         }
     }
 
-    return pRetBiomeName;
-}
+    return biomesIndex;
 
+}
 
 uint32_t* enkiGetMineCraftPalette()
 {

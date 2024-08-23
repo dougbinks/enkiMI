@@ -98,7 +98,7 @@ typedef struct enkiNBTDataStream_s
 // Make a copy if you need to use the buffer in another lib.
 // Other strings in file will not be altered.
 // pUnCompressedData_ should be freed by caller.
-// FreeMemoryAllocated() should still be called to free any internal allocations.
+// enkiNBTFreeAllocations() should still be called to free any internal allocations.
 void enkiNBTInitFromMemoryUncompressed( enkiNBTDataStream* pStream_, uint8_t* pUnCompressedData_, uint32_t dataSize_ );
 
 // Initialize stream from memory pointer to compressed content.

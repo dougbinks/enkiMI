@@ -2064,8 +2064,10 @@ static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalet
 		paletteNum = pStream_->parentTags[ levelPalette + 1 ].listCurrItem;
 		assert( paletteNum >= 0 );
 		assert( paletteNum < (int32_t)pSectionPalette_->size );
-		if(   pStream_->currentTag.tagId == enkiNBTTAG_String
-			&& enkiAreStringsEqual( "Name", pStream_->currentTag.pName ) )
+		if(  pStream_->currentTag.tagId == enkiNBTTAG_String
+		    && ( NULL == pStream_->currentTag.pName ||
+                 enkiAreStringsEqual( "Name", pStream_->currentTag.pName ) ||
+                 enkiAreStringsEqual( "id", pStream_->currentTag.pName ) ) )
 		{
 			enkiNBTString paletteEntry = enkiNBTReadString( pStream_ );
 			// find in palette
@@ -2087,7 +2089,8 @@ static void LoadChunkPalette( enkiNBTDataStream* pStream_, enkiChunkSectionPalet
 			}
 		}
 		if(  enkiNBTTAG_Compound == pStream_->currentTag.tagId 
-			&& enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) )
+			&& ( enkiAreStringsEqual( "Properties", pStream_->currentTag.pName ) ||
+                 enkiAreStringsEqual( "properties", pStream_->currentTag.pName ) ) )
 		{
 			int levelProperties = pStream_->level;
 			uint32_t numProperties = 0;

@@ -9,6 +9,13 @@ Support development of enkiMI through [Github Sponsors](https://github.com/spons
 
 A permissively licensed lightweight C and C++ Minecraft Importer library.
 
+## No generative AI / LLMs
+
+Do not use generative AI / large language models (LLMs) to contribute to this project.
+
+- You must confirm that you are the author of the contribution, and that you did not use generative AI / LLMs.
+- You must contribute under the terms of the project licence.
+
 ## Building
 
 A cmake file is included for the example code, but to use in your project simply add the 2 .c the files in [/src](https://github.com/dougbinks/enkiMI/tree/master/src) into your project and add the director to your include paths.
